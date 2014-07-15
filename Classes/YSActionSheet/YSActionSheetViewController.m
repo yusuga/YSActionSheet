@@ -11,6 +11,7 @@
 
 @interface YSActionSheetViewController () <UIGestureRecognizerDelegate>
 
+@property (copy, nonatomic) void(^didDismissViewcontroller)(void);
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *cancelTapGestureRecognizer;
 
 @property (weak, nonatomic, readwrite) UIWindow *previousKeyWindow;
@@ -79,9 +80,10 @@
     }
 }
 
-- (void)showWithItems:(NSArray *)items
+- (void)showWithItems:(NSArray *)items didDismissViewcontroller:(void (^)(void))didDismissViewcontroller
 {
     self.items = items;
+    self.didDismissViewcontroller = didDismissViewcontroller;
     
     self.previousKeyWindow = [UIApplication sharedApplication].keyWindow;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -118,6 +120,8 @@
         
         self.window = nil;
         [self.previousKeyWindow makeKeyAndVisible];
+        
+        if (self.didDismissViewcontroller) self.didDismissViewcontroller();
     }];
 }
 

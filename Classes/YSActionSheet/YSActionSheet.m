@@ -26,10 +26,10 @@
 }
 
 
-- (void)showWithItems:(NSArray *)items
+- (void)showWithItems:(NSArray *)items didDismissViewcontroller:(void (^)(void))didDismissViewcontroller
 {
     YSActionSheetViewController *vc = [YSActionSheetViewController viewControllerWithCancelButtonTitle:self.cancelButtonTitle];
-    [vc showWithItems:items];
+    [vc showWithItems:items didDismissViewcontroller:didDismissViewcontroller];
     self.actionSheetViewController = vc;
 }
 
