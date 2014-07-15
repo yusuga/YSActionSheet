@@ -52,7 +52,9 @@
     }
     
     YSActionSheet *actionSheet = [[YSActionSheet alloc] init];
-    [actionSheet showWithItems:items];
+    [actionSheet showWithItems:items didDismissViewcontroller:^{
+        NSLog(@"did dismiss");
+    }];
     
 #if 0
     [self performSelector:@selector(updateItemForActionSheet:) withObject:actionSheet afterDelay:3.];
