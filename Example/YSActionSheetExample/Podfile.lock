@@ -1,0 +1,10 @@
+PODS:
+  - YSImageFilter (0.1.1)
+
+DEPENDENCIES:
+  - YSImageFilter
+
+SPEC CHECKSUMS:
+  YSImageFilter: 4749e1101bc7330b4f275120937f6520caf86305
+
+COCOAPODS: 0.33.1
