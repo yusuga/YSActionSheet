@@ -11,7 +11,7 @@
 
 @interface YSActionSheetContentViewController ()
 
-@property (nonatomic) NSMutableArray *items;
+@property (weak, nonatomic) NSArray *items;
 
 @end
 
@@ -32,21 +32,7 @@
 
 - (void)setActionSheetItems:(NSArray*)items
 {
-    [self.items setArray:items];
-}
-
-- (void)updateItemTitle:(NSString *)title image:(UIImage *)image atIndex:(NSUInteger)index
-{
-    YSActionSheetItem *item = self.items[index];
-    if (item) {
-        if (title) {
-            item.title = title;
-        }
-        if (image) {
-            item.image = image;
-        }
-        [self.tableView reloadData];
-    }
+    self.items = items;
 }
 
 #pragma mark - Table view data source

@@ -8,10 +8,10 @@
 
 #import "YSActionSheetViewController.h"
 #import "YSActionSheetContentViewController.h"
+#import "YSActionSheetItem.h"
 
 @interface YSActionSheetViewController () <UIGestureRecognizerDelegate>
 
-@property (copy, nonatomic) void(^didDismissViewcontroller)(void);
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *cancelTapGestureRecognizer;
 
 @property (weak, nonatomic, readwrite) UIWindow *previousKeyWindow;
@@ -21,21 +21,27 @@
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIView *actionSheetView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
-@property (copy, nonatomic) NSString *cancelButtonTitle;
 
 @property (weak, nonatomic) YSActionSheetContentViewController *contentViewController;
-@property (weak, nonatomic) NSArray *items;
+@property (nonatomic) NSMutableArray *items;
 
 @end
 
 @implementation YSActionSheetViewController
 
-+ (instancetype)viewControllerWithCancelButtonTitle:(NSString *)cancelButtonTitle
++ (instancetype)viewController
 {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"YSActionSheet" bundle:nil];
     YSActionSheetViewController *vc = [sb instantiateInitialViewController];
-    vc.cancelButtonTitle = cancelButtonTitle;
     return vc;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.items = [NSMutableArray array];
+    }
+    return self;
 }
 
 - (void)viewDidLoad
@@ -80,11 +86,31 @@
     }
 }
 
-- (void)showWithItems:(NSArray *)items didDismissViewcontroller:(void (^)(void))didDismissViewcontroller
+#pragma mark - item
+
+- (void)addItem:(YSActionSheetItem *)item
 {
-    self.items = items;
-    self.didDismissViewcontroller = didDismissViewcontroller;
-    
+    [self.items addObject:item];
+}
+
+- (void)updateItemTitle:(NSString *)title image:(UIImage *)image atIndex:(NSUInteger)index
+{
+    YSActionSheetItem *item = self.items[index];
+    if (item) {
+        if (title) {
+            item.title = title;
+        }
+        if (image) {
+            item.image = image;
+        }
+        [self.contentViewController.tableView reloadData];
+    }
+}
+
+#pragma mark - show, dismiss
+
+- (void)show
+{
     self.previousKeyWindow = [UIApplication sharedApplication].keyWindow;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -125,12 +151,7 @@
     }];
 }
 
-- (void)updateItemTitle:(NSString *)title image:(UIImage *)image atIndex:(NSUInteger)index
-{
-    [self.contentViewController updateItemTitle:title image:image atIndex:index];
-}
-
-#pragma mark -
+#pragma mark - button action
 
 - (IBAction)cancelButtonDidPush:(id)sender
 {

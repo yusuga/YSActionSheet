@@ -11,8 +11,14 @@
 
 @interface YSActionSheetViewController : UIViewController
 
-+ (instancetype)viewControllerWithCancelButtonTitle:(NSString*)cancelButtonTitle;
-- (void)showWithItems:(NSArray*)items didDismissViewcontroller:(void(^)(void))didDismissViewcontroller;
++ (instancetype)viewController;
+
+@property (copy, nonatomic) NSString *cancelButtonTitle;
+@property (copy, nonatomic) void(^didDismissViewcontroller)(void);
+
+- (void)addItem:(YSActionSheetItem*)item;
 - (void)updateItemTitle:(NSString*)title image:(UIImage*)image atIndex:(NSUInteger)index;
+
+- (void)show;
 
 @end

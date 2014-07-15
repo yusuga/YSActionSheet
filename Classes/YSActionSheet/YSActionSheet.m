@@ -20,22 +20,36 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.cancelButtonTitle = @"Cancel";
+        YSActionSheetViewController *vc = [YSActionSheetViewController viewController];
+        vc.cancelButtonTitle = @"Cancel";
+        self.actionSheetViewController = vc;
     }
     return self;
 }
 
-
-- (void)showWithItems:(NSArray *)items didDismissViewcontroller:(void (^)(void))didDismissViewcontroller
+- (void)setCancelButtonTitle:(NSString *)title
 {
-    YSActionSheetViewController *vc = [YSActionSheetViewController viewControllerWithCancelButtonTitle:self.cancelButtonTitle];
-    [vc showWithItems:items didDismissViewcontroller:didDismissViewcontroller];
-    self.actionSheetViewController = vc;
+    self.actionSheetViewController.cancelButtonTitle = title;
+}
+
+- (void)setDidDismissViewcontrollerCompletion:(void (^)(void))didDismissViewcontroller
+{
+    self.actionSheetViewController.didDismissViewcontroller = didDismissViewcontroller;
+}
+
+- (void)addItem:(YSActionSheetItem*)item
+{
+    [self.actionSheetViewController addItem:item];
 }
 
 - (void)updateItemTitle:(NSString *)title image:(UIImage *)image atIndex:(NSUInteger)index
 {
     [self.actionSheetViewController updateItemTitle:title image:image atIndex:index];
+}
+
+- (void)show
+{
+    [self.actionSheetViewController show];
 }
 
 @end

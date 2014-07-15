@@ -11,9 +11,11 @@
 
 @interface YSActionSheet : NSObject
 
-@property (copy, nonatomic) NSString *cancelButtonTitle; // default is Cancel
-
-- (void)showWithItems:(NSArray*)items didDismissViewcontroller:(void(^)(void))didDismissViewcontroller;
+- (void)setCancelButtonTitle:(NSString*)title; // default is Cancel
+- (void)setDidDismissViewcontrollerCompletion:(void(^)(void))didDismissViewcontroller;
+- (void)addItem:(YSActionSheetItem*)item;
 - (void)updateItemTitle:(NSString*)title image:(UIImage*)image atIndex:(NSUInteger)index;
+
+- (void)show;
 
 @end

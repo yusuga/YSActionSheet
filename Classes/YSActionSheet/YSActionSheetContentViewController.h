@@ -11,7 +11,6 @@
 @interface YSActionSheetContentViewController : UITableViewController
 
 - (void)setActionSheetItems:(NSArray*)items;
-- (void)updateItemTitle:(NSString*)title image:(UIImage*)image atIndex:(NSUInteger)index;
 
 @property (copy, nonatomic) void(^didSelectRow)(void);
 
