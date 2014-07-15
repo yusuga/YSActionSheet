@@ -31,30 +31,31 @@
 
 - (IBAction)showButtonDidPush:(id)sender
 {
-    NSMutableArray *items = @[].mutableCopy;
+    YSActionSheet *actionSheet = [[YSActionSheet alloc] init];
     
     YSImageFilter *filter = [[YSImageFilter alloc] init];
     filter.size = CGSizeMake(32, 32);
     
     for (NSUInteger i = 0; i < 1; i++) {
-        [items addObject:[[YSActionSheetItem alloc] initWithTitle:@"title 1"
-                                                            image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
-                                                             type:YSActionSheetButtonTypeDefault
-                                                   didClickButton:^{
-                                                       NSLog(@"did click 1");
-                                                   }]];
-        [items addObject:[[YSActionSheetItem alloc] initWithTitle:@"title 2"
-                                                            image:nil
-                                                             type:YSActionSheetButtonTypeDestructive
-                                                   didClickButton:^{
-                                                       NSLog(@"did click 2");
-                                                   }]];
+        [actionSheet addItem:[[YSActionSheetItem alloc] initWithTitle:@"title 1"
+                                                                image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
+                                                                 type:YSActionSheetButtonTypeDefault
+                                                       didClickButton:^{
+                                                           NSLog(@"did click 1");
+                                                       }]];
+        [actionSheet addItem:[[YSActionSheetItem alloc] initWithTitle:@"title 2"
+                                                                image:nil
+                                                                 type:YSActionSheetButtonTypeDestructive
+                                                       didClickButton:^{
+                                                           NSLog(@"did click 2");
+                                                       }]];
     }
     
-    YSActionSheet *actionSheet = [[YSActionSheet alloc] init];
-    [actionSheet showWithItems:items didDismissViewcontroller:^{
+    [actionSheet setDidDismissViewcontrollerCompletion:^{
         NSLog(@"did dismiss");
     }];
+    
+    [actionSheet show];
     
 #if 0
     [self performSelector:@selector(updateItemForActionSheet:) withObject:actionSheet afterDelay:3.];
