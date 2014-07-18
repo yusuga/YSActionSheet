@@ -13,6 +13,7 @@
 
 - (void)setCancelButtonTitle:(NSString*)title; // default is Cancel
 - (void)setDidDismissViewcontrollerCompletion:(void(^)(void))didDismissViewcontroller;
+- (void)setTitleView:(UIView*)titleView;
 - (void)addItem:(YSActionSheetItem*)item;
 - (void)updateItemTitle:(NSString*)title image:(UIImage*)image atIndex:(NSUInteger)index;
 

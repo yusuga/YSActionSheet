@@ -37,6 +37,11 @@
     self.actionSheetViewController.didDismissViewcontroller = didDismissViewcontroller;
 }
 
+- (void)setTitleView:(UIView *)titleView
+{
+    [self.actionSheetViewController setTitleView:titleView];
+}
+
 - (void)addItem:(YSActionSheetItem*)item
 {
     [self.actionSheetViewController addItem:item];

@@ -16,6 +16,8 @@
 @property (copy, nonatomic) NSString *cancelButtonTitle;
 @property (copy, nonatomic) void(^didDismissViewcontroller)(void);
 
+- (void)setTitleView:(UIView*)titleView;
+
 - (void)addItem:(YSActionSheetItem*)item;
 - (void)updateItemTitle:(NSString*)title image:(UIImage*)image atIndex:(NSUInteger)index;
 

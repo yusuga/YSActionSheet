@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIView *actionSheetView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
+@property (nonatomic) UIView *titleView;
+
 @property (weak, nonatomic) YSActionSheetContentViewController *contentViewController;
 @property (nonatomic) NSMutableArray *items;
 
@@ -51,10 +53,13 @@
     [self.cancelButton setTitle:self.cancelButtonTitle forState:UIControlStateNormal];
     
     YSActionSheetContentViewController *contentViewController;
-    for (YSActionSheetContentViewController *childVC in self.childViewControllers) {
-        if ([childVC isKindOfClass:[YSActionSheetContentViewController class]]) {
-            contentViewController = childVC;
-            break;
+    for (UINavigationController *nc in self.childViewControllers) {
+        if ([nc isKindOfClass:[UINavigationController class]]) {
+            YSActionSheetContentViewController *topVC = (id)nc.topViewController;
+            if ([topVC isKindOfClass:[YSActionSheetContentViewController class]]) {
+                contentViewController = topVC;
+                break;
+            }
         }
     }
     NSAssert1([contentViewController isKindOfClass:[YSActionSheetContentViewController class]], @"vc: %@", contentViewController);
@@ -65,25 +70,6 @@
     self.contentViewController.didSelectRow = ^{
         [wself dismiss];
     };
-    
-    [self configureContainerViewLayout];
-}
-
-- (void)configureContainerViewLayout
-{
-    CGFloat cellHeight = [[self.contentViewController class] cellHeight];
-    CGFloat allCellHeight = cellHeight*[self.items count];
-    CGFloat containerHeight = self.containerView.bounds.size.height;
-    if (allCellHeight < containerHeight) {
-        CGRect f = self.containerView.frame;
-        f.origin.y += containerHeight - allCellHeight;
-        f.size.height = allCellHeight;
-        self.containerView.frame = f;
-        
-        self.contentViewController.tableView.scrollEnabled = NO;
-    } else {
-        self.contentViewController.tableView.scrollEnabled = YES;
-    }
 }
 
 #pragma mark - item
@@ -123,6 +109,12 @@
     CGRect f = self.actionSheetView.frame;
     f.origin.y = self.view.bounds.size.height;
     self.actionSheetView.frame = f;
+
+    if (self.titleView) {
+        self.contentViewController.navigationItem.titleView = self.titleView;
+    }
+    [self.contentViewController.navigationController setNavigationBarHidden:self.titleView ? NO : YES animated:NO];
+    [self configureContainerViewLayout];
     
     [UIView animateWithDuration:0.3 animations:^{
         self.backgroundView.alpha = 1.f;
@@ -130,6 +122,26 @@
     } completion:^(BOOL finished) {
         
     }];
+}
+
+- (void)configureContainerViewLayout
+{
+    CGFloat cellHeight = [[self.contentViewController class] cellHeight];
+    CGFloat allCellHeight = cellHeight*[self.items count];
+    if (self.titleView) {
+        allCellHeight += self.contentViewController.navigationController.navigationBar.bounds.size.height;
+    }
+    CGFloat containerHeight = self.containerView.bounds.size.height;
+    if (allCellHeight < containerHeight) {
+        CGRect f = self.containerView.frame;
+        f.origin.y += containerHeight - allCellHeight;
+        f.size.height = allCellHeight;
+        self.containerView.frame = f;
+        
+        self.contentViewController.tableView.scrollEnabled = NO;
+    } else {
+        self.contentViewController.tableView.scrollEnabled = YES;
+    }
 }
 
 - (void)dismiss
