@@ -55,6 +55,11 @@
         NSLog(@"did dismiss");
     }];
     
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"TITLE";
+    [label sizeToFit];
+    [actionSheet setTitleView:label];
+    
     [actionSheet show];
     
 #if 0
