@@ -12,6 +12,7 @@
 @interface YSActionSheetContentViewController ()
 
 @property (weak, nonatomic) NSArray *items;
+@property (nonatomic) BOOL centeringText;
 
 @end
 
@@ -33,6 +34,15 @@
 - (void)setActionSheetItems:(NSArray*)items
 {
     self.items = items;
+    
+    self.centeringText = YES;
+    for (YSActionSheetItem *item in items) {
+        if (item.image) {
+            self.centeringText = NO;
+            break;
+        }
+    }
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -50,7 +60,13 @@
     
     cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:item.title
                                                                     attributes:[YSActionSheetItem textAttributesForType:item.type]];
-    cell.imageView.image = item.image;
+    if (self.centeringText) {
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.imageView.image = nil;
+    } else {
+        cell.textLabel.textAlignment = NSTextAlignmentLeft;
+        cell.imageView.image = item.image;
+    }
     
     return cell;
 }
