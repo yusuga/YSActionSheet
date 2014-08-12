@@ -55,6 +55,10 @@
         NSLog(@"did dismiss");
     }];
     
+    [actionSheet setCancelButtonDidPush:^{
+        NSLog(@"did cancel");
+    }];
+    
     UILabel *label = [[UILabel alloc] init];
     label.text = @"TITLE";
     [label sizeToFit];
