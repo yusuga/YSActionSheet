@@ -15,6 +15,7 @@
 
 @property (copy, nonatomic) NSString *cancelButtonTitle;
 @property (copy, nonatomic) void(^didDismissViewcontroller)(void);
+@property (copy, nonatomic) void(^didCancel)(void);
 
 - (void)setTitleView:(UIView*)titleView;
 

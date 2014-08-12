@@ -32,6 +32,11 @@
     self.actionSheetViewController.cancelButtonTitle = title;
 }
 
+- (void)setCancelButtonDidPush:(void (^)(void))didCancel
+{
+    self.actionSheetViewController.didCancel = didCancel;
+}
+
 - (void)setDidDismissViewcontrollerCompletion:(void (^)(void))didDismissViewcontroller
 {
     self.actionSheetViewController.didDismissViewcontroller = didDismissViewcontroller;

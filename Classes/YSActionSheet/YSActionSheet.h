@@ -12,6 +12,7 @@
 @interface YSActionSheet : NSObject
 
 - (void)setCancelButtonTitle:(NSString*)title; // default is Cancel
+- (void)setCancelButtonDidPush:(void(^)(void))didCancel;
 - (void)setDidDismissViewcontrollerCompletion:(void(^)(void))didDismissViewcontroller;
 - (void)setTitleView:(UIView*)titleView;
 - (void)addItem:(YSActionSheetItem*)item;

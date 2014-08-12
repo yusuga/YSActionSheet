@@ -167,6 +167,7 @@
 
 - (IBAction)cancelButtonDidPush:(id)sender
 {
+    if (self.didCancel) self.didCancel();    
     [self dismiss];
 }
 
