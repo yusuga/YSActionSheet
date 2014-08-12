@@ -17,7 +17,8 @@
 @property (copy, nonatomic) void(^didDismissViewcontroller)(void);
 @property (copy, nonatomic) void(^didCancel)(void);
 
-- (void)setTitleView:(UIView*)titleView;
+- (void)setHeaderTitle:(NSString*)title;
+- (void)setHeaderTitleView:(UIView*)titleView;
 
 - (void)addItem:(YSActionSheetItem*)item;
 - (void)updateItemTitle:(NSString*)title image:(UIImage*)image atIndex:(NSUInteger)index;

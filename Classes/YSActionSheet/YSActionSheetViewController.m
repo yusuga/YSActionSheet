@@ -22,7 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIView *actionSheetView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
-@property (nonatomic) UIView *titleView;
+@property (nonatomic) NSString *headerTitle;
+@property (nonatomic) UIView *headerTitleView;
 
 @property (weak, nonatomic) YSActionSheetContentViewController *contentViewController;
 @property (nonatomic) NSMutableArray *items;
@@ -110,10 +111,19 @@
     f.origin.y = self.view.bounds.size.height;
     self.actionSheetView.frame = f;
 
-    if (self.titleView) {
-        self.contentViewController.navigationItem.titleView = self.titleView;
+    UIView *titleView;
+    if (self.headerTitleView) {
+        titleView = self.headerTitleView;
+    } else if (self.headerTitle.length) {
+        UILabel *label = [[UILabel alloc] init];
+        label.text = self.headerTitle;
+        label.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
+        label.textColor = [UIColor lightGrayColor];
+        [label sizeToFit];
+        titleView = label;
     }
-    [self.contentViewController.navigationController setNavigationBarHidden:self.titleView ? NO : YES animated:NO];
+    self.contentViewController.navigationItem.titleView = titleView;
+    [self.contentViewController.navigationController setNavigationBarHidden:titleView ? NO : YES animated:NO];
     [self configureContainerViewLayout];
     
     [UIView animateWithDuration:0.3 animations:^{
@@ -128,7 +138,7 @@
 {
     CGFloat cellHeight = [[self.contentViewController class] cellHeight];
     CGFloat allCellHeight = cellHeight*[self.items count];
-    if (self.titleView) {
+    if (self.contentViewController.navigationItem.titleView) {
         allCellHeight += self.contentViewController.navigationController.navigationBar.bounds.size.height;
     }
     CGFloat containerHeight = self.containerView.bounds.size.height;
