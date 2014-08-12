@@ -40,14 +40,14 @@
         [actionSheet addItem:[[YSActionSheetItem alloc] initWithTitle:@"title 1"
                                                                 image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
                                                                  type:YSActionSheetButtonTypeDefault
-                                                       didClickButton:^{
-                                                           NSLog(@"did click 1");
+                                                       didClickButton:^(NSInteger selectedIndex) {
+                                                           NSLog(@"did click %zd", selectedIndex);
                                                        }]];
         [actionSheet addItem:[[YSActionSheetItem alloc] initWithTitle:@"title 2"
                                                                 image:nil
                                                                  type:YSActionSheetButtonTypeDestructive
-                                                       didClickButton:^{
-                                                           NSLog(@"did click 2");
+                                                       didClickButton:^(NSInteger selectedIndex) {
+                                                           NSLog(@"did click %zd", selectedIndex);
                                                        }]];
     }
     
