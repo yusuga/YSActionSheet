@@ -11,6 +11,8 @@
 #import <YSImageFilter/UIImage+YSImageFilter.h>
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *showButton2;
+
 
 @end
 
@@ -59,10 +61,15 @@
         NSLog(@"did cancel");
     }];
     
-    UILabel *label = [[UILabel alloc] init];
-    label.text = @"TITLE";
-    [label sizeToFit];
-    [actionSheet setTitleView:label];
+    NSString *title = @"TITLE";
+    if (sender == self.showButton2) {
+        [actionSheet setHeaderTitle:title];
+    } else {
+        UILabel *label = [[UILabel alloc] init];
+        label.text = title;
+        [label sizeToFit];
+        [actionSheet setHeaderTitleView:label];
+    }
     
     [actionSheet show];
     
