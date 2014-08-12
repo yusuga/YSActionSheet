@@ -77,7 +77,7 @@
     
     YSActionSheetItem *item = self.items[indexPath.row];
     if (item.didClickButton) {
-        item.didClickButton();
+        item.didClickButton(indexPath.row);
     }
     if (self.didSelectRow) {
         self.didSelectRow();
