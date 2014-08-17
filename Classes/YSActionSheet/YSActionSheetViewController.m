@@ -100,6 +100,7 @@
 {
     self.previousKeyWindow = [UIApplication sharedApplication].keyWindow;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.windowLevel = UIWindowLevelStatusBar + CGFLOAT_MIN;
     self.window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.window.opaque = NO;
     self.window.rootViewController = self;
@@ -192,6 +193,13 @@
         }
     }
     return YES;
+}
+
+#pragma mark - StatusBar
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return [self.previousKeyWindow.rootViewController preferredStatusBarStyle];
 }
 
 @end
