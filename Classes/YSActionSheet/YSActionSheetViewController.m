@@ -127,12 +127,16 @@
     [self.contentViewController.navigationController setNavigationBarHidden:titleView ? NO : YES animated:NO];
     [self configureContainerViewLayout];
     
-    [UIView animateWithDuration:0.3 animations:^{
-        self.backgroundView.alpha = 1.f;
-        self.actionSheetView.frame = self.window.bounds;
-    } completion:^(BOOL finished) {
-        
-    }];
+    [UIView animateWithDuration:0.4
+                          delay:0.15
+         usingSpringWithDamping:1.f
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         self.backgroundView.alpha = 1.f;
+         self.actionSheetView.frame = self.window.bounds;
+     } completion:NULL];
 }
 
 - (void)configureContainerViewLayout
@@ -157,21 +161,27 @@
 
 - (void)dismiss
 {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.backgroundView.alpha = 0.f;
-        CGRect f = self.actionSheetView.frame;
-        f.origin.y = self.actionSheetView.bounds.size.height;
-        self.actionSheetView.frame = f;
-    } completion:^(BOOL finished) {
-        for (UIView *view in @[self.view, self.window]) {
-            [view removeFromSuperview];
-        }
-        
-        self.window = nil;
-        [self.previousKeyWindow makeKeyAndVisible];
-        
-        if (self.didDismissViewcontroller) self.didDismissViewcontroller();
-    }];
+    [UIView animateWithDuration:0.4
+                          delay:0.
+         usingSpringWithDamping:1.f
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         self.backgroundView.alpha = 0.f;
+         CGRect f = self.actionSheetView.frame;
+         f.origin.y = self.actionSheetView.bounds.size.height;
+         self.actionSheetView.frame = f;
+     } completion:^(BOOL finished) {
+         for (UIView *view in @[self.view, self.window]) {
+             [view removeFromSuperview];
+         }
+         
+         self.window = nil;
+         [self.previousKeyWindow makeKeyAndVisible];
+         
+         if (self.didDismissViewcontroller) self.didDismissViewcontroller();
+     }];
 }
 
 #pragma mark - button action
