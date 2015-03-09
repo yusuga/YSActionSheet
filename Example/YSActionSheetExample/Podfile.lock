@@ -1,10 +1,24 @@
 PODS:
-  - YSImageFilter (0.1.1)
+  - RMUniversalAlert (0.6):
+    - RMUniversalAlert/Core (= 0.6)
+  - RMUniversalAlert/Core (0.6):
+    - UIActionSheet+Blocks (>= 0.8)
+    - UIAlertController+Blocks (>= 0.8)
+    - UIAlertView+Blocks (>= 0.8)
+  - UIActionSheet+Blocks (0.8.1)
+  - UIAlertController+Blocks (0.8)
+  - UIAlertView+Blocks (0.8.1)
+  - YSImageFilter (0.1.7)
 
 DEPENDENCIES:
+  - RMUniversalAlert
   - YSImageFilter
 
 SPEC CHECKSUMS:
-  YSImageFilter: 4749e1101bc7330b4f275120937f6520caf86305
+  RMUniversalAlert: 29efbec1d069082dd851054042b934550bc70b45
+  UIActionSheet+Blocks: c8b9c02f3d08964e8f7a4202f004a639c15eab80
+  UIAlertController+Blocks: a02869a586a1e242accabc86beb5f08f00998a76
+  UIAlertView+Blocks: 0b749f1f7bd5131ff2233b30a406c1585a7171b2
+  YSImageFilter: c5aaf64c9cd71c308e138476840145bcece3ff75
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.35.0
