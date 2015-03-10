@@ -23,10 +23,12 @@
 		B87239AC197515BB00EC5CE2 /* YSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = B87239AB197515BB00EC5CE2 /* YSActionSheet.m */; };
 		B87239AF197515EF00EC5CE2 /* YSActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87239AE197515EF00EC5CE2 /* YSActionSheetViewController.m */; };
 		B87239B11975160500EC5CE2 /* YSActionSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87239B01975160500EC5CE2 /* YSActionSheet.storyboard */; };
-		B87239B4197517B800EC5CE2 /* YSActionSheetContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87239B3197517B800EC5CE2 /* YSActionSheetContentViewController.m */; };
+		B87239B4197517B800EC5CE2 /* YSActionSheetButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87239B3197517B800EC5CE2 /* YSActionSheetButtonsViewController.m */; };
 		B87239B619751D6100EC5CE2 /* cat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B87239B519751D6100EC5CE2 /* cat@2x.png */; };
 		B87239B91975271D00EC5CE2 /* YSActionSheetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B87239B81975271D00EC5CE2 /* YSActionSheetItem.m */; };
 		B87DFDF81AAD893C00D5175F /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87DFDF71AAD893C00D5175F /* TableViewController.m */; };
+		B87DFDFA1AADA0AB00D5175F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B87DFDF91AADA0AB00D5175F /* LaunchScreen.xib */; };
+		B8C012331AAEE4D400DBC176 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C012321AAEE4D400DBC176 /* NavigationController.m */; };
 		EC35AB10C8EF40378DC5EE57 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE90F3BBCF84F2D92DFA609 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -66,13 +68,16 @@
 		B87239AD197515EF00EC5CE2 /* YSActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetViewController.h; sourceTree = "<group>"; };
 		B87239AE197515EF00EC5CE2 /* YSActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetViewController.m; sourceTree = "<group>"; };
 		B87239B01975160500EC5CE2 /* YSActionSheet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = YSActionSheet.storyboard; sourceTree = "<group>"; };
-		B87239B2197517B800EC5CE2 /* YSActionSheetContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetContentViewController.h; sourceTree = "<group>"; };
-		B87239B3197517B800EC5CE2 /* YSActionSheetContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetContentViewController.m; sourceTree = "<group>"; };
+		B87239B2197517B800EC5CE2 /* YSActionSheetButtonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetButtonsViewController.h; sourceTree = "<group>"; };
+		B87239B3197517B800EC5CE2 /* YSActionSheetButtonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetButtonsViewController.m; sourceTree = "<group>"; };
 		B87239B519751D6100EC5CE2 /* cat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cat@2x.png"; sourceTree = "<group>"; };
 		B87239B71975271D00EC5CE2 /* YSActionSheetItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetItem.h; sourceTree = "<group>"; };
 		B87239B81975271D00EC5CE2 /* YSActionSheetItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetItem.m; sourceTree = "<group>"; };
 		B87DFDF61AAD893C00D5175F /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		B87DFDF71AAD893C00D5175F /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		B87DFDF91AADA0AB00D5175F /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		B8C012311AAEE4D400DBC176 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		B8C012321AAEE4D400DBC176 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,9 +153,12 @@
 				B87239831975159200EC5CE2 /* AppDelegate.h */,
 				B87239841975159200EC5CE2 /* AppDelegate.m */,
 				B87239861975159200EC5CE2 /* Main.storyboard */,
+				B8C012311AAEE4D400DBC176 /* NavigationController.h */,
+				B8C012321AAEE4D400DBC176 /* NavigationController.m */,
 				B87DFDF61AAD893C00D5175F /* TableViewController.h */,
 				B87DFDF71AAD893C00D5175F /* TableViewController.m */,
 				B87239B519751D6100EC5CE2 /* cat@2x.png */,
+				B87DFDF91AADA0AB00D5175F /* LaunchScreen.xib */,
 				B872398C1975159200EC5CE2 /* Images.xcassets */,
 				B872397B1975159200EC5CE2 /* Supporting Files */,
 			);
@@ -196,8 +204,8 @@
 				B87239B01975160500EC5CE2 /* YSActionSheet.storyboard */,
 				B87239AD197515EF00EC5CE2 /* YSActionSheetViewController.h */,
 				B87239AE197515EF00EC5CE2 /* YSActionSheetViewController.m */,
-				B87239B2197517B800EC5CE2 /* YSActionSheetContentViewController.h */,
-				B87239B3197517B800EC5CE2 /* YSActionSheetContentViewController.m */,
+				B87239B2197517B800EC5CE2 /* YSActionSheetButtonsViewController.h */,
+				B87239B3197517B800EC5CE2 /* YSActionSheetButtonsViewController.m */,
 			);
 			name = YSActionSheet;
 			path = ../../Classes/YSActionSheet;
@@ -285,6 +293,7 @@
 				B87239B619751D6100EC5CE2 /* cat@2x.png in Resources */,
 				B872397F1975159200EC5CE2 /* InfoPlist.strings in Resources */,
 				B87239B11975160500EC5CE2 /* YSActionSheet.storyboard in Resources */,
+				B87DFDFA1AADA0AB00D5175F /* LaunchScreen.xib in Resources */,
 				B87239881975159200EC5CE2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,8 +348,9 @@
 			files = (
 				B87239AC197515BB00EC5CE2 /* YSActionSheet.m in Sources */,
 				B87239AF197515EF00EC5CE2 /* YSActionSheetViewController.m in Sources */,
+				B8C012331AAEE4D400DBC176 /* NavigationController.m in Sources */,
 				B87239851975159200EC5CE2 /* AppDelegate.m in Sources */,
-				B87239B4197517B800EC5CE2 /* YSActionSheetContentViewController.m in Sources */,
+				B87239B4197517B800EC5CE2 /* YSActionSheetButtonsViewController.m in Sources */,
 				B87239811975159200EC5CE2 /* main.m in Sources */,
 				B87239B91975271D00EC5CE2 /* YSActionSheetItem.m in Sources */,
 				B87DFDF81AAD893C00D5175F /* TableViewController.m in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Iyp-PJ-fyI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Iyp-PJ-fyI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -9,62 +9,112 @@
         <scene sceneID="Sfi-dv-fri">
             <objects>
                 <viewController id="Iyp-PJ-fyI" customClass="YSActionSheetViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1fV-ko-oG5"/>
+                        <viewControllerLayoutGuide type="bottom" id="uMr-JC-gay"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tLc-c0-txz">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view alpha="0.0" contentMode="scaleToFill" id="x5W-NV-66j" userLabel="Background View">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" id="wkC-vW-ADN" userLabel="Action Sheet View">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7A-hR-AkH" userLabel="ActionSheetArea">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <containerView contentMode="scaleToFill" id="JIV-cl-C5B">
-                                        <rect key="frame" x="6" y="20" width="308" height="488"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <segue destination="ZxM-Lv-Z2y" kind="embed" id="IF2-Si-vQg"/>
-                                        </connections>
-                                    </containerView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YSh-RS-i0e">
-                                        <rect key="frame" x="6" y="516" width="308" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UQ-Dc-RHc">
+                                        <rect key="frame" x="8" y="548" width="584" height="44"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="INg-1r-fiD"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="Cancel">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <state key="normal" title="Button"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="3"/>
+                                                <integer key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="cancelButtonDidPush:" destination="Iyp-PJ-fyI" eventType="touchUpInside" id="00v-4h-Hna"/>
+                                            <action selector="cancelButtonDidPush:" destination="Iyp-PJ-fyI" eventType="touchUpInside" id="b3f-fF-fIm"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zdg-KG-evN" userLabel="ButtonsArea">
+                                        <rect key="frame" x="8" y="8" width="584" height="532"/>
+                                        <subviews>
+                                            <containerView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JIV-cl-C5B" userLabel="ButtonsContainerView">
+                                                <rect key="frame" x="0.0" y="0.0" width="584" height="532"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="532" id="2cC-Hn-dlJ"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="tKg-TK-RNT" kind="embed" id="21b-6t-M8Y"/>
+                                                </connections>
+                                            </containerView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="JIV-cl-C5B" secondAttribute="trailing" id="5PY-g5-bM2"/>
+                                            <constraint firstItem="JIV-cl-C5B" firstAttribute="top" secondItem="zdg-KG-evN" secondAttribute="top" id="C6F-b5-cdD"/>
+                                            <constraint firstItem="JIV-cl-C5B" firstAttribute="leading" secondItem="zdg-KG-evN" secondAttribute="leading" id="azM-DR-8aM"/>
+                                            <constraint firstAttribute="bottom" secondItem="JIV-cl-C5B" secondAttribute="bottom" id="hkJ-1j-eA2"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="C6F-b5-cdD"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="jwC-AD-kA3" appends="YES" id="GhF-BG-4xE"/>
-                                </connections>
+                                <constraints>
+                                    <constraint firstItem="4UQ-Dc-RHc" firstAttribute="top" secondItem="zdg-KG-evN" secondAttribute="bottom" constant="8" id="CIZ-10-cWo"/>
+                                    <constraint firstAttribute="bottom" secondItem="4UQ-Dc-RHc" secondAttribute="bottom" constant="8" id="QFE-Pm-b9r"/>
+                                    <constraint firstItem="zdg-KG-evN" firstAttribute="leading" secondItem="S7A-hR-AkH" secondAttribute="leading" constant="8" id="TAl-ql-hzV"/>
+                                    <constraint firstItem="4UQ-Dc-RHc" firstAttribute="leading" secondItem="S7A-hR-AkH" secondAttribute="leading" constant="8" id="Yip-vF-01k"/>
+                                    <constraint firstItem="zdg-KG-evN" firstAttribute="top" secondItem="S7A-hR-AkH" secondAttribute="top" priority="249" constant="8" id="hpa-Z7-JW7"/>
+                                    <constraint firstAttribute="trailing" secondItem="4UQ-Dc-RHc" secondAttribute="trailing" constant="8" id="jU5-1d-JYF"/>
+                                    <constraint firstAttribute="trailing" secondItem="zdg-KG-evN" secondAttribute="trailing" constant="8" id="kfB-WL-YMP"/>
+                                    <constraint firstAttribute="width" constant="600" id="lNH-Cy-lXP"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="S7A-hR-AkH" firstAttribute="leading" secondItem="tLc-c0-txz" secondAttribute="leading" priority="999" id="3Zt-Ue-Yep"/>
+                            <constraint firstItem="S7A-hR-AkH" firstAttribute="top" secondItem="tLc-c0-txz" secondAttribute="top" id="RUW-0j-C6U"/>
+                            <constraint firstAttribute="trailing" secondItem="S7A-hR-AkH" secondAttribute="trailing" priority="999" id="XDG-j7-G2p"/>
+                            <constraint firstItem="S7A-hR-AkH" firstAttribute="top" secondItem="1fV-ko-oG5" secondAttribute="bottom" id="hn6-iV-VVV"/>
+                            <constraint firstAttribute="centerX" secondItem="S7A-hR-AkH" secondAttribute="centerX" id="tUI-0r-7WW"/>
+                            <constraint firstAttribute="centerY" secondItem="S7A-hR-AkH" secondAttribute="centerY" id="vAD-EP-wQW"/>
+                            <constraint firstItem="uMr-JC-gay" firstAttribute="top" secondItem="S7A-hR-AkH" secondAttribute="bottom" id="zj2-Jg-m9M"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="3Zt-Ue-Yep"/>
+                                <exclude reference="XDG-j7-G2p"/>
+                                <exclude reference="hn6-iV-VVV"/>
+                                <exclude reference="vAD-EP-wQW"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="jwC-AD-kA3" appends="YES" id="fSc-lG-9kR"/>
+                        </connections>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="actionSheetView" destination="wkC-vW-ADN" id="0EY-7K-tIo"/>
-                        <outlet property="backgroundView" destination="x5W-NV-66j" id="OaW-Lu-Uq7"/>
-                        <outlet property="cancelButton" destination="YSh-RS-i0e" id="ayO-Bs-4Hd"/>
+                        <outlet property="actionSheetArea" destination="S7A-hR-AkH" id="2yE-6B-2LI"/>
+                        <outlet property="actionSheetAreaWidthConstraint" destination="lNH-Cy-lXP" id="OB7-U9-5hs"/>
+                        <outlet property="buttonsArea" destination="zdg-KG-evN" id="Wxi-NP-l1I"/>
+                        <outlet property="buttonsContainerView" destination="JIV-cl-C5B" id="tEW-Nh-dZ3"/>
+                        <outlet property="buttonsContainerViewHeightConstraint" destination="2cC-Hn-dlJ" id="Iwe-in-abB"/>
+                        <outlet property="cancelButton" destination="4UQ-Dc-RHc" id="2tm-SB-hSh"/>
                         <outlet property="cancelTapGestureRecognizer" destination="jwC-AD-kA3" id="hRR-0e-EcB"/>
-                        <outlet property="containerView" destination="JIV-cl-C5B" id="SF7-BB-72a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A0s-e9-Ldr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -75,14 +125,14 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="151" y="144"/>
+            <point key="canvasLocation" x="406" y="190"/>
         </scene>
-        <!--Action Sheet Content View Controller-->
+        <!--Action Sheet Buttons View Controller-->
         <scene sceneID="1dx-Fi-SQW">
             <objects>
-                <tableViewController id="ACm-ci-mGt" customClass="YSActionSheetContentViewController" sceneMemberID="viewController">
+                <tableViewController id="ACm-ci-mGt" customClass="YSActionSheetButtonsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="nu0-lz-4X6">
-                        <rect key="frame" x="0.0" y="0.0" width="308" height="488"/>
+                        <rect key="frame" x="0.0" y="0.0" width="584" height="532"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -105,6 +155,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableViewCell>
                         </prototypes>
                         <userDefinedRuntimeAttributes>
@@ -121,36 +172,25 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q9b-cs-kDm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1072" y="180"/>
+            <point key="canvasLocation" x="1950" y="190"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="C2G-0B-OOq">
+        <scene sceneID="1g5-OA-yeI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZxM-Lv-Z2y" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tKg-TK-RNT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q9b-HN-UqY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YtD-eV-Twn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="3"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                        </userDefinedRuntimeAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ACm-ci-mGt" kind="relationship" relationship="rootViewController" id="Uzw-IO-fqt"/>
+                        <segue destination="ACm-ci-mGt" kind="relationship" relationship="rootViewController" id="GOZ-yd-9dC"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I6T-Gx-9Xa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FO6-GC-3th" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="618" y="180"/>
+            <point key="canvasLocation" x="1154" y="190"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

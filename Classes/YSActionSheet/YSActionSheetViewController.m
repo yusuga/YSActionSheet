@@ -7,7 +7,7 @@
 //
 
 #import "YSActionSheetViewController.h"
-#import "YSActionSheetContentViewController.h"
+#import "YSActionSheetButtonsViewController.h"
 #import "YSActionSheetItem.h"
 
 @interface YSActionSheetViewController () <UIGestureRecognizerDelegate>
@@ -17,15 +17,17 @@
 @property (weak, nonatomic, readwrite) UIWindow *previousKeyWindow;
 @property (nonatomic) UIWindow *window;
 
-@property (weak, nonatomic) IBOutlet UIView *backgroundView;
-@property (weak, nonatomic) IBOutlet UIView *containerView;
-@property (weak, nonatomic) IBOutlet UIView *actionSheetView;
+@property (weak, nonatomic) IBOutlet UIView *actionSheetArea;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *actionSheetAreaWidthConstraint;
+@property (weak, nonatomic) IBOutlet UIView *buttonsArea;
+@property (weak, nonatomic) IBOutlet UIView *buttonsContainerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonsContainerViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @property (nonatomic) NSString *headerTitle;
 @property (nonatomic) UIView *headerTitleView;
 
-@property (weak, nonatomic) YSActionSheetContentViewController *contentViewController;
+@property (weak, nonatomic) YSActionSheetButtonsViewController *buttonsViewController;
 @property (nonatomic) NSMutableArray *items;
 
 @end
@@ -53,27 +55,46 @@
     
     [self.cancelButton setTitle:self.cancelButtonTitle forState:UIControlStateNormal];
     
-    YSActionSheetContentViewController *contentViewController;
+    YSActionSheetButtonsViewController *buttonsVC;
     for (UINavigationController *nc in self.childViewControllers) {
         if ([nc isKindOfClass:[UINavigationController class]]) {
-            YSActionSheetContentViewController *topVC = (id)nc.topViewController;
-            if ([topVC isKindOfClass:[YSActionSheetContentViewController class]]) {
-                contentViewController = topVC;
+            YSActionSheetButtonsViewController *topVC = (id)nc.topViewController;
+            if ([topVC isKindOfClass:[YSActionSheetButtonsViewController class]]) {
+                buttonsVC = topVC;
                 break;
             }
         }
-    }
-    NSAssert1([contentViewController isKindOfClass:[YSActionSheetContentViewController class]], @"vc: %@", contentViewController);
-    self.contentViewController = contentViewController;
-    [self.contentViewController setActionSheetItems:self.items];
+    }    
+    NSAssert1([buttonsVC isKindOfClass:[YSActionSheetButtonsViewController class]], @"vc: %@", buttonsVC);
+    self.buttonsViewController = buttonsVC;
+    [self.buttonsViewController setActionSheetItems:self.items];
     
     __weak typeof(self) wself = self;
-    self.contentViewController.didSelectRow = ^{
+    self.buttonsViewController.didSelectRow = ^{
         [wself dismiss];
     };
 }
 
-#pragma mark - item
+- (void)viewWillLayoutSubviews
+{
+    self.actionSheetAreaWidthConstraint.constant = MIN(self.view.bounds.size.width, self.view.bounds.size.height);
+    
+    CGFloat viewHeight = [self.buttonsViewController viewHeight];
+    
+    [self.buttonsArea setNeedsLayout];
+    [self.buttonsArea layoutIfNeeded];
+    
+    CGFloat containerMaxHeight = self.buttonsArea.bounds.size.height;
+    if (viewHeight <= containerMaxHeight) {
+        self.buttonsViewController.tableView.scrollEnabled = NO;
+    } else {
+        viewHeight = containerMaxHeight;
+        self.buttonsViewController.tableView.scrollEnabled = YES;
+    }
+    self.buttonsContainerViewHeightConstraint.constant = viewHeight;
+}
+
+#pragma mark - Item
 
 - (void)addItem:(YSActionSheetItem *)item
 {
@@ -90,7 +111,7 @@
         if (image) {
             item.image = image;
         }
-        [self.contentViewController.tableView reloadData];
+        [self.buttonsViewController.tableView reloadData];
     }
 }
 
@@ -98,6 +119,8 @@
 
 - (void)show
 {
+    /* Window */
+    
     self.previousKeyWindow = [UIApplication sharedApplication].keyWindow;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.windowLevel = UIWindowLevelStatusBar + CGFLOAT_MIN;
@@ -108,10 +131,8 @@
     [self.window addSubview:self.view];    
     self.view.frame = self.window.bounds;
     
-    CGRect f = self.actionSheetView.frame;
-    f.origin.y = self.view.bounds.size.height;
-    self.actionSheetView.frame = f;
-
+    /* Heder title */
+    
     UIView *titleView;
     if (self.headerTitleView) {
         titleView = self.headerTitleView;
@@ -123,9 +144,18 @@
         [label sizeToFit];
         titleView = label;
     }
-    self.contentViewController.navigationItem.titleView = titleView;
-    [self.contentViewController.navigationController setNavigationBarHidden:titleView ? NO : YES animated:NO];
-    [self configureContainerViewLayout];
+    if (titleView) {
+        self.buttonsViewController.navigationItem.titleView = titleView;
+        [self.buttonsViewController.navigationController setNavigationBarHidden:titleView ? NO : YES animated:NO];
+    }
+    
+    /* Animation */
+    
+    self.actionSheetArea.frame = ^CGRect{
+        CGRect frame = self.actionSheetArea.frame;
+        frame.origin.y = self.view.bounds.size.height;
+        return frame;
+    }();
     
     [UIView animateWithDuration:0.4
                           delay:0.15
@@ -134,29 +164,13 @@
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
-         self.backgroundView.alpha = 1.f;
-         self.actionSheetView.frame = self.window.bounds;
+         self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4f];
+         self.actionSheetArea.frame = ^CGRect{
+             CGRect frame = self.actionSheetArea.frame;
+             frame.origin.y = 0.f;
+             return frame;
+         }();
      } completion:NULL];
-}
-
-- (void)configureContainerViewLayout
-{
-    CGFloat cellHeight = [[self.contentViewController class] cellHeight];
-    CGFloat allCellHeight = cellHeight*[self.items count];
-    if (self.contentViewController.navigationItem.titleView) {
-        allCellHeight += self.contentViewController.navigationController.navigationBar.bounds.size.height;
-    }
-    CGFloat containerHeight = self.containerView.bounds.size.height;
-    if (allCellHeight < containerHeight) {
-        CGRect f = self.containerView.frame;
-        f.origin.y += containerHeight - allCellHeight;
-        f.size.height = allCellHeight;
-        self.containerView.frame = f;
-        
-        self.contentViewController.tableView.scrollEnabled = NO;
-    } else {
-        self.contentViewController.tableView.scrollEnabled = YES;
-    }
 }
 
 - (void)dismiss
@@ -168,10 +182,12 @@
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
-         self.backgroundView.alpha = 0.f;
-         CGRect f = self.actionSheetView.frame;
-         f.origin.y = self.actionSheetView.bounds.size.height;
-         self.actionSheetView.frame = f;
+         self.view.backgroundColor = [UIColor clearColor];
+         self.actionSheetArea.frame = ^CGRect{
+             CGRect frame = self.actionSheetArea.frame;
+             frame.origin.y = self.view.bounds.size.height;
+             return frame;
+         }();
      } completion:^(BOOL finished) {
          for (UIView *view in @[self.view, self.window]) {
              [view removeFromSuperview];
@@ -197,8 +213,8 @@
 - (BOOL)gestureRecognizerShouldBegin:(UITapGestureRecognizer *)gestureRecognizer
 {
     if (self.cancelTapGestureRecognizer == gestureRecognizer) {
-        CGPoint location = [gestureRecognizer locationInView:self.actionSheetView];
-        if (CGRectContainsPoint(self.containerView.frame, location)) {
+        CGPoint location = [gestureRecognizer locationInView:self.actionSheetArea];
+        if (CGRectContainsPoint(self.buttonsContainerView.frame, location)) {
             return NO;
         }
     }
@@ -210,6 +226,11 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return [self.previousKeyWindow.rootViewController preferredStatusBarStyle];
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
 }
 
 @end

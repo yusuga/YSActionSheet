@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YSActionSheetContentViewController : UITableViewController
+@interface YSActionSheetButtonsViewController : UITableViewController
 
 - (void)setActionSheetItems:(NSArray*)items;
 
 @property (copy, nonatomic) void(^didSelectRow)(void);
 
-+ (CGFloat)cellHeight;
+- (CGFloat)viewHeight;
 
 @end

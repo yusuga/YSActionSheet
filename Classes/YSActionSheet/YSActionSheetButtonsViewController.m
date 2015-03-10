@@ -6,17 +6,17 @@
 //  Copyright (c) 2014年 Yu Sugawara. All rights reserved.
 //
 
-#import "YSActionSheetContentViewController.h"
+#import "YSActionSheetButtonsViewController.h"
 #import "YSActionSheetItem.h"
 
-@interface YSActionSheetContentViewController ()
+@interface YSActionSheetButtonsViewController ()
 
 @property (weak, nonatomic) NSArray *items;
 @property (nonatomic) BOOL centeringText;
 
 @end
 
-@implementation YSActionSheetContentViewController
+@implementation YSActionSheetButtonsViewController
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -43,6 +43,16 @@
         }
     }
     [self.tableView reloadData];
+}
+
+- (CGFloat)viewHeight
+{
+    CGFloat cellHeight = [[self class] cellHeight];
+    CGFloat viewHeight = cellHeight*[self.items count];
+    if (!self.navigationController.navigationBarHidden) {
+        viewHeight += self.navigationController.navigationBar.intrinsicContentSize.height;
+    }
+    return viewHeight;
 }
 
 #pragma mark - Table view data source
@@ -87,6 +97,26 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [[self class] cellHeight];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    /* http://stackoverflow.com/questions/25770119/ios-8-uitableview-separator-inset-0-not-working/25877725#25877725 */
+    
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 #pragma mark - settings
