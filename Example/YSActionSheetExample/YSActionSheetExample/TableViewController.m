@@ -20,13 +20,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+#if 1
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cat"]];
+#else
+    self.view.backgroundColor = [UIColor blueColor];
+#endif
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     NSString *title = @"TITLE";
     NSString *cancel = @"Cancel";
@@ -40,6 +45,7 @@
     
     switch (indexPath.row) {
         case 0:
+        {
             [RMUniversalAlert showActionSheetInViewController:self
                                                     withTitle:title
                                                       message:nil
@@ -47,11 +53,13 @@
                                        destructiveButtonTitle:nil
                                             otherButtonTitles:buttonTitles
                            popoverPresentationControllerBlock:^(RMPopoverPresentationController *popover) {
-                               
+                               popover.sourceView = self.view;
+                               popover.sourceRect = cell.frame;
                            } tapBlock:^(RMUniversalAlert *alert, NSInteger buttonIndex) {
                                
                            }];
             return;
+        }
         default:
             break;
     }
@@ -89,6 +97,11 @@
     }
     
     [actionSheet show];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor clearColor]; // workaround in iPad
 }
 
 @end

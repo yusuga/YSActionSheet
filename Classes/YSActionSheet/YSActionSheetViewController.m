@@ -19,9 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *actionSheetArea;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *actionSheetAreaWidthConstraint;
-@property (weak, nonatomic) IBOutlet UIView *buttonsArea;
 @property (weak, nonatomic) IBOutlet UIView *buttonsContainerView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonsContainerViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @property (nonatomic) NSString *headerTitle;
@@ -56,15 +54,13 @@
     [self.cancelButton setTitle:self.cancelButtonTitle forState:UIControlStateNormal];
     
     YSActionSheetButtonsViewController *buttonsVC;
-    for (UINavigationController *nc in self.childViewControllers) {
-        if ([nc isKindOfClass:[UINavigationController class]]) {
-            YSActionSheetButtonsViewController *topVC = (id)nc.topViewController;
-            if ([topVC isKindOfClass:[YSActionSheetButtonsViewController class]]) {
-                buttonsVC = topVC;
-                break;
-            }
+    for (YSActionSheetButtonsViewController *vc in self.childViewControllers) {
+        if ([vc isKindOfClass:[YSActionSheetButtonsViewController class]]) {
+            buttonsVC = vc;
+            break;
         }
-    }    
+    }
+    
     NSAssert1([buttonsVC isKindOfClass:[YSActionSheetButtonsViewController class]], @"vc: %@", buttonsVC);
     self.buttonsViewController = buttonsVC;
     [self.buttonsViewController setActionSheetItems:self.items];
@@ -79,19 +75,9 @@
 {
     self.actionSheetAreaWidthConstraint.constant = MIN(self.view.bounds.size.width, self.view.bounds.size.height);
     
-    CGFloat viewHeight = [self.buttonsViewController viewHeight];
-    
-    [self.buttonsArea setNeedsLayout];
-    [self.buttonsArea layoutIfNeeded];
-    
-    CGFloat containerMaxHeight = self.buttonsArea.bounds.size.height;
-    if (viewHeight <= containerMaxHeight) {
-        self.buttonsViewController.tableView.scrollEnabled = NO;
-    } else {
-        viewHeight = containerMaxHeight;
-        self.buttonsViewController.tableView.scrollEnabled = YES;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.actionSheetAreaWidthConstraint.constant /= 2.f;
     }
-    self.buttonsContainerViewHeightConstraint.constant = viewHeight;
 }
 
 #pragma mark - Item
@@ -119,9 +105,12 @@
 
 - (void)show
 {
-    /* Window */
-    
     self.previousKeyWindow = [UIApplication sharedApplication].keyWindow;
+    if ([self.previousKeyWindow.rootViewController isKindOfClass:[self class]]) {
+        DDLogError(@"Double startup of the %@", NSStringFromClass([self class]));
+        return;
+    }
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.windowLevel = UIWindowLevelStatusBar + CGFLOAT_MIN;
     self.window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -131,25 +120,7 @@
     [self.window addSubview:self.view];    
     self.view.frame = self.window.bounds;
     
-    /* Heder title */
-    
-    UIView *titleView;
-    if (self.headerTitleView) {
-        titleView = self.headerTitleView;
-    } else if (self.headerTitle.length) {
-        UILabel *label = [[UILabel alloc] init];
-        label.text = self.headerTitle;
-        label.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
-        label.textColor = [UIColor lightGrayColor];
-        [label sizeToFit];
-        titleView = label;
-    }
-    if (titleView) {
-        self.buttonsViewController.navigationItem.titleView = titleView;
-        [self.buttonsViewController.navigationController setNavigationBarHidden:titleView ? NO : YES animated:NO];
-    }
-    
-    /* Animation */
+    [self.buttonsViewController setHeaderTitle:self.headerTitle];    
     
     self.actionSheetArea.frame = ^CGRect{
         CGRect frame = self.actionSheetArea.frame;
@@ -214,7 +185,7 @@
 {
     if (self.cancelTapGestureRecognizer == gestureRecognizer) {
         CGPoint location = [gestureRecognizer locationInView:self.actionSheetArea];
-        if (CGRectContainsPoint(self.buttonsContainerView.frame, location)) {
+        if (CGRectContainsPoint(self.buttonsViewController.tableView.frame, location)) {
             return NO;
         }
     }

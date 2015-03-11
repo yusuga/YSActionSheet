@@ -9,7 +9,15 @@
 #import "YSActionSheetButtonsViewController.h"
 #import "YSActionSheetItem.h"
 
-@interface YSActionSheetButtonsViewController ()
+@interface YSActionSheetButtonsViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic, readwrite) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerBackgroundColorBottomConstraint;
+
+@property (strong, nonatomic) IBOutlet UIView *headerTitleView;
+@property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
 
 @property (weak, nonatomic) NSArray *items;
 @property (nonatomic) BOOL centeringText;
@@ -28,7 +36,52 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+    
+    if (NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVisualEffectView")) {
+        self.tableView.backgroundView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+    }
+    
+    self.headerBackgroundColorBottomConstraint.constant = 1.f/[UIScreen mainScreen].scale;
+}
+
+- (void)viewWillLayoutSubviews
+{
+    CGFloat maxHeight = self.view.bounds.size.height;
+    CGFloat allCellHeight = [self allCellHeight];
+    CGFloat heightConstant = 0.f;
+    
+    if (allCellHeight > maxHeight) {
+        self.headerTitleView.hidden = YES;
+        self.tableView.scrollEnabled = YES;
+        heightConstant = maxHeight;
+    } else if (allCellHeight + self.headerTitleView.bounds.size.height > maxHeight) {
+        self.headerTitleView.hidden = YES;
+        self.tableView.scrollEnabled = NO;
+        heightConstant = allCellHeight;
+    } else if (allCellHeight + self.headerTitleView.bounds.size.height < maxHeight) {
+        self.headerTitleView.hidden = NO;
+        self.tableView.scrollEnabled = NO;
+        heightConstant = allCellHeight + self.headerTitleView.bounds.size.height;
+    } else {
+        self.headerTitleView.hidden = NO;
+        self.tableView.scrollEnabled = NO;
+        heightConstant = allCellHeight;
+    }
+
+    self.tableViewHeightConstraint.constant = heightConstant;
+
+    UIEdgeInsets contentInset = ^UIEdgeInsets{
+        UIEdgeInsets insets = self.tableView.contentInset;
+        insets.top = -self.tableView.tableHeaderView.bounds.size.height;
+        if (!self.headerTitleView.hidden) {
+            insets.top += self.headerTitleView.bounds.size.height;
+        }
+        insets.bottom = -self.tableView.tableFooterView.bounds.size.height;
+        return insets;
+    }();
+
+    self.tableView.contentInset = contentInset;
 }
 
 - (void)setActionSheetItems:(NSArray*)items
@@ -45,14 +98,24 @@
     [self.tableView reloadData];
 }
 
-- (CGFloat)viewHeight
+- (void)setHeaderTitle:(NSString *)headerTitle
 {
-    CGFloat cellHeight = [[self class] cellHeight];
-    CGFloat viewHeight = cellHeight*[self.items count];
-    if (!self.navigationController.navigationBarHidden) {
-        viewHeight += self.navigationController.navigationBar.intrinsicContentSize.height;
+    self.headerTitleLabel.text = headerTitle;
+}
+
+- (CGFloat)allCellHeight
+{
+    return [[self class] cellHeight]*[self.items count];
+}
+
+- (CGFloat)allContentHeight
+{
+    CGFloat height = [self allCellHeight];
+    
+    if (self.headerTitleLabel.text.length) {
+        height += self.headerTitleView.bounds.size.height;
     }
-    return viewHeight;
+    return height;
 }
 
 #pragma mark - Table view data source
@@ -97,26 +160,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [[self class] cellHeight];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    /* http://stackoverflow.com/questions/25770119/ios-8-uitableview-separator-inset-0-not-working/25877725#25877725 */
-    
-    // Remove seperator inset
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    
-    // Prevent the cell from inheriting the Table View's margin settings
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-        [cell setPreservesSuperviewLayoutMargins:NO];
-    }
-    
-    // Explictly set your cell's layout margins
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
 }
 
 #pragma mark - settings

@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YSActionSheetButtonsViewController : UITableViewController
+@interface YSActionSheetButtonsViewController : UIViewController
+
+@property (weak, nonatomic, readonly) IBOutlet UITableView *tableView;
 
 - (void)setActionSheetItems:(NSArray*)items;
+- (void)setHeaderTitle:(NSString*)title;
 
 @property (copy, nonatomic) void(^didSelectRow)(void);
-
-- (CGFloat)viewHeight;
 
 @end

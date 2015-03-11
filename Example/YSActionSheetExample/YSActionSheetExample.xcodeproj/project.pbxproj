@@ -29,6 +29,7 @@
 		B87DFDF81AAD893C00D5175F /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87DFDF71AAD893C00D5175F /* TableViewController.m */; };
 		B87DFDFA1AADA0AB00D5175F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B87DFDF91AADA0AB00D5175F /* LaunchScreen.xib */; };
 		B8C012331AAEE4D400DBC176 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C012321AAEE4D400DBC176 /* NavigationController.m */; };
+		B8C35DE71AAFE68F00C08D6F /* YSActionSheetButtonsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C35DE61AAFE68F00C08D6F /* YSActionSheetButtonsCell.m */; };
 		EC35AB10C8EF40378DC5EE57 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE90F3BBCF84F2D92DFA609 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,8 @@
 		B87DFDF91AADA0AB00D5175F /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		B8C012311AAEE4D400DBC176 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
 		B8C012321AAEE4D400DBC176 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		B8C35DE51AAFE68F00C08D6F /* YSActionSheetButtonsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetButtonsCell.h; sourceTree = "<group>"; };
+		B8C35DE61AAFE68F00C08D6F /* YSActionSheetButtonsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetButtonsCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +209,8 @@
 				B87239AE197515EF00EC5CE2 /* YSActionSheetViewController.m */,
 				B87239B2197517B800EC5CE2 /* YSActionSheetButtonsViewController.h */,
 				B87239B3197517B800EC5CE2 /* YSActionSheetButtonsViewController.m */,
+				B8C35DE51AAFE68F00C08D6F /* YSActionSheetButtonsCell.h */,
+				B8C35DE61AAFE68F00C08D6F /* YSActionSheetButtonsCell.m */,
 			);
 			name = YSActionSheet;
 			path = ../../Classes/YSActionSheet;
@@ -349,6 +354,7 @@
 				B87239AC197515BB00EC5CE2 /* YSActionSheet.m in Sources */,
 				B87239AF197515EF00EC5CE2 /* YSActionSheetViewController.m in Sources */,
 				B8C012331AAEE4D400DBC176 /* NavigationController.m in Sources */,
+				B8C35DE71AAFE68F00C08D6F /* YSActionSheetButtonsCell.m in Sources */,
 				B87239851975159200EC5CE2 /* AppDelegate.m in Sources */,
 				B87239B4197517B800EC5CE2 /* YSActionSheetButtonsViewController.m in Sources */,
 				B87239811975159200EC5CE2 /* main.m in Sources */,
@@ -482,7 +488,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YSActionSheetExample/YSActionSheetExample-Prefix.pch";
 				INFOPLIST_FILE = "YSActionSheetExample/YSActionSheetExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -496,7 +504,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YSActionSheetExample/YSActionSheetExample-Prefix.pch";
 				INFOPLIST_FILE = "YSActionSheetExample/YSActionSheetExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
