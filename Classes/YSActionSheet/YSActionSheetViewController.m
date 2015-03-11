@@ -22,9 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIView *buttonsContainerView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
-@property (nonatomic) NSString *headerTitle;
-@property (nonatomic) UIView *headerTitleView;
-
 @property (weak, nonatomic) YSActionSheetButtonsViewController *buttonsViewController;
 @property (nonatomic) NSMutableArray *items;
 
@@ -73,6 +70,8 @@
 
 - (void)viewWillLayoutSubviews
 {
+    /* ActionSheetArea constraint */
+    
     self.actionSheetAreaWidthConstraint.constant = MIN(self.view.bounds.size.width, self.view.bounds.size.height);
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -119,8 +118,12 @@
     [self.window makeKeyAndVisible];
     [self.window addSubview:self.view];    
     self.view.frame = self.window.bounds;
-    
-    [self.buttonsViewController setHeaderTitle:self.headerTitle];    
+  
+    if (self.headerTitle.length) {
+        [self.buttonsViewController setHeaderTitle:self.headerTitle];
+    } else if (self.headerTitleView) {
+        [self.buttonsViewController setHeaderTitleView:self.headerTitleView];
+    }
     
     self.actionSheetArea.frame = ^CGRect{
         CGRect frame = self.actionSheetArea.frame;

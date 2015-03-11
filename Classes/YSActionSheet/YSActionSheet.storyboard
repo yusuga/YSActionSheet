@@ -121,17 +121,17 @@
                                 </constraints>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="496-ei-7x7" userLabel="HeaderView">
-                                    <rect key="frame" x="0.0" y="0.0" width="584" height="200"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="496-ei-7x7" userLabel="HeaderContainerView">
+                                    <rect key="frame" x="0.0" y="0.0" width="584" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Yn-vA-MWX" userLabel="HeaderBackgroundColorView">
-                                            <rect key="frame" x="0.0" y="0.0" width="584" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="584" height="60"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G81-dj-JVA" userLabel="HeaderTitleView">
-                                                    <rect key="frame" x="0.0" y="140" width="584" height="60"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G81-dj-JVA" userLabel="HeaderView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="60"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2x0-VV-Ybw">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2x0-VV-Ybw">
                                                             <rect key="frame" x="8" y="22" width="568" height="16"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -154,17 +154,12 @@
                                                 <constraint firstAttribute="bottom" secondItem="G81-dj-JVA" secondAttribute="bottom" id="9aM-dQ-OUa"/>
                                                 <constraint firstItem="G81-dj-JVA" firstAttribute="leading" secondItem="1Yn-vA-MWX" secondAttribute="leading" id="IGv-pf-DrC"/>
                                                 <constraint firstAttribute="trailing" secondItem="G81-dj-JVA" secondAttribute="trailing" id="kgn-lS-mlf"/>
-                                                <constraint firstAttribute="height" constant="200" id="vY4-MS-a0u"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="vY4-MS-a0u"/>
-                                                </mask>
-                                            </variation>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="1Yn-vA-MWX" firstAttribute="top" secondItem="496-ei-7x7" secondAttribute="top" id="AbG-7q-O5f"/>
                                         <constraint firstAttribute="bottom" secondItem="1Yn-vA-MWX" secondAttribute="bottom" id="BWE-s4-eF5"/>
                                         <constraint firstItem="1Yn-vA-MWX" firstAttribute="top" secondItem="496-ei-7x7" secondAttribute="top" id="RBr-9Q-euJ"/>
                                         <constraint firstItem="1Yn-vA-MWX" firstAttribute="leading" secondItem="496-ei-7x7" secondAttribute="leading" id="r8u-h3-YFf"/>
@@ -172,7 +167,7 @@
                                     </constraints>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="nJb-DG-zZA" userLabel="FooterView">
-                                    <rect key="frame" x="0.0" y="266" width="584" height="200"/>
+                                    <rect key="frame" x="0.0" y="126" width="584" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                                 </view>
@@ -228,7 +223,7 @@
                     <connections>
                         <outlet property="headerBackgroundColorBottomConstraint" destination="BWE-s4-eF5" id="r73-p1-nkG"/>
                         <outlet property="headerTitleLabel" destination="2x0-VV-Ybw" id="qaP-B9-J5r"/>
-                        <outlet property="headerTitleView" destination="G81-dj-JVA" id="l3q-ij-v7O"/>
+                        <outlet property="headerView" destination="G81-dj-JVA" id="lyk-Dc-snr"/>
                         <outlet property="tableView" destination="iGC-2d-XRB" id="EAs-9m-bgf"/>
                         <outlet property="tableViewHeightConstraint" destination="Ftn-6m-b7O" id="7du-FJ-pEY"/>
                     </connections>

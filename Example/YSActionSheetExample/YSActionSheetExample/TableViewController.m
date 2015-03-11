@@ -20,7 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
 #if 1
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cat"]];
 #else
@@ -33,11 +33,37 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    NSString *title = @"TITLE";
+    NSString *title = indexPath.section == 5 ? nil : @"TITLE";
     NSString *cancel = @"Cancel";
     NSArray *buttonTitles = ^NSArray*{
         NSMutableArray *titles = @[].mutableCopy;
-        for (NSUInteger count = 0; count < (indexPath.section ? 10 : 3); count++) {
+        NSUInteger maxCount = ^NSUInteger{
+            NSUInteger maxCount = 3;
+            CGSize size = [UIScreen mainScreen].bounds.size;
+            
+            switch (indexPath.section) {
+                case 1:
+                case 2:
+                {
+                    CGFloat height = MAX(size.width, size.height) - 8.f - 8.f - 60.f - 8.f;
+                    maxCount = ceil(height/44.f);
+                    if (indexPath.section == 2) {
+                        maxCount += 1;
+                    }
+                    break;
+                }
+                case 3:
+                {
+                    CGFloat height = MIN(size.width, size.height) - 8.f - 8.f - 60.f - 8.f;
+                    maxCount = floor(height/44.f);
+                }
+                default:
+                    break;
+            }
+            return maxCount;
+        }();
+        
+        for (NSUInteger count = 0; count < maxCount; count++) {
             [titles addObject:[NSString stringWithFormat:@"other%zd", count+1]];
         }
         return [NSArray arrayWithArray:titles];
@@ -87,13 +113,10 @@
         NSLog(@"did cancel");
     }];
     
-    if (indexPath.row == 1) {
-        [actionSheet setHeaderTitle:title];
+    if (indexPath.section == 4) {
+        [actionSheet setHeaderTitleView:[[UISwitch alloc] init]];
     } else {
-        UILabel *label = [[UILabel alloc] init];
-        label.text = title;
-        [label sizeToFit];
-        [actionSheet setHeaderTitleView:label];
+        [actionSheet setHeaderTitle:title];
     }
     
     [actionSheet show];

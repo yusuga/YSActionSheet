@@ -16,7 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerBackgroundColorBottomConstraint;
 
-@property (strong, nonatomic) IBOutlet UIView *headerTitleView;
+@property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
 
 @property (weak, nonatomic) NSArray *items;
@@ -42,45 +42,92 @@
         self.tableView.backgroundView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
     }
     
+    CGRect frame = CGRectMake(0.f, 0.f, self.tableView.bounds.size.width, self.tableView.bounds.size.height);
+    self.tableView.tableHeaderView.frame = frame;
+    self.tableView.tableFooterView.frame = frame;
+    
     self.headerBackgroundColorBottomConstraint.constant = 1.f/[UIScreen mainScreen].scale;
 }
 
 - (void)viewWillLayoutSubviews
 {
+    BOOL headerTitleEnabled = YES;
+    if (self.headerTitle.length) {
+        self.headerTitleLabel.text = self.headerTitle;
+    } else if (self.headerTitleView) {
+        if (!self.headerTitleView.superview) {
+            [self.headerView addSubview:self.headerTitleView];
+            [self.headerTitleView setTranslatesAutoresizingMaskIntoConstraints:NO];
+            
+            [self.headerTitleView addConstraint:[NSLayoutConstraint constraintWithItem:self.headerTitleView
+                                                                             attribute:NSLayoutAttributeWidth
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:nil
+                                                                             attribute:NSLayoutAttributeWidth
+                                                                            multiplier:1.f
+                                                                              constant:self.headerTitleView.bounds.size.width]];
+            [self.headerTitleView addConstraint:[NSLayoutConstraint constraintWithItem:self.headerTitleView
+                                                                             attribute:NSLayoutAttributeHeight
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:nil
+                                                                             attribute:NSLayoutAttributeHeight
+                                                                            multiplier:1.0
+                                                                              constant:self.headerTitleView.bounds.size.height]];
+            [self.headerView addConstraint:[NSLayoutConstraint constraintWithItem:self.headerTitleView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.headerView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1.f
+                                                                         constant:0.f]];
+            [self.headerView addConstraint:[NSLayoutConstraint constraintWithItem:self.headerTitleView
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.headerView
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                       multiplier:1.f
+                                                                         constant:0.f]];
+        }
+    } else {
+        headerTitleEnabled = NO;
+    }
+    
     CGFloat maxHeight = self.view.bounds.size.height;
     CGFloat allCellHeight = [self allCellHeight];
     CGFloat heightConstant = 0.f;
     
     if (allCellHeight > maxHeight) {
-        self.headerTitleView.hidden = YES;
+        self.headerView.hidden = YES;
         self.tableView.scrollEnabled = YES;
         heightConstant = maxHeight;
-    } else if (allCellHeight + self.headerTitleView.bounds.size.height > maxHeight) {
-        self.headerTitleView.hidden = YES;
+        headerTitleEnabled = NO;
+    } else if (headerTitleEnabled && allCellHeight + self.headerView.bounds.size.height > maxHeight) {
+        self.headerView.hidden = YES;
         self.tableView.scrollEnabled = NO;
         heightConstant = allCellHeight;
-    } else if (allCellHeight + self.headerTitleView.bounds.size.height < maxHeight) {
-        self.headerTitleView.hidden = NO;
+        headerTitleEnabled = NO;
+    } else if (headerTitleEnabled && allCellHeight + self.headerView.bounds.size.height < maxHeight) {
+        self.headerView.hidden = NO;
         self.tableView.scrollEnabled = NO;
-        heightConstant = allCellHeight + self.headerTitleView.bounds.size.height;
+        heightConstant = allCellHeight + self.headerView.bounds.size.height;
     } else {
-        self.headerTitleView.hidden = NO;
+        self.headerView.hidden = NO;
         self.tableView.scrollEnabled = NO;
         heightConstant = allCellHeight;
     }
-
+    
     self.tableViewHeightConstraint.constant = heightConstant;
-
+    
     UIEdgeInsets contentInset = ^UIEdgeInsets{
         UIEdgeInsets insets = self.tableView.contentInset;
         insets.top = -self.tableView.tableHeaderView.bounds.size.height;
-        if (!self.headerTitleView.hidden) {
-            insets.top += self.headerTitleView.bounds.size.height;
+        if (headerTitleEnabled) {
+            insets.top += self.headerView.bounds.size.height;
         }
         insets.bottom = -self.tableView.tableFooterView.bounds.size.height;
         return insets;
     }();
-
+    
     self.tableView.contentInset = contentInset;
 }
 
@@ -98,24 +145,9 @@
     [self.tableView reloadData];
 }
 
-- (void)setHeaderTitle:(NSString *)headerTitle
-{
-    self.headerTitleLabel.text = headerTitle;
-}
-
 - (CGFloat)allCellHeight
 {
     return [[self class] cellHeight]*[self.items count];
-}
-
-- (CGFloat)allContentHeight
-{
-    CGFloat height = [self allCellHeight];
-    
-    if (self.headerTitleLabel.text.length) {
-        height += self.headerTitleView.bounds.size.height;
-    }
-    return height;
 }
 
 #pragma mark - Table view data source
