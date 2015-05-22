@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Iyp-PJ-fyI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Iyp-PJ-fyI">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
         <!--Action Sheet View Controller-->
@@ -27,7 +26,7 @@
                                             <constraint firstAttribute="height" constant="44" id="INg-1r-fiD"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Cancel"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="4"/>
@@ -37,25 +36,22 @@
                                             <action selector="cancelButtonDidPush:" destination="Iyp-PJ-fyI" eventType="touchUpInside" id="b3f-fF-fIm"/>
                                         </connections>
                                     </button>
-                                    <containerView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JIV-cl-C5B" userLabel="ButtonsContainerView">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tx3-cD-JoI" userLabel="ContentView">
                                         <rect key="frame" x="8" y="8" width="584" height="532"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <segue destination="Fy1-ws-Z9n" kind="embed" id="iyB-1M-cJ7"/>
-                                        </connections>
-                                    </containerView>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="JIV-cl-C5B" firstAttribute="top" secondItem="S7A-hR-AkH" secondAttribute="top" constant="8" id="4qC-eV-CNO"/>
-                                    <constraint firstItem="JIV-cl-C5B" firstAttribute="leading" secondItem="S7A-hR-AkH" secondAttribute="leading" constant="8" id="5s5-3y-Q1X"/>
+                                    <constraint firstItem="4UQ-Dc-RHc" firstAttribute="top" secondItem="tx3-cD-JoI" secondAttribute="bottom" constant="8" id="IKP-p4-qYW"/>
                                     <constraint firstAttribute="bottom" secondItem="4UQ-Dc-RHc" secondAttribute="bottom" constant="8" id="QFE-Pm-b9r"/>
-                                    <constraint firstAttribute="trailing" secondItem="JIV-cl-C5B" secondAttribute="trailing" constant="8" id="TcU-SL-P8i"/>
+                                    <constraint firstItem="tx3-cD-JoI" firstAttribute="leading" secondItem="S7A-hR-AkH" secondAttribute="leading" constant="8" id="Wre-3O-dyF"/>
                                     <constraint firstItem="4UQ-Dc-RHc" firstAttribute="leading" secondItem="S7A-hR-AkH" secondAttribute="leading" constant="8" id="Yip-vF-01k"/>
-                                    <constraint firstItem="4UQ-Dc-RHc" firstAttribute="top" secondItem="JIV-cl-C5B" secondAttribute="bottom" constant="8" id="duI-i7-64Q"/>
                                     <constraint firstAttribute="trailing" secondItem="4UQ-Dc-RHc" secondAttribute="trailing" constant="8" id="jU5-1d-JYF"/>
                                     <constraint firstAttribute="width" constant="600" id="lNH-Cy-lXP"/>
+                                    <constraint firstItem="tx3-cD-JoI" firstAttribute="top" secondItem="S7A-hR-AkH" secondAttribute="top" constant="8" id="pap-qD-H67"/>
+                                    <constraint firstAttribute="trailing" secondItem="tx3-cD-JoI" secondAttribute="trailing" constant="8" id="sMI-CM-QkJ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -86,9 +82,9 @@
                     <connections>
                         <outlet property="actionSheetArea" destination="S7A-hR-AkH" id="2yE-6B-2LI"/>
                         <outlet property="actionSheetAreaWidthConstraint" destination="lNH-Cy-lXP" id="OB7-U9-5hs"/>
-                        <outlet property="buttonsContainerView" destination="JIV-cl-C5B" id="tEW-Nh-dZ3"/>
                         <outlet property="cancelButton" destination="4UQ-Dc-RHc" id="2tm-SB-hSh"/>
                         <outlet property="cancelTapGestureRecognizer" destination="jwC-AD-kA3" id="hRR-0e-EcB"/>
+                        <outlet property="contentView" destination="tx3-cD-JoI" id="1gw-ZO-mHH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A0s-e9-Ldr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -104,17 +100,17 @@
         <!--Action Sheet Buttons View Controller-->
         <scene sceneID="0ps-uP-MtT">
             <objects>
-                <viewController id="Fy1-ws-Z9n" customClass="YSActionSheetButtonsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="YSActionSheetButtonsViewController" id="Fy1-ws-Z9n" customClass="YSActionSheetButtonsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NMs-Qf-5S9"/>
                         <viewControllerLayoutGuide type="bottom" id="H4j-9l-E1d"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="enA-4M-bS4">
-                        <rect key="frame" x="0.0" y="0.0" width="584" height="532"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iGC-2d-XRB">
-                                <rect key="frame" x="0.0" y="0.0" width="584" height="532"/>
+                                <rect key="frame" x="0.0" y="68" width="600" height="532"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="532" id="Ftn-6m-b7O"/>
@@ -122,17 +118,17 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="496-ei-7x7" userLabel="HeaderContainerView">
-                                    <rect key="frame" x="0.0" y="0.0" width="584" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Yn-vA-MWX" userLabel="HeaderBackgroundColorView">
-                                            <rect key="frame" x="0.0" y="0.0" width="584" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G81-dj-JVA" userLabel="HeaderView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2x0-VV-Ybw">
-                                                            <rect key="frame" x="8" y="22" width="568" height="16"/>
+                                                            <rect key="frame" x="8" y="22" width="584" height="16"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -149,7 +145,7 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="G81-dj-JVA" secondAttribute="bottom" id="9aM-dQ-OUa"/>
                                                 <constraint firstItem="G81-dj-JVA" firstAttribute="leading" secondItem="1Yn-vA-MWX" secondAttribute="leading" id="IGv-pf-DrC"/>
@@ -167,9 +163,9 @@
                                     </constraints>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="nJb-DG-zZA" userLabel="FooterView">
-                                    <rect key="frame" x="0.0" y="126" width="584" height="60"/>
+                                    <rect key="frame" x="0.0" y="126" width="600" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="CbA-tx-31A" style="IBUITableViewCellStyleDefault" id="Clh-GP-GjQ" customClass="YSActionSheetButtonsCell">
@@ -184,7 +180,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -221,7 +217,9 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="footerBackgroundColorView" destination="nJb-DG-zZA" id="42m-zM-VjF"/>
                         <outlet property="headerBackgroundColorBottomConstraint" destination="BWE-s4-eF5" id="r73-p1-nkG"/>
+                        <outlet property="headerBackgroundColorView" destination="1Yn-vA-MWX" id="aL4-pN-2Ix"/>
                         <outlet property="headerTitleLabel" destination="2x0-VV-Ybw" id="qaP-B9-J5r"/>
                         <outlet property="headerView" destination="G81-dj-JVA" id="lyk-Dc-snr"/>
                         <outlet property="tableView" destination="iGC-2d-XRB" id="EAs-9m-bgf"/>

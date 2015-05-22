@@ -8,6 +8,12 @@
 
 #import "YSActionSheetButtonsViewController.h"
 #import "YSActionSheetItem.h"
+#import "YSActionSheetHeaderView.h"
+#import "YSActionSheetUtility.h"
+
+static NSString * const kHeaderIdentifier = @"Header";
+static CGFloat const kCellHeight = 44.f;
+static CGFloat const kSectionHeaderHeight = 20.f;
 
 @interface YSActionSheetButtonsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -17,28 +23,31 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerBackgroundColorBottomConstraint;
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIView *headerBackgroundColorView;
 @property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
+@property (weak, nonatomic) IBOutlet UIView *footerBackgroundColorView;
 
-@property (weak, nonatomic) NSArray *items;
 @property (nonatomic) BOOL centeringText;
+@property (nonatomic) BOOL multipleSection;
+
+@property (nonatomic) NSArray *items;
+@property (nonatomic) NSArray *sectionTitles;
 
 @end
 
 @implementation YSActionSheetButtonsViewController
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
++ (instancetype)viewController
 {
-    if (self = [super initWithCoder:aDecoder]) {
-        self.items = [NSMutableArray array];
-    }
-    return self;
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"YSActionSheet" bundle:nil];
+    return [sb instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    if (NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVisualEffectView")) {
+    if ([YSActionSheetUtility hasBlurEffect]) {
         self.tableView.backgroundView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
     }
     
@@ -46,7 +55,10 @@
     self.tableView.tableHeaderView.frame = frame;
     self.tableView.tableFooterView.frame = frame;
     
+    self.headerBackgroundColorView.backgroundColor = [YSActionSheetUtility contentBackgroundColor];
     self.headerBackgroundColorBottomConstraint.constant = 1.f/[UIScreen mainScreen].scale;
+    
+    self.footerBackgroundColorView.backgroundColor = [YSActionSheetUtility contentBackgroundColor];
 }
 
 - (void)viewWillLayoutSubviews
@@ -93,27 +105,27 @@
     }
     
     CGFloat maxHeight = self.view.bounds.size.height;
-    CGFloat allCellHeight = [self allCellHeight];
+    CGFloat contentHeight = [self allContentHeight];
     CGFloat heightConstant = 0.f;
     
-    if (allCellHeight > maxHeight) {
+    if (contentHeight > maxHeight) {
         self.headerView.hidden = YES;
         self.tableView.scrollEnabled = YES;
         heightConstant = maxHeight;
         headerTitleEnabled = NO;
-    } else if (headerTitleEnabled && allCellHeight + self.headerView.bounds.size.height > maxHeight) {
+    } else if (headerTitleEnabled && contentHeight + self.headerView.bounds.size.height > maxHeight) {
         self.headerView.hidden = YES;
         self.tableView.scrollEnabled = NO;
-        heightConstant = allCellHeight;
+        heightConstant = contentHeight;
         headerTitleEnabled = NO;
-    } else if (headerTitleEnabled && allCellHeight + self.headerView.bounds.size.height < maxHeight) {
+    } else if (headerTitleEnabled && contentHeight + self.headerView.bounds.size.height < maxHeight) {
         self.headerView.hidden = NO;
         self.tableView.scrollEnabled = NO;
-        heightConstant = allCellHeight + self.headerView.bounds.size.height;
+        heightConstant = contentHeight + self.headerView.bounds.size.height;
     } else {
         self.headerView.hidden = NO;
         self.tableView.scrollEnabled = NO;
-        heightConstant = allCellHeight;
+        heightConstant = contentHeight;
     }
     
     self.tableViewHeightConstraint.constant = heightConstant;
@@ -131,6 +143,55 @@
     self.tableView.contentInset = contentInset;
 }
 
+- (void)setItems:(NSArray *)items
+{
+    _items = items;
+    
+    self.centeringText = YES;
+    
+    if (self.multipleSection) {
+        for (NSArray *secItems in items) {
+            for (YSActionSheetItem *item in secItems) {
+                if (item.image) {
+                    self.centeringText = NO;
+                    break;
+                }
+            }
+        }
+    } else {
+        for (YSActionSheetItem *item in items) {
+            if (item.image) {
+                self.centeringText = NO;
+                break;
+            }
+        }
+    }
+}
+
+- (void)setSectionTitles:(NSArray *)sectionTitles
+                   items:(NSArray *)items
+{
+    self.multipleSection = YES;
+    self.sectionTitles = sectionTitles;
+    self.items = items;
+}
+
+- (void)updateItemTitle:(NSString *)title
+                  image:(UIImage *)image
+            forIndexPath:(NSIndexPath *)indexPath
+{
+    YSActionSheetItem *item = [self itemForIndexPath:indexPath];
+    if (item) {
+        if (title) {
+            item.title = title;
+        }
+        if (image) {
+            item.image = image;
+        }
+        [self.tableView reloadData];
+    }
+}
+
 - (void)setActionSheetItems:(NSArray*)items
 {
     self.items = items;
@@ -145,23 +206,39 @@
     [self.tableView reloadData];
 }
 
-- (CGFloat)allCellHeight
+- (CGFloat)allContentHeight
 {
-    return [[self class] cellHeight]*[self.items count];
+    CGFloat cellHeight = [self cellHeight];
+    
+    if (self.multipleSection) {
+        NSUInteger count = 0;
+        
+        for (NSArray *secItems in self.items) {
+            count += [secItems count];
+        }
+        return cellHeight*count + [[self sectionTitles] count]*[self sectionHeaderHeight];
+    } else {
+        return cellHeight*[self.items count];
+    }
 }
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.multipleSection ? [self.items count] : 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.items count];
+    return self.multipleSection ? [self.items[section] count] : [self.items count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    YSActionSheetItem *item = self.items[indexPath.row];
+    YSActionSheetItem *item = [self itemForIndexPath:indexPath];
     
     cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:item.title
                                                                     attributes:[YSActionSheetItem textAttributesForType:item.type]];
@@ -180,9 +257,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    YSActionSheetItem *item = self.items[indexPath.row];
+    YSActionSheetItem *item = [self itemForIndexPath:indexPath];
     if (item.didClickButton) {
-        item.didClickButton(indexPath.row);
+        item.didClickButton(indexPath);
     }
     if (self.didSelectRow) {
         self.didSelectRow();
@@ -191,14 +268,44 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[self class] cellHeight];
+    return [self cellHeight];
 }
 
-#pragma mark - settings
+#pragma mark Header
 
-+ (CGFloat)cellHeight
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return 44.f;
+    if (self.multipleSection && [self.sectionTitles count]) {
+        YSActionSheetHeaderView *view = [[YSActionSheetHeaderView alloc] init];
+        view.titleLabel.text = self.sectionTitles[section];
+        if ([tableView respondsToSelector:@selector(layoutMargins)]) {
+            view.titleLabelLeadingConstraint.constant = tableView.layoutMargins.left;
+        }
+        return view;
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return self.multipleSection && [self.sectionTitles count] ? [self sectionHeaderHeight] : 0.f;
+}
+
+#pragma mark - Utility
+
+- (YSActionSheetItem *)itemForIndexPath:(NSIndexPath *)indexPath
+{
+    return self.multipleSection ? self.items[indexPath.section][indexPath.row] : self.items[indexPath.row];
+}
+
+- (CGFloat)cellHeight
+{
+    return kCellHeight;
+}
+
+- (CGFloat)sectionHeaderHeight
+{
+    return kSectionHeaderHeight;
 }
 
 @end

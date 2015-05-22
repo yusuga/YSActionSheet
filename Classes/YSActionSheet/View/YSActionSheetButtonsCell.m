@@ -7,6 +7,7 @@
 //
 
 #import "YSActionSheetButtonsCell.h"
+#import "YSActionSheetUtility.h"
 
 @implementation YSActionSheetButtonsCell
 
@@ -16,7 +17,7 @@
     
     // Workaround: Bug of Interface builder in iPad
     self.backgroundColor = [UIColor clearColor];
-    self.contentView.backgroundColor = [self contentBackgroundColor];
+    self.contentView.backgroundColor = [YSActionSheetUtility contentBackgroundColor];
     self.textLabel.backgroundColor = [UIColor clearColor];
 }
 
@@ -27,18 +28,11 @@
     
     UIColor *color;
     if (highlighted) {
-        color = [UIColor colorWithWhite:1.f alpha:0.6f];
+        color = [YSActionSheetUtility highlightedContentBackgroundColor];
     } else {
-        color = [self contentBackgroundColor];
+        color = [YSActionSheetUtility contentBackgroundColor];
     }
     self.contentView.backgroundColor = color;
-}
-
-#pragma mark -
-
-- (UIColor*)contentBackgroundColor
-{
-    return [UIColor colorWithWhite:1.f alpha:0.8f];
 }
 
 @end

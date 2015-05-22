@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class YSActionSheet;
-typedef void(^YSActionSheetDidClickButton)(NSInteger selectedIndex);
+typedef void(^YSActionSheetDidClickButton)(NSIndexPath *indexPath);
 
 typedef NS_ENUM(NSInteger, YSActionSheetButtonType) {
     YSActionSheetButtonTypeDefault,

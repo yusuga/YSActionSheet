@@ -8,21 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "YSActionSheetItem.h"
+#import "YSActionSheetButtonsViewController.h"
 
 @interface YSActionSheetViewController : UIViewController
 
 + (instancetype)viewController;
 
-@property (copy, nonatomic) NSString *cancelButtonTitle;
+- (void)setCancelButtonTitle:(NSString *)title;
 @property (copy, nonatomic) void(^didDismissViewcontroller)(void);
 @property (copy, nonatomic) void(^didCancel)(void);
 
-@property (nonatomic) NSString *headerTitle;
-@property (nonatomic) UIView *headerTitleView;
-
-- (void)addItem:(YSActionSheetItem*)item;
-- (void)updateItemTitle:(NSString*)title image:(UIImage*)image atIndex:(NSUInteger)index;
+@property (nonatomic, readonly) YSActionSheetButtonsViewController *buttonsViewController;
 
 - (void)show;
+- (BOOL)isVisible;
 
 @end

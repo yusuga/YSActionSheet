@@ -11,14 +11,113 @@
 
 @interface YSActionSheet : NSObject
 
-- (void)setCancelButtonTitle:(NSString*)title; // default is Cancel
-- (void)setCancelButtonDidPush:(void(^)(void))didCancel;
-- (void)setDidDismissViewcontrollerCompletion:(void(^)(void))didDismissViewcontroller;
-- (void)setHeaderTitle:(NSString*)title;
-- (void)setHeaderTitleView:(UIView*)titleView;
-- (void)addItem:(YSActionSheetItem*)item;
-- (void)updateItemTitle:(NSString*)title image:(UIImage*)image atIndex:(NSUInteger)index;
+///--------------------------
+/// @name Single section item
+///--------------------------
 
+/**
+ *  Set cell items in single section.
+ *
+ *  @param items NSArray of YSActionSheetItem.
+ */
+- (void)setItems:(NSArray *)items;
+
+/**
+ *  Update cell item in single section.
+ *
+ *  @param title string of cell.
+ *  @param image Image of cell.
+ *  @param index index of cell.
+ */
+- (void)updateItemTitle:(NSString*)title
+                  image:(UIImage*)image
+               forIndex:(NSUInteger)index;
+
+///----------------------------
+/// @name Multiple section item
+///----------------------------
+
+/**
+ *  Set cell items in multiple section.
+ *
+ *  @param sectionTitles NSArray of NSString.
+ *  @param items NSArray of NSArray of YSActionSheetItem
+ */
+- (void)setSectionTitles:(NSArray *)sectionTitles
+                   items:(NSArray *)items;
+
+/**
+ *  Update cell item in multiple section.
+ *
+ *  @param title String of cell.
+ *  @param image Image of cell.
+ *  @param index Index path of cell.
+ */
+- (void)updateItemTitle:(NSString *)title
+                  image:(UIImage *)image
+           forIndexPath:(NSIndexPath *)indexPath;
+
+///-------------
+/// @name Header
+///-------------
+
+/**
+ *  Set header title.
+ *  
+ *  @warning It may not be displayed by the entire height.
+ */
+- (void)setHeaderTitle:(NSString*)title;
+
+/**
+ *  Set header view.
+ *
+ *  @warning It may not be displayed by the entire height.
+ */
+- (void)setHeaderTitleView:(UIView*)titleView;
+
+///-------------
+/// @name Cancel
+///-------------
+
+/**
+ *  Set cancel button title. Default is 'Cancel'.
+ */
+- (void)setCancelButtonTitle:(NSString*)title;
+
+/**
+ *  Called after the block is pressed the cancel button.
+ */
+- (void)setCancelButtonDidPush:(void(^)(void))didCancel;
+
+///-----------
+/// @name Show
+///-----------
+
+/**
+ *  Displays the receiver using animation.
+ */
 - (void)show;
+
+///--------------
+/// @name Dismiss
+///--------------
+
+/**
+ *  Dismisses the receiver using animation.
+ *
+ *  @param didDismissViewcontroller The block to execute after the view controller is dismissed.
+ */
+- (void)setDidDismissViewcontrollerCompletion:(void(^)(void))didDismissViewcontroller;
+
+///------------
+/// @name State
+///------------
+
+/**
+ *  A Boolean value that indicates whether the receiver is displayed.
+ *
+ *  @return If YES, the receiver is displayed; otherwise, NO.
+ */
+- (BOOL)isVisible;
 
 @end

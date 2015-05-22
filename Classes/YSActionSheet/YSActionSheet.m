@@ -17,19 +17,65 @@
 
 @implementation YSActionSheet
 
+#pragma mark - Initial
+
 - (instancetype)init
 {
     if (self = [super init]) {
         YSActionSheetViewController *vc = [YSActionSheetViewController viewController];
-        vc.cancelButtonTitle = @"Cancel";
         self.actionSheetViewController = vc;
     }
     return self;
 }
 
+#pragma mark - Single section item
+
+- (void)setItems:(NSArray *)items
+{
+    [self.actionSheetViewController.buttonsViewController setItems:items];
+}
+
+- (void)updateItemTitle:(NSString *)title image:(UIImage *)image forIndex:(NSUInteger)index
+{
+    [self.actionSheetViewController.buttonsViewController updateItemTitle:title
+                                                                    image:image
+                                                             forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+}
+
+#pragma mark - Multiple section item
+
+- (void)setSectionTitles:(NSArray *)sectionTitles
+                   items:(NSArray *)items
+{
+    NSAssert2([sectionTitles count] == [items count], @"[sectionTitles count](%zd) != [items count](%zd)", [sectionTitles count], [items count]);
+    [self.actionSheetViewController.buttonsViewController setSectionTitles:sectionTitles
+                                                                     items:items];
+}
+
+- (void)updateItemTitle:(NSString *)title image:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath
+{
+    [self.actionSheetViewController.buttonsViewController updateItemTitle:title
+                                                                    image:image
+                                                             forIndexPath:indexPath];
+}
+
+#pragma mark - Header
+
+- (void)setHeaderTitle:(NSString *)title
+{
+    self.actionSheetViewController.buttonsViewController.headerTitle = title;
+}
+
+- (void)setHeaderTitleView:(UIView *)titleView
+{
+    self.actionSheetViewController.buttonsViewController.headerTitleView = titleView;
+}
+
+#pragma mark - Cancel
+
 - (void)setCancelButtonTitle:(NSString *)title
 {
-    self.actionSheetViewController.cancelButtonTitle = title;
+    [self.actionSheetViewController setCancelButtonTitle:title];
 }
 
 - (void)setCancelButtonDidPush:(void (^)(void))didCancel
@@ -37,34 +83,25 @@
     self.actionSheetViewController.didCancel = didCancel;
 }
 
+#pragma mark - Show
+
+- (void)show
+{
+    [self.actionSheetViewController show];
+}
+
+#pragma mark - Dismiss
+
 - (void)setDidDismissViewcontrollerCompletion:(void (^)(void))didDismissViewcontroller
 {
     self.actionSheetViewController.didDismissViewcontroller = didDismissViewcontroller;
 }
 
-- (void)setHeaderTitle:(NSString *)title
-{
-    [self.actionSheetViewController setHeaderTitle:title];
-}
+#pragma mark - State
 
-- (void)setHeaderTitleView:(UIView *)titleView
+- (BOOL)isVisible
 {
-    [self.actionSheetViewController setHeaderTitleView:titleView];
-}
-
-- (void)addItem:(YSActionSheetItem*)item
-{
-    [self.actionSheetViewController addItem:item];
-}
-
-- (void)updateItemTitle:(NSString *)title image:(UIImage *)image atIndex:(NSUInteger)index
-{
-    [self.actionSheetViewController updateItemTitle:title image:image atIndex:index];
-}
-
-- (void)show
-{
-    [self.actionSheetViewController show];
+    return [self.actionSheetViewController isVisible];
 }
 
 @end

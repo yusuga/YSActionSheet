@@ -7,8 +7,8 @@
 //
 
 #import "YSActionSheetViewController.h"
-#import "YSActionSheetButtonsViewController.h"
 #import "YSActionSheetItem.h"
+#import "YSActionSheetUtility.h"
 
 @interface YSActionSheetViewController () <UIGestureRecognizerDelegate>
 
@@ -17,13 +17,12 @@
 @property (weak, nonatomic, readwrite) UIWindow *previousKeyWindow;
 @property (nonatomic) UIWindow *window;
 
+@property (nonatomic, readwrite) YSActionSheetButtonsViewController *buttonsViewController;
+
 @property (weak, nonatomic) IBOutlet UIView *actionSheetArea;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *actionSheetAreaWidthConstraint;
-@property (weak, nonatomic) IBOutlet UIView *buttonsContainerView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
-
-@property (weak, nonatomic) YSActionSheetButtonsViewController *buttonsViewController;
-@property (nonatomic) NSMutableArray *items;
 
 @end
 
@@ -33,34 +32,13 @@
 {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"YSActionSheet" bundle:nil];
     YSActionSheetViewController *vc = [sb instantiateInitialViewController];
+    vc.buttonsViewController = [YSActionSheetButtonsViewController viewController];
     return vc;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        self.items = [NSMutableArray array];
-    }
-    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.cancelButton setTitle:self.cancelButtonTitle forState:UIControlStateNormal];
-    
-    YSActionSheetButtonsViewController *buttonsVC;
-    for (YSActionSheetButtonsViewController *vc in self.childViewControllers) {
-        if ([vc isKindOfClass:[YSActionSheetButtonsViewController class]]) {
-            buttonsVC = vc;
-            break;
-        }
-    }
-    
-    NSAssert1([buttonsVC isKindOfClass:[YSActionSheetButtonsViewController class]], @"vc: %@", buttonsVC);
-    self.buttonsViewController = buttonsVC;
-    [self.buttonsViewController setActionSheetItems:self.items];
     
     __weak typeof(self) wself = self;
     self.buttonsViewController.didSelectRow = ^{
@@ -79,25 +57,9 @@
     }
 }
 
-#pragma mark - Item
-
-- (void)addItem:(YSActionSheetItem *)item
+- (void)setCancelButtonTitle:(NSString *)title
 {
-    [self.items addObject:item];
-}
-
-- (void)updateItemTitle:(NSString *)title image:(UIImage *)image atIndex:(NSUInteger)index
-{
-    YSActionSheetItem *item = self.items[index];
-    if (item) {
-        if (title) {
-            item.title = title;
-        }
-        if (image) {
-            item.image = image;
-        }
-        [self.buttonsViewController.tableView reloadData];
-    }
+    [self.cancelButton setTitle:title forState:UIControlStateNormal];
 }
 
 #pragma mark - show, dismiss
@@ -106,7 +68,7 @@
 {
     self.previousKeyWindow = [UIApplication sharedApplication].keyWindow;
     if ([self.previousKeyWindow.rootViewController isKindOfClass:[self class]]) {
-        DDLogError(@"Double startup of the %@", NSStringFromClass([self class]));
+        dd_func_warn(@"Double startup of the %@", NSStringFromClass([self class]));
         return;
     }
     
@@ -118,18 +80,17 @@
     [self.window makeKeyAndVisible];
     [self.window addSubview:self.view];    
     self.view.frame = self.window.bounds;
-  
-    if (self.headerTitle.length) {
-        [self.buttonsViewController setHeaderTitle:self.headerTitle];
-    } else if (self.headerTitleView) {
-        [self.buttonsViewController setHeaderTitleView:self.headerTitleView];
-    }
     
     self.actionSheetArea.frame = ^CGRect{
         CGRect frame = self.actionSheetArea.frame;
         frame.origin.y = self.view.bounds.size.height;
         return frame;
     }();
+    
+    self.buttonsViewController.view.frame = self.contentView.bounds;
+    [self.contentView addSubview:self.buttonsViewController.view];
+    [self addChildViewController:self.buttonsViewController];
+    [self.buttonsViewController didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.4
                           delay:0.15
@@ -172,6 +133,11 @@
          
          if (self.didDismissViewcontroller) self.didDismissViewcontroller();
      }];
+}
+
+- (BOOL)isVisible
+{
+    return self.window != nil;
 }
 
 #pragma mark - button action
