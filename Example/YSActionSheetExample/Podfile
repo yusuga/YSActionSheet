@@ -1,5 +1,5 @@
 platform :ios, '7.0'
-pod 'YSCocoaLumberjackHelper'
+pod 'LumberjackLauncher'
 
 pod 'YSImageFilter'
 pod 'RMUniversalAlert'
