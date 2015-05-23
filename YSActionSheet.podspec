@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'YSActionSheet'
-  s.version = '0.2.0'
+  s.version = '0.2.1'
   s.summary = 'Customizable action sheet.'
   s.homepage = 'https://github.com/yusuga/YSActionSheet'
   s.license = 'MIT'
@@ -26,13 +26,13 @@ Pod::Spec.new do |s|
   
   s.subspec 'View' do |ss|
     ss.dependency 'YSActionSheet/Utility'
+    ss.dependency 'YSActionSheet/Model'
     ss.source_files = 'Classes/YSActionSheet/View/*.{h,m}'
     ss.resources    = 'Classes/YSActionSheet/View/*.xib'
   end
   
   s.subspec 'ViewController' do |ss|
     ss.dependency 'YSActionSheet/View'
-    ss.dependency 'YSActionSheet/Model'
     ss.source_files = 'Classes/YSActionSheet/ViewController/*.{h,m}'
     ss.resources    = 'Classes/YSActionSheet/ViewController/*.storyboard'
   end
