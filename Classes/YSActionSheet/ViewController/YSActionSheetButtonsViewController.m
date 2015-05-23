@@ -7,10 +7,11 @@
 //
 
 #import "YSActionSheetButtonsViewController.h"
-#import "YSActionSheetItem.h"
+#import "YSActionSheetCell.h"
 #import "YSActionSheetHeaderView.h"
 #import "YSActionSheetUtility.h"
 
+static NSString * const kCellIdentifier = @"Cell";
 static NSString * const kHeaderIdentifier = @"Header";
 static CGFloat const kCellHeight = 44.f;
 static CGFloat const kSectionHeaderHeight = 20.f;
@@ -27,7 +28,6 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 @property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
 @property (weak, nonatomic) IBOutlet UIView *footerBackgroundColorView;
 
-@property (nonatomic) BOOL centeringText;
 @property (nonatomic) BOOL multipleSection;
 
 @property (nonatomic) NSArray *items;
@@ -59,6 +59,8 @@ static CGFloat const kSectionHeaderHeight = 20.f;
     self.headerBackgroundColorBottomConstraint.constant = 1.f/[UIScreen mainScreen].scale;
     
     self.footerBackgroundColorView.backgroundColor = [YSActionSheetUtility contentBackgroundColor];
+    
+    [self.tableView registerNib:[YSActionSheetCell nib] forCellReuseIdentifier:kCellIdentifier];
 }
 
 - (void)viewWillLayoutSubviews
@@ -143,31 +145,6 @@ static CGFloat const kSectionHeaderHeight = 20.f;
     self.tableView.contentInset = contentInset;
 }
 
-- (void)setItems:(NSArray *)items
-{
-    _items = items;
-    
-    self.centeringText = YES;
-    
-    if (self.multipleSection) {
-        for (NSArray *secItems in items) {
-            for (YSActionSheetItem *item in secItems) {
-                if (item.image) {
-                    self.centeringText = NO;
-                    break;
-                }
-            }
-        }
-    } else {
-        for (YSActionSheetItem *item in items) {
-            if (item.image) {
-                self.centeringText = NO;
-                break;
-            }
-        }
-    }
-}
-
 - (void)setSectionTitles:(NSArray *)sectionTitles
                    items:(NSArray *)items
 {
@@ -176,33 +153,21 @@ static CGFloat const kSectionHeaderHeight = 20.f;
     self.items = items;
 }
 
-- (void)updateItemTitle:(NSString *)title
-                  image:(UIImage *)image
-            forIndexPath:(NSIndexPath *)indexPath
+- (void)updateItem:(YSActionSheetItem *)item
+      forIndexPath:(NSIndexPath *)indexPath
 {
-    YSActionSheetItem *item = [self itemForIndexPath:indexPath];
-    if (item) {
-        if (title) {
-            item.title = title;
-        }
-        if (image) {
-            item.image = image;
-        }
-        [self.tableView reloadData];
+    if (self.multipleSection) {
+        NSMutableArray *items = [self.items mutableCopy];
+        NSMutableArray *secItems = [items[indexPath.section] mutableCopy];
+        [secItems replaceObjectAtIndex:indexPath.row withObject:item];
+        [items replaceObjectAtIndex:indexPath.section withObject:[NSArray arrayWithArray:secItems]];
+        self.items = [NSArray arrayWithArray:items];
+    } else {
+        NSMutableArray *items = [self.items mutableCopy];
+        [items replaceObjectAtIndex:indexPath.row withObject:item];
+        self.items = [NSArray arrayWithArray:items];
     }
-}
 
-- (void)setActionSheetItems:(NSArray*)items
-{
-    self.items = items;
-    
-    self.centeringText = YES;
-    for (YSActionSheetItem *item in items) {
-        if (item.image) {
-            self.centeringText = NO;
-            break;
-        }
-    }
     [self.tableView reloadData];
 }
 
@@ -236,21 +201,15 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    YSActionSheetItem *item = [self itemForIndexPath:indexPath];
-    
-    cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:item.title
-                                                                    attributes:[YSActionSheetItem textAttributesForType:item.type]];
-    if (self.centeringText) {
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.imageView.image = nil;
-    } else {
-        cell.textLabel.textAlignment = NSTextAlignmentLeft;
-        cell.imageView.image = item.image;
-    }
-    
+    YSActionSheetCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
+    [cell configureWithItem:[self itemForIndexPath:indexPath]];
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    YSActionSheetItem *item = [self itemForIndexPath:indexPath];
+    return !item.activityIndicatorShown;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

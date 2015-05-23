@@ -18,16 +18,23 @@ typedef NS_ENUM(NSInteger, YSActionSheetButtonType) {
 
 @interface YSActionSheetItem : NSObject
 
-- (instancetype)initWithTitle:(NSString*)title
-                        image:(UIImage*)image
-                         type:(YSActionSheetButtonType)type
-               didClickButton:(YSActionSheetDidClickButton)didClickButton;
++ (instancetype)itemWithText:(NSString *)text
+               textAlignment:(NSTextAlignment)textAlignment
+                    textType:(YSActionSheetButtonType)textType
+                       image:(UIImage *)image
+               accessoryView:(UIView *)accessoryView
+              didClickButton:(YSActionSheetDidClickButton)didClickButton;
 
-@property (copy, nonatomic) NSString *title;
++ (instancetype)activityIndicatorItem;
+
+@property (copy, nonatomic) NSString *text;
+@property (nonatomic) NSTextAlignment textAlignment;    // Defailt is NSTextAlignmentCenter
+@property (nonatomic) YSActionSheetButtonType textType;
 @property (nonatomic) UIImage *image;
-@property (nonatomic) YSActionSheetButtonType type;
+@property (nonatomic) UIView *accessoryView;
 @property (copy, nonatomic) YSActionSheetDidClickButton didClickButton;
+@property (nonatomic) BOOL activityIndicatorShown;
 
-+ (NSDictionary*)textAttributesForType:(YSActionSheetButtonType)type;
+- (NSAttributedString *)attributedText;
 
 @end

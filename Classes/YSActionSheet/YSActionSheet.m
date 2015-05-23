@@ -35,11 +35,9 @@
     [self.actionSheetViewController.buttonsViewController setItems:items];
 }
 
-- (void)updateItemTitle:(NSString *)title image:(UIImage *)image forIndex:(NSUInteger)index
+- (void)updateItem:(YSActionSheetItem *)item forIndex:(NSUInteger)index
 {
-    [self.actionSheetViewController.buttonsViewController updateItemTitle:title
-                                                                    image:image
-                                                             forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    [self updateItem:item forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
 
 #pragma mark - Multiple section item
@@ -52,11 +50,10 @@
                                                                      items:items];
 }
 
-- (void)updateItemTitle:(NSString *)title image:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath
+- (void)updateItem:(YSActionSheetItem *)item forIndexPath:(NSIndexPath *)indexPath
 {
-    [self.actionSheetViewController.buttonsViewController updateItemTitle:title
-                                                                    image:image
-                                                             forIndexPath:indexPath];
+    [self.actionSheetViewController.buttonsViewController updateItem:item
+                                                        forIndexPath:indexPath];
 }
 
 #pragma mark - Header

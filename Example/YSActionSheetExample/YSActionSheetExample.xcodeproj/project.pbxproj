@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B844487B1B103EDF00A771C4 /* YSActionSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B844487A1B103EDF00A771C4 /* YSActionSheetCell.xib */; };
 		B87239751975159200EC5CE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B87239741975159200EC5CE2 /* Foundation.framework */; };
 		B87239771975159200EC5CE2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B87239761975159200EC5CE2 /* CoreGraphics.framework */; };
 		B87239791975159200EC5CE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B87239781975159200EC5CE2 /* UIKit.framework */; };
@@ -26,7 +27,7 @@
 		B87DFDFA1AADA0AB00D5175F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B87DFDF91AADA0AB00D5175F /* LaunchScreen.xib */; };
 		B8B678601B0FB2A800C6924A /* YSActionSheetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B678501B0FB2A800C6924A /* YSActionSheetItem.m */; };
 		B8B678611B0FB2A800C6924A /* YSActionSheetUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B678531B0FB2A800C6924A /* YSActionSheetUtility.m */; };
-		B8B678621B0FB2A800C6924A /* YSActionSheetButtonsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B678561B0FB2A800C6924A /* YSActionSheetButtonsCell.m */; };
+		B8B678621B0FB2A800C6924A /* YSActionSheetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B678561B0FB2A800C6924A /* YSActionSheetCell.m */; };
 		B8B678631B0FB2A800C6924A /* YSActionSheetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B678581B0FB2A800C6924A /* YSActionSheetHeaderView.m */; };
 		B8B678641B0FB2A800C6924A /* YSActionSheetHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8B678591B0FB2A800C6924A /* YSActionSheetHeaderView.xib */; };
 		B8B678651B0FB2A800C6924A /* YSActionSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B6785B1B0FB2A800C6924A /* YSActionSheet.storyboard */; };
@@ -51,6 +52,7 @@
 		2427C53047389A059DF07CB7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3C0860D6B1B0DD41855EE0C1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8DE90F3BBCF84F2D92DFA609 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B844487A1B103EDF00A771C4 /* YSActionSheetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YSActionSheetCell.xib; sourceTree = "<group>"; };
 		B87239711975159200EC5CE2 /* YSActionSheetExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YSActionSheetExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B87239741975159200EC5CE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B87239761975159200EC5CE2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -78,8 +80,8 @@
 		B8B678501B0FB2A800C6924A /* YSActionSheetItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetItem.m; sourceTree = "<group>"; };
 		B8B678521B0FB2A800C6924A /* YSActionSheetUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetUtility.h; sourceTree = "<group>"; };
 		B8B678531B0FB2A800C6924A /* YSActionSheetUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetUtility.m; sourceTree = "<group>"; };
-		B8B678551B0FB2A800C6924A /* YSActionSheetButtonsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetButtonsCell.h; sourceTree = "<group>"; };
-		B8B678561B0FB2A800C6924A /* YSActionSheetButtonsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetButtonsCell.m; sourceTree = "<group>"; };
+		B8B678551B0FB2A800C6924A /* YSActionSheetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetCell.h; sourceTree = "<group>"; };
+		B8B678561B0FB2A800C6924A /* YSActionSheetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetCell.m; sourceTree = "<group>"; };
 		B8B678571B0FB2A800C6924A /* YSActionSheetHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetHeaderView.h; sourceTree = "<group>"; };
 		B8B678581B0FB2A800C6924A /* YSActionSheetHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetHeaderView.m; sourceTree = "<group>"; };
 		B8B678591B0FB2A800C6924A /* YSActionSheetHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YSActionSheetHeaderView.xib; sourceTree = "<group>"; };
@@ -243,8 +245,9 @@
 		B8B678541B0FB2A800C6924A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B8B678551B0FB2A800C6924A /* YSActionSheetButtonsCell.h */,
-				B8B678561B0FB2A800C6924A /* YSActionSheetButtonsCell.m */,
+				B8B678551B0FB2A800C6924A /* YSActionSheetCell.h */,
+				B8B678561B0FB2A800C6924A /* YSActionSheetCell.m */,
+				B844487A1B103EDF00A771C4 /* YSActionSheetCell.xib */,
 				B8B678571B0FB2A800C6924A /* YSActionSheetHeaderView.h */,
 				B8B678581B0FB2A800C6924A /* YSActionSheetHeaderView.m */,
 				B8B678591B0FB2A800C6924A /* YSActionSheetHeaderView.xib */,
@@ -350,6 +353,7 @@
 				B8B678651B0FB2A800C6924A /* YSActionSheet.storyboard in Resources */,
 				B87DFDFA1AADA0AB00D5175F /* LaunchScreen.xib in Resources */,
 				B87239881975159200EC5CE2 /* Main.storyboard in Resources */,
+				B844487B1B103EDF00A771C4 /* YSActionSheetCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +415,7 @@
 				B87239811975159200EC5CE2 /* main.m in Sources */,
 				B8B678601B0FB2A800C6924A /* YSActionSheetItem.m in Sources */,
 				B87DFDF81AAD893C00D5175F /* TableViewController.m in Sources */,
-				B8B678621B0FB2A800C6924A /* YSActionSheetButtonsCell.m in Sources */,
+				B8B678621B0FB2A800C6924A /* YSActionSheetCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

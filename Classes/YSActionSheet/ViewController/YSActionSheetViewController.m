@@ -124,11 +124,10 @@
              return frame;
          }();
      } completion:^(BOOL finished) {
-         for (UIView *view in @[self.view, self.window]) {
-             [view removeFromSuperview];
-         }
-         
+         [self.view removeFromSuperview];
+         [self.window removeFromSuperview];
          self.window = nil;
+         
          [self.previousKeyWindow makeKeyAndVisible];
          
          if (self.didDismissViewcontroller) self.didDismissViewcontroller();

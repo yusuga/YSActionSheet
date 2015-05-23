@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YSActionSheetItem.h"
 
 @interface YSActionSheetButtonsViewController : UIViewController
 
@@ -18,9 +19,8 @@
 - (void)setSectionTitles:(NSArray *)sectionTitles       // NSArray of NSString
                    items:(NSArray *)items;              // NSArray of NSArray of YSActionSheetItem
 
-- (void)updateItemTitle:(NSString *)title
-                  image:(UIImage *)image
-            forIndexPath:(NSIndexPath *)indexPath;
+- (void)updateItem:(YSActionSheetItem *)item
+      forIndexPath:(NSIndexPath *)indexPath;
 
 @property (copy, nonatomic) NSString *headerTitle;
 @property (nonatomic) UIView *headerTitleView;

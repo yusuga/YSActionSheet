@@ -72,7 +72,7 @@
         return [NSArray arrayWithArray:titles];
     }();
     
-    if (indexPath.section != 6) {
+    if (indexPath.section < 6) {
         switch (indexPath.row) {
             case 0:
             {
@@ -100,57 +100,106 @@
     YSImageFilter *filter = [[YSImageFilter alloc] init];
     filter.size = CGSizeMake(32, 32);
     
-    if (indexPath.section == 6) {
-        NSMutableArray *items = [NSMutableArray array];
-        NSMutableArray *titles = [NSMutableArray array];
-        NSUInteger sectionMax = 0;
-        NSUInteger rowMax = 0;
-        
-        switch (indexPath.row) {
-            case 0:
-                sectionMax = 3;
-                rowMax = 2;
-                break;
-            case 1:
-                sectionMax = 2;
-                rowMax = 4;
-                break;
-            case 2:
-                sectionMax = 3;
-                rowMax = 5;
-                break;
-            default:
-                abort();
-                break;
-        }
-        
-        for (NSUInteger section = 0; section < sectionMax; section++) {
-            [titles addObject:[NSString stringWithFormat:@"Section %zd", section]];
-            NSMutableArray *secItems = [NSMutableArray array];
-            for (NSUInteger row = 0; row < rowMax; row++) {
-                [secItems addObject:[[YSActionSheetItem alloc] initWithTitle:[NSString stringWithFormat:@"Title %zd - %zd", section, row]
-                                                                       image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
-                                                                        type:YSActionSheetButtonTypeDefault
-                                                              didClickButton:^(NSIndexPath *indexPath) {
-                                                                  NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
-                                                              }]];
+    switch (indexPath.section) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        {
+            NSMutableArray *items = [NSMutableArray arrayWithCapacity:[buttonTitles count]];
+            for (NSString *buttonTitle in buttonTitles) {
+                [items addObject:[YSActionSheetItem itemWithText:buttonTitle
+                                                   textAlignment:indexPath.section == 0 ? NSTextAlignmentCenter : NSTextAlignmentLeft
+                                                        textType:YSActionSheetButtonTypeDefault
+                                                           image:indexPath.section == 0 ? nil : [[UIImage imageNamed:@"cat"] ys_filter:filter]
+                                                   accessoryView:nil
+                                                  didClickButton:^(NSIndexPath *indexPath) {
+                                                      NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                  }]];
             }
-            [items addObject:[NSArray arrayWithArray:secItems]];
+            [actionSheet setItems:[NSArray arrayWithArray:items]];
+            break;
         }
-        
-        [actionSheet setSectionTitles:[NSArray arrayWithArray:titles]
-                                items:[NSArray arrayWithArray:items]];
-    } else {
-        NSMutableArray *items = [NSMutableArray arrayWithCapacity:[buttonTitles count]];
-        for (NSString *buttonTitle in buttonTitles) {
-            [items addObject:[[YSActionSheetItem alloc] initWithTitle:buttonTitle
-                                                                image:indexPath.section == 0 ? nil : [[UIImage imageNamed:@"cat"] ys_filter:filter]
-                                                                 type:YSActionSheetButtonTypeDefault
-                                                       didClickButton:^(NSIndexPath *indexPath) {
-                                                           NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
-                                                       }]];
+        case 6:
+        {
+            NSMutableArray *items = [NSMutableArray array];
+            NSMutableArray *titles = [NSMutableArray array];
+            NSUInteger sectionMax = 0;
+            NSUInteger rowMax = 0;
+            
+            switch (indexPath.row) {
+                case 0:
+                    sectionMax = 3;
+                    rowMax = 2;
+                    break;
+                case 1:
+                    sectionMax = 2;
+                    rowMax = 4;
+                    break;
+                case 2:
+                    sectionMax = 3;
+                    rowMax = 5;
+                    break;
+                default:
+                    abort();
+                    break;
+            }
+            
+            for (NSUInteger section = 0; section < sectionMax; section++) {
+                [titles addObject:[NSString stringWithFormat:@"Section %zd", section]];
+                NSMutableArray *secItems = [NSMutableArray array];
+                for (NSUInteger row = 0; row < rowMax; row++) {
+                    [secItems addObject:[YSActionSheetItem itemWithText:[NSString stringWithFormat:@"Title %zd - %zd", section, row]
+                                                          textAlignment:NSTextAlignmentLeft
+                                                               textType:YSActionSheetButtonTypeDefault
+                                                                  image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
+                                                          accessoryView:nil
+                                                         didClickButton:^(NSIndexPath *indexPath) {
+                                                             NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                         }]];
+                }
+                [items addObject:[NSArray arrayWithArray:secItems]];
+            }
+            
+            [actionSheet setSectionTitles:[NSArray arrayWithArray:titles]
+                                    items:[NSArray arrayWithArray:items]];
+            break;
         }
-        [actionSheet setItems:[NSArray arrayWithArray:items]];
+        case 7:
+        {
+            switch (indexPath.row) {
+                case 0:
+                    [actionSheet setSectionTitles:@[@"Section 0", @"Section 1"]
+                                            items:@[@[[YSActionSheetItem activityIndicatorItem]],
+                                                    @[[YSActionSheetItem activityIndicatorItem]]]];
+                    break;
+                case 1:
+                {
+                    UILabel *label = [[UILabel alloc] init];
+                    label.text = @"Accessory";
+                    label.textColor = [UIColor lightGrayColor];
+                    label.font = [UIFont systemFontOfSize:12.f];
+                    [label sizeToFit];                    
+                    
+                    [actionSheet setItems:@[[YSActionSheetItem itemWithText:@"TEXT"
+                                                              textAlignment:NSTextAlignmentLeft
+                                                                   textType:YSActionSheetButtonTypeDefault
+                                                                      image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
+                                                              accessoryView:label
+                                                             didClickButton:^(NSIndexPath *indexPath) {
+                                                                 NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                             }]]];
+                    break;
+                }
+                default:
+                    abort();
+            }
+            break;
+        }
+        default:
+            break;
     }
     
     __weak typeof(self) wself = self;
@@ -199,9 +248,14 @@
     filter.size = CGSizeMake(32, 32);
     
     dd_func_info(nil);
-    [self.actionSheet updateItemTitle:@"UPDATE"
-                                image:[[UIImage imageNamed:@"cat2"] ys_filter:filter]
-                         forIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [self.actionSheet updateItem:[YSActionSheetItem itemWithText:@"UPDATE"
+                                                   textAlignment:NSTextAlignmentLeft
+                                                        textType:YSActionSheetButtonTypeDefault
+                                                           image:[[UIImage imageNamed:@"cat2"] ys_filter:filter]
+                                                   accessoryView:nil
+                                                  didClickButton:^(NSIndexPath *indexPath) {
+                                                      NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                  }] forIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
 
 @end

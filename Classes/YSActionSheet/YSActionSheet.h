@@ -25,13 +25,11 @@
 /**
  *  Update cell item in single section.
  *
- *  @param title string of cell.
- *  @param image Image of cell.
+ *  @param item Item of cell.
  *  @param index index of cell.
  */
-- (void)updateItemTitle:(NSString*)title
-                  image:(UIImage*)image
-               forIndex:(NSUInteger)index;
+- (void)updateItem:(YSActionSheetItem *)item
+          forIndex:(NSUInteger)index;
 
 ///----------------------------
 /// @name Multiple section item
@@ -49,13 +47,11 @@
 /**
  *  Update cell item in multiple section.
  *
- *  @param title String of cell.
- *  @param image Image of cell.
- *  @param index Index path of cell.
+ *  @param item Item of cell
+ *  @param indexPath Index path of cell.
  */
-- (void)updateItemTitle:(NSString *)title
-                  image:(UIImage *)image
-           forIndexPath:(NSIndexPath *)indexPath;
+- (void)updateItem:(YSActionSheetItem *)item
+      forIndexPath:(NSIndexPath *)indexPath;
 
 ///-------------
 /// @name Header

@@ -12,18 +12,48 @@ static CGFloat const kYSActionSheetButtonFontSize = 20.f;
 
 @implementation YSActionSheetItem
 
-- (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image type:(YSActionSheetButtonType)type didClickButton:(YSActionSheetDidClickButton)didClickButton
++ (instancetype)itemWithText:(NSString *)text
+               textAlignment:(NSTextAlignment)textAlignment
+                    textType:(YSActionSheetButtonType)textType
+                       image:(UIImage *)image
+               accessoryView:(UIView *)accessoryView
+              didClickButton:(YSActionSheetDidClickButton)didClickButton
+{
+    YSActionSheetItem *item = [[YSActionSheetItem alloc] init];
+    item.text = text;
+    item.textAlignment = textAlignment;
+    item.textType = textType;
+    item.image = image;
+    item.accessoryView = accessoryView;
+    item.didClickButton = didClickButton;
+    return item;
+}
+
++ (instancetype)activityIndicatorItem;
+{
+    YSActionSheetItem *item = [[YSActionSheetItem alloc] init];
+    item.activityIndicatorShown = YES;
+    return item;
+}
+
+- (instancetype)init
 {
     if (self = [super init]) {
-        self.title = title;
-        self.image = image;
-        self.type = type;
-        self.didClickButton = didClickButton;
+        self.textAlignment = NSTextAlignmentCenter;
     }
     return self;
 }
 
-+ (NSDictionary*)textAttributesForType:(YSActionSheetButtonType)type
+- (NSAttributedString *)attributedText
+{
+    if (!self.text) return nil;
+    return [[NSAttributedString alloc] initWithString:self.text
+                                           attributes:[[self class] textAttributesForType:self.textType]];
+}
+
+#pragma mark - Utitliy
+
++ (NSDictionary *)textAttributesForType:(YSActionSheetButtonType)type
 {
     switch (type) {
         default: NSAssert1(false, @"unsupported type: %zd", type);
