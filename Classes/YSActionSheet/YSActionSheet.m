@@ -56,6 +56,13 @@
                                                         forIndexPath:indexPath];
 }
 
+#pragma mark - Items
+
+- (NSArray *)items
+{
+    return self.actionSheetViewController.buttonsViewController.items;
+}
+
 #pragma mark - Header
 
 - (void)setHeaderTitle:(NSString *)title
@@ -85,6 +92,11 @@
 - (void)show
 {
     [self.actionSheetViewController show];
+}
+
+- (void)reloadData
+{
+    [self.actionSheetViewController.buttonsViewController.tableView reloadData];
 }
 
 #pragma mark - Dismiss

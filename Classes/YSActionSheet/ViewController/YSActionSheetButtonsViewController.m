@@ -30,7 +30,7 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 
 @property (nonatomic) BOOL multipleSection;
 
-@property (nonatomic) NSArray *items;
+@property (nonatomic, readwrite) NSArray *items;
 @property (nonatomic) NSArray *sectionTitles;
 
 @end

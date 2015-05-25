@@ -215,7 +215,11 @@
     }];
     
     if (indexPath.section == 4) {
-        [actionSheet setHeaderTitleView:[[UISwitch alloc] init]];
+        UISwitch *headerSwitch = [[UISwitch alloc] init];
+        [headerSwitch addTarget:self
+                         action:@selector(headerSwitchDidChange:)
+               forControlEvents:UIControlEventValueChanged];
+        [actionSheet setHeaderTitleView:headerSwitch];
     } else {
         [actionSheet setHeaderTitle:title];
     }
@@ -231,6 +235,13 @@
 }
 
 #pragma mark -
+
+- (void)headerSwitchDidChange:(UISwitch *)sender
+{
+    YSActionSheetItem *item = [self.actionSheet.items firstObject];
+    item.image = [[UIImage imageNamed:[NSString stringWithFormat:@"cat%@", sender.on ? @"2" : @""]] ys_filter:[self imageFilter]];
+    [self.actionSheet reloadData];
+}
 
 - (IBAction)delayUpdateItemButtonDidPush:(id)sender
 {
@@ -256,6 +267,15 @@
                                                   didClickButton:^(NSIndexPath *indexPath) {
                                                       NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
                                                   }] forIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+}
+
+#pragma mark -
+
+- (YSImageFilter *)imageFilter
+{
+    YSImageFilter *filter = [[YSImageFilter alloc] init];
+    filter.size = CGSizeMake(32, 32);
+    return filter;
 }
 
 @end

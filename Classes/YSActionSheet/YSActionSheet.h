@@ -53,6 +53,16 @@
 - (void)updateItem:(YSActionSheetItem *)item
       forIndexPath:(NSIndexPath *)indexPath;
 
+///------------
+/// @name Items
+///------------
+
+/**
+ *  Items of action sheet.
+ *
+ */
+- (NSArray *)items;
+
 ///-------------
 /// @name Header
 ///-------------
@@ -93,6 +103,11 @@
  *  Displays the receiver using animation.
  */
 - (void)show;
+
+/**
+ *  Reloads the items of the action sheet.
+ */
+- (void)reloadData;
 
 ///--------------
 /// @name Dismiss

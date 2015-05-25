@@ -22,6 +22,8 @@
 - (void)updateItem:(YSActionSheetItem *)item
       forIndexPath:(NSIndexPath *)indexPath;
 
+@property (nonatomic, readonly) NSArray *items;
+
 @property (copy, nonatomic) NSString *headerTitle;
 @property (nonatomic) UIView *headerTitleView;
 
