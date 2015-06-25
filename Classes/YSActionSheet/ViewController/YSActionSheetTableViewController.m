@@ -1,12 +1,12 @@
 //
-//  YSActionSheetContentViewController.m
+//  YSActionSheetTableViewController.m
 //  YSActionSheetExample
 //
 //  Created by Yu Sugawara on 2014/07/15.
 //  Copyright (c) 2014年 Yu Sugawara. All rights reserved.
 //
 
-#import "YSActionSheetButtonsViewController.h"
+#import "YSActionSheetTableViewController.h"
 #import "YSActionSheetCell.h"
 #import "YSActionSheetHeaderView.h"
 #import "YSActionSheetUtility.h"
@@ -16,7 +16,7 @@ static NSString * const kHeaderIdentifier = @"Header";
 static CGFloat const kCellHeight = 44.f;
 static CGFloat const kSectionHeaderHeight = 20.f;
 
-@interface YSActionSheetButtonsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface YSActionSheetTableViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic, readwrite) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
@@ -35,7 +35,7 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 
 @end
 
-@implementation YSActionSheetButtonsViewController
+@implementation YSActionSheetTableViewController
 
 + (instancetype)viewController
 {

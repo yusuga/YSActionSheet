@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "YSActionSheetItem.h"
-#import "YSActionSheetButtonsViewController.h"
+#import "YSActionSheetTableViewController.h"
 
 @interface YSActionSheetWindowController : UIViewController
 
@@ -18,7 +18,7 @@
 @property (copy, nonatomic) void(^didDismissViewcontroller)(void);
 @property (copy, nonatomic) void(^didCancel)(void);
 
-@property (nonatomic, readonly) YSActionSheetButtonsViewController *buttonsViewController;
+@property (nonatomic, readonly) YSActionSheetTableViewController *buttonsViewController;
 
 - (void)show;
 - (BOOL)isVisible;

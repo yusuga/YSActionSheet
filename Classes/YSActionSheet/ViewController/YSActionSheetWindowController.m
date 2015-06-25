@@ -17,7 +17,7 @@
 @property (weak, nonatomic, readwrite) UIWindow *previousKeyWindow;
 @property (nonatomic) UIWindow *window;
 
-@property (nonatomic, readwrite) YSActionSheetButtonsViewController *buttonsViewController;
+@property (nonatomic, readwrite) YSActionSheetTableViewController *buttonsViewController;
 
 @property (weak, nonatomic) IBOutlet UIView *actionSheetArea;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *actionSheetAreaWidthConstraint;
@@ -32,7 +32,7 @@
 {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"YSActionSheet" bundle:nil];
     YSActionSheetWindowController *vc = [sb instantiateInitialViewController];
-    vc.buttonsViewController = [YSActionSheetButtonsViewController viewController];
+    vc.buttonsViewController = [YSActionSheetTableViewController viewController];
     return vc;
 }
 

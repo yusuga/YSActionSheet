@@ -31,7 +31,7 @@
 		B8B678631B0FB2A800C6924A /* YSActionSheetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B678581B0FB2A800C6924A /* YSActionSheetHeaderView.m */; };
 		B8B678641B0FB2A800C6924A /* YSActionSheetHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8B678591B0FB2A800C6924A /* YSActionSheetHeaderView.xib */; };
 		B8B678651B0FB2A800C6924A /* YSActionSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B6785B1B0FB2A800C6924A /* YSActionSheet.storyboard */; };
-		B8B678661B0FB2A800C6924A /* YSActionSheetButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B6785D1B0FB2A800C6924A /* YSActionSheetButtonsViewController.m */; };
+		B8B678661B0FB2A800C6924A /* YSActionSheetTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B6785D1B0FB2A800C6924A /* YSActionSheetTableViewController.m */; };
 		B8B678671B0FB2A800C6924A /* YSActionSheetWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B6785F1B0FB2A800C6924A /* YSActionSheetWindowController.m */; };
 		B8B678691B0FB43600C6924A /* cat2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8B678681B0FB43600C6924A /* cat2@2x.png */; };
 		B8C012331AAEE4D400DBC176 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C012321AAEE4D400DBC176 /* NavigationController.m */; };
@@ -86,8 +86,8 @@
 		B8B678581B0FB2A800C6924A /* YSActionSheetHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetHeaderView.m; sourceTree = "<group>"; };
 		B8B678591B0FB2A800C6924A /* YSActionSheetHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YSActionSheetHeaderView.xib; sourceTree = "<group>"; };
 		B8B6785B1B0FB2A800C6924A /* YSActionSheet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = YSActionSheet.storyboard; sourceTree = "<group>"; };
-		B8B6785C1B0FB2A800C6924A /* YSActionSheetButtonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetButtonsViewController.h; sourceTree = "<group>"; };
-		B8B6785D1B0FB2A800C6924A /* YSActionSheetButtonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetButtonsViewController.m; sourceTree = "<group>"; };
+		B8B6785C1B0FB2A800C6924A /* YSActionSheetTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetTableViewController.h; sourceTree = "<group>"; };
+		B8B6785D1B0FB2A800C6924A /* YSActionSheetTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetTableViewController.m; sourceTree = "<group>"; };
 		B8B6785E1B0FB2A800C6924A /* YSActionSheetWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetWindowController.h; sourceTree = "<group>"; };
 		B8B6785F1B0FB2A800C6924A /* YSActionSheetWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetWindowController.m; sourceTree = "<group>"; };
 		B8B678681B0FB43600C6924A /* cat2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cat2@2x.png"; sourceTree = "<group>"; };
@@ -261,8 +261,8 @@
 				B8B6785B1B0FB2A800C6924A /* YSActionSheet.storyboard */,
 				B8B6785E1B0FB2A800C6924A /* YSActionSheetWindowController.h */,
 				B8B6785F1B0FB2A800C6924A /* YSActionSheetWindowController.m */,
-				B8B6785C1B0FB2A800C6924A /* YSActionSheetButtonsViewController.h */,
-				B8B6785D1B0FB2A800C6924A /* YSActionSheetButtonsViewController.m */,
+				B8B6785C1B0FB2A800C6924A /* YSActionSheetTableViewController.h */,
+				B8B6785D1B0FB2A800C6924A /* YSActionSheetTableViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -405,7 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8B678661B0FB2A800C6924A /* YSActionSheetButtonsViewController.m in Sources */,
+				B8B678661B0FB2A800C6924A /* YSActionSheetTableViewController.m in Sources */,
 				B87239AC197515BB00EC5CE2 /* YSActionSheet.m in Sources */,
 				B8B678631B0FB2A800C6924A /* YSActionSheetHeaderView.m in Sources */,
 				B8B678611B0FB2A800C6924A /* YSActionSheetUtility.m in Sources */,
