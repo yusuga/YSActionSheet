@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, YSActionSheetButtonType) {
 + (instancetype)activityIndicatorItem;
 
 @property (copy, nonatomic) NSString *text;
-@property (nonatomic) NSTextAlignment textAlignment;    // Defailt is NSTextAlignmentCenter
+@property (nonatomic) NSTextAlignment textAlignment;    // Default is NSTextAlignmentCenter
 @property (nonatomic) YSActionSheetButtonType textType;
 @property (nonatomic) UIImage *image;
 @property (nonatomic) UIView *accessoryView;
