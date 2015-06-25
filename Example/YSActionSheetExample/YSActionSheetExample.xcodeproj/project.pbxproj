@@ -32,7 +32,7 @@
 		B8B678641B0FB2A800C6924A /* YSActionSheetHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8B678591B0FB2A800C6924A /* YSActionSheetHeaderView.xib */; };
 		B8B678651B0FB2A800C6924A /* YSActionSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B6785B1B0FB2A800C6924A /* YSActionSheet.storyboard */; };
 		B8B678661B0FB2A800C6924A /* YSActionSheetButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B6785D1B0FB2A800C6924A /* YSActionSheetButtonsViewController.m */; };
-		B8B678671B0FB2A800C6924A /* YSActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B6785F1B0FB2A800C6924A /* YSActionSheetViewController.m */; };
+		B8B678671B0FB2A800C6924A /* YSActionSheetWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B6785F1B0FB2A800C6924A /* YSActionSheetWindowController.m */; };
 		B8B678691B0FB43600C6924A /* cat2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8B678681B0FB43600C6924A /* cat2@2x.png */; };
 		B8C012331AAEE4D400DBC176 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C012321AAEE4D400DBC176 /* NavigationController.m */; };
 		EC35AB10C8EF40378DC5EE57 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE90F3BBCF84F2D92DFA609 /* libPods.a */; };
@@ -88,8 +88,8 @@
 		B8B6785B1B0FB2A800C6924A /* YSActionSheet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = YSActionSheet.storyboard; sourceTree = "<group>"; };
 		B8B6785C1B0FB2A800C6924A /* YSActionSheetButtonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetButtonsViewController.h; sourceTree = "<group>"; };
 		B8B6785D1B0FB2A800C6924A /* YSActionSheetButtonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetButtonsViewController.m; sourceTree = "<group>"; };
-		B8B6785E1B0FB2A800C6924A /* YSActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetViewController.h; sourceTree = "<group>"; };
-		B8B6785F1B0FB2A800C6924A /* YSActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetViewController.m; sourceTree = "<group>"; };
+		B8B6785E1B0FB2A800C6924A /* YSActionSheetWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetWindowController.h; sourceTree = "<group>"; };
+		B8B6785F1B0FB2A800C6924A /* YSActionSheetWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetWindowController.m; sourceTree = "<group>"; };
 		B8B678681B0FB43600C6924A /* cat2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cat2@2x.png"; sourceTree = "<group>"; };
 		B8C012311AAEE4D400DBC176 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
 		B8C012321AAEE4D400DBC176 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
@@ -259,8 +259,8 @@
 			isa = PBXGroup;
 			children = (
 				B8B6785B1B0FB2A800C6924A /* YSActionSheet.storyboard */,
-				B8B6785E1B0FB2A800C6924A /* YSActionSheetViewController.h */,
-				B8B6785F1B0FB2A800C6924A /* YSActionSheetViewController.m */,
+				B8B6785E1B0FB2A800C6924A /* YSActionSheetWindowController.h */,
+				B8B6785F1B0FB2A800C6924A /* YSActionSheetWindowController.m */,
 				B8B6785C1B0FB2A800C6924A /* YSActionSheetButtonsViewController.h */,
 				B8B6785D1B0FB2A800C6924A /* YSActionSheetButtonsViewController.m */,
 			);
@@ -410,7 +410,7 @@
 				B8B678631B0FB2A800C6924A /* YSActionSheetHeaderView.m in Sources */,
 				B8B678611B0FB2A800C6924A /* YSActionSheetUtility.m in Sources */,
 				B8C012331AAEE4D400DBC176 /* NavigationController.m in Sources */,
-				B8B678671B0FB2A800C6924A /* YSActionSheetViewController.m in Sources */,
+				B8B678671B0FB2A800C6924A /* YSActionSheetWindowController.m in Sources */,
 				B87239851975159200EC5CE2 /* AppDelegate.m in Sources */,
 				B87239811975159200EC5CE2 /* main.m in Sources */,
 				B8B678601B0FB2A800C6924A /* YSActionSheetItem.m in Sources */,

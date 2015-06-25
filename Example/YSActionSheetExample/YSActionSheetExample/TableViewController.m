@@ -97,8 +97,7 @@
     
     YSActionSheet *actionSheet = [[YSActionSheet alloc] init];
     
-    YSImageFilter *filter = [[YSImageFilter alloc] init];
-    filter.size = CGSizeMake(32, 32);
+    YSImageFilter *filter = [self imageFilter];
     
     switch (indexPath.section) {
         case 0:
@@ -255,14 +254,11 @@
         return ;
     }
     
-    YSImageFilter *filter = [[YSImageFilter alloc] init];
-    filter.size = CGSizeMake(32, 32);
-    
     dd_func_info(nil);
     [self.actionSheet updateItem:[YSActionSheetItem itemWithText:@"UPDATE"
                                                    textAlignment:NSTextAlignmentLeft
                                                         textType:YSActionSheetButtonTypeDefault
-                                                           image:[[UIImage imageNamed:@"cat2"] ys_filter:filter]
+                                                           image:[[UIImage imageNamed:@"cat2"] ys_filter:[self imageFilter]]
                                                    accessoryView:nil
                                                   didClickButton:^(NSIndexPath *indexPath) {
                                                       NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
@@ -275,6 +271,7 @@
 {
     YSImageFilter *filter = [[YSImageFilter alloc] init];
     filter.size = CGSizeMake(32, 32);
+
     return filter;
 }
 

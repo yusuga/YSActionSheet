@@ -7,11 +7,11 @@
 //
 
 #import "YSActionSheet.h"
-#import "YSActionSheetViewController.h"
+#import "YSActionSheetWindowController.h"
 
 @interface YSActionSheet ()
 
-@property (nonatomic) YSActionSheetViewController *actionSheetViewController;
+@property (nonatomic) YSActionSheetWindowController *actionSheetViewController;
 
 @end
 
@@ -22,7 +22,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        YSActionSheetViewController *vc = [YSActionSheetViewController viewController];
+        YSActionSheetWindowController *vc = [YSActionSheetWindowController viewController];
         self.actionSheetViewController = vc;
     }
     return self;

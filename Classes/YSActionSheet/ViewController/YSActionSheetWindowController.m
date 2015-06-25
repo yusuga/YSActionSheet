@@ -1,16 +1,16 @@
 //
-//  YSActionSheetViewController.m
+//  YSActionSheetWindowController.m
 //  YSActionSheetExample
 //
 //  Created by Yu Sugawara on 2014/07/15.
 //  Copyright (c) 2014年 Yu Sugawara. All rights reserved.
 //
 
-#import "YSActionSheetViewController.h"
+#import "YSActionSheetWindowController.h"
 #import "YSActionSheetItem.h"
 #import "YSActionSheetUtility.h"
 
-@interface YSActionSheetViewController () <UIGestureRecognizerDelegate>
+@interface YSActionSheetWindowController () <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *cancelTapGestureRecognizer;
 
@@ -26,12 +26,12 @@
 
 @end
 
-@implementation YSActionSheetViewController
+@implementation YSActionSheetWindowController
 
 + (instancetype)viewController
 {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"YSActionSheet" bundle:nil];
-    YSActionSheetViewController *vc = [sb instantiateInitialViewController];
+    YSActionSheetWindowController *vc = [sb instantiateInitialViewController];
     vc.buttonsViewController = [YSActionSheetButtonsViewController viewController];
     return vc;
 }

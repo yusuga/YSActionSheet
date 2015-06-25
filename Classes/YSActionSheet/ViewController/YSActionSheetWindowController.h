@@ -1,5 +1,5 @@
 //
-//  YSActionSheetViewController.h
+//  YSActionSheetWindowController.h
 //  YSActionSheetExample
 //
 //  Created by Yu Sugawara on 2014/07/15.
@@ -10,7 +10,7 @@
 #import "YSActionSheetItem.h"
 #import "YSActionSheetButtonsViewController.h"
 
-@interface YSActionSheetViewController : UIViewController
+@interface YSActionSheetWindowController : UIViewController
 
 + (instancetype)viewController;
 
