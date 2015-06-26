@@ -95,6 +95,20 @@
  */
 - (void)setCancelButtonDidPush:(void(^)(void))didCancel;
 
+///--------------
+/// @name Heights
+///--------------
+
+/**
+ *  The height of each row (table cell) in the table view.
+ */
+- (void)setRowHeight:(CGFloat)rowHeight;
+
+/**
+ *  The height of section headers in the table view.
+ */
+- (void)setSectionHeaderHeight:(CGFloat)sectionHeaderHeight;
+
 ///-----------
 /// @name Show
 ///-----------

@@ -27,6 +27,9 @@
 @property (copy, nonatomic) NSString *headerTitle;
 @property (nonatomic) UIView *headerTitleView;
 
+@property (nonatomic) CGFloat rowHeight;
+@property (nonatomic) CGFloat sectionHeaderHeight;
+
 @property (copy, nonatomic) void(^didSelectRow)(void);
 
 @end

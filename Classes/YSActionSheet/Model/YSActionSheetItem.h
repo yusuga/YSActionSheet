@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, YSActionSheetButtonType) {
               didClickButton:(YSActionSheetDidClickButton)didClickButton;
 
 + (instancetype)activityIndicatorItem;
++ (instancetype)activityIndicatorItemWithImage:(UIImage *)image;
 
 @property (copy, nonatomic) NSString *text;
 @property (nonatomic) NSTextAlignment textAlignment;    // Default is NSTextAlignmentCenter

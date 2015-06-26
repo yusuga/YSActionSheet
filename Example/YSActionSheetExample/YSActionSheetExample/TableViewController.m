@@ -175,6 +175,11 @@
                                                     @[[YSActionSheetItem activityIndicatorItem]]]];
                     break;
                 case 1:
+                    [actionSheet setSectionTitles:@[@"Section 0", @"Section 1"]
+                                            items:@[@[[YSActionSheetItem activityIndicatorItemWithImage:[[UIImage imageNamed:@"cat"] ys_filter:filter]]],
+                                                    @[[YSActionSheetItem activityIndicatorItemWithImage:[[UIImage imageNamed:@"cat"] ys_filter:filter]]]]];
+                    break;
+                case 2:
                 {
                     UILabel *label = [[UILabel alloc] init];
                     label.text = @"Accessory";
@@ -190,6 +195,32 @@
                                                              didClickButton:^(NSIndexPath *indexPath) {
                                                                  NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
                                                              }]]];
+                    break;
+                }
+                case 3:
+                {
+                    NSMutableArray *items = [NSMutableArray arrayWithCapacity:[buttonTitles count]];
+                    for (NSString *buttonTitle in buttonTitles) {
+                        [items addObject:[YSActionSheetItem itemWithText:buttonTitle
+                                                           textAlignment:indexPath.section == 0 ? NSTextAlignmentCenter : NSTextAlignmentLeft
+                                                                textType:YSActionSheetButtonTypeDefault
+                                                                   image:indexPath.section == 0 ? nil : [[UIImage imageNamed:@"cat"] ys_filter:filter]
+                                                           accessoryView:nil
+                                                          didClickButton:^(NSIndexPath *indexPath) {
+                                                              NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                          }]];
+                    }
+                    [actionSheet setSectionTitles:@[@"Section height 40"]
+                                            items:@[@[[YSActionSheetItem itemWithText:@"Row height 80"
+                                                                      textAlignment:NSTextAlignmentLeft
+                                                                           textType:YSActionSheetButtonTypeDefault
+                                                                              image:[[UIImage imageNamed:@"cat"] ys_filter:[self imageFilter]]
+                                                                      accessoryView:nil
+                                                                     didClickButton:^(NSIndexPath *indexPath) {
+                                                                         NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                                     }]]]];
+                    [actionSheet setRowHeight:80.];
+                    [actionSheet setSectionHeaderHeight:40.];
                     break;
                 }
                 default:
@@ -271,6 +302,7 @@
 {
     YSImageFilter *filter = [[YSImageFilter alloc] init];
     filter.size = CGSizeMake(32, 32);
+    filter.mask = YSImageFilterMaskRoundedCornersIOS7RadiusRatio;
 
     return filter;
 }

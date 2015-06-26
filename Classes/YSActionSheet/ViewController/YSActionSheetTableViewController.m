@@ -13,7 +13,7 @@
 
 static NSString * const kCellIdentifier = @"Cell";
 static NSString * const kHeaderIdentifier = @"Header";
-static CGFloat const kCellHeight = 44.f;
+static CGFloat const kRowHeight = 44.f;
 static CGFloat const kSectionHeaderHeight = 20.f;
 
 @interface YSActionSheetTableViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -41,6 +41,12 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"YSActionSheet" bundle:nil];
     return [sb instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
+}
+
+- (void)awakeFromNib
+{
+    self.rowHeight = kRowHeight;
+    self.sectionHeaderHeight = kSectionHeaderHeight;
 }
 
 - (void)viewDidLoad
@@ -173,7 +179,7 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 
 - (CGFloat)allContentHeight
 {
-    CGFloat cellHeight = [self cellHeight];
+    CGFloat rowHeight = self.rowHeight;
     
     if (self.multipleSection) {
         NSUInteger count = 0;
@@ -181,9 +187,9 @@ static CGFloat const kSectionHeaderHeight = 20.f;
         for (NSArray *secItems in self.items) {
             count += [secItems count];
         }
-        return cellHeight*count + [[self sectionTitles] count]*[self sectionHeaderHeight];
+        return rowHeight*count + [[self sectionTitles] count]*self.sectionHeaderHeight;
     } else {
-        return cellHeight*[self.items count];
+        return rowHeight*[self.items count];
     }
 }
 
@@ -227,7 +233,7 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self cellHeight];
+    return self.rowHeight;
 }
 
 #pragma mark Header
@@ -247,7 +253,7 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return self.multipleSection && [self.sectionTitles count] ? [self sectionHeaderHeight] : 0.f;
+    return self.multipleSection && [self.sectionTitles count] ? self.sectionHeaderHeight : 0.;
 }
 
 #pragma mark - Utility
@@ -255,16 +261,6 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 - (YSActionSheetItem *)itemForIndexPath:(NSIndexPath *)indexPath
 {
     return self.multipleSection ? self.items[indexPath.section][indexPath.row] : self.items[indexPath.row];
-}
-
-- (CGFloat)cellHeight
-{
-    return kCellHeight;
-}
-
-- (CGFloat)sectionHeaderHeight
-{
-    return kSectionHeaderHeight;
 }
 
 @end

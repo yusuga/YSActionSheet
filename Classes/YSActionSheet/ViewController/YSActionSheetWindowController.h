@@ -18,7 +18,7 @@
 @property (copy, nonatomic) void(^didDismissViewcontroller)(void);
 @property (copy, nonatomic) void(^didCancel)(void);
 
-@property (nonatomic, readonly) YSActionSheetTableViewController *buttonsViewController;
+@property (nonatomic, readonly) YSActionSheetTableViewController *tableViewController;
 
 - (void)show;
 - (BOOL)isVisible;

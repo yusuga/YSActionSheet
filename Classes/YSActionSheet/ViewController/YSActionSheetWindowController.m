@@ -17,7 +17,7 @@
 @property (weak, nonatomic, readwrite) UIWindow *previousKeyWindow;
 @property (nonatomic) UIWindow *window;
 
-@property (nonatomic, readwrite) YSActionSheetTableViewController *buttonsViewController;
+@property (nonatomic, readwrite) YSActionSheetTableViewController *tableViewController;
 
 @property (weak, nonatomic) IBOutlet UIView *actionSheetArea;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *actionSheetAreaWidthConstraint;
@@ -32,7 +32,7 @@
 {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"YSActionSheet" bundle:nil];
     YSActionSheetWindowController *vc = [sb instantiateInitialViewController];
-    vc.buttonsViewController = [YSActionSheetTableViewController viewController];
+    vc.tableViewController = [YSActionSheetTableViewController viewController];
     return vc;
 }
 
@@ -41,7 +41,7 @@
     [super viewDidLoad];
     
     __weak typeof(self) wself = self;
-    self.buttonsViewController.didSelectRow = ^{
+    self.tableViewController.didSelectRow = ^{
         [wself dismiss];
     };
 }
@@ -87,15 +87,15 @@
         return frame;
     }();
     
-    self.buttonsViewController.view.frame = self.contentView.bounds;
-    [self.contentView addSubview:self.buttonsViewController.view];
-    [self addChildViewController:self.buttonsViewController];
-    [self.buttonsViewController didMoveToParentViewController:self];
+    self.tableViewController.view.frame = self.contentView.bounds;
+    [self.contentView addSubview:self.tableViewController.view];
+    [self addChildViewController:self.tableViewController];
+    [self.tableViewController didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.4
                           delay:0.15
-         usingSpringWithDamping:1.f
-          initialSpringVelocity:0.f
+         usingSpringWithDamping:1.
+          initialSpringVelocity:0.
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
@@ -153,7 +153,7 @@
 {
     if (self.cancelTapGestureRecognizer == gestureRecognizer) {
         CGPoint location = [gestureRecognizer locationInView:self.actionSheetArea];
-        if (CGRectContainsPoint(self.buttonsViewController.tableView.frame, location)) {
+        if (CGRectContainsPoint(self.tableViewController.tableView.frame, location)) {
             return NO;
         }
     }

@@ -36,6 +36,13 @@ static CGFloat const kYSActionSheetButtonFontSize = 20.f;
     return item;
 }
 
++ (instancetype)activityIndicatorItemWithImage:(UIImage *)image
+{
+    YSActionSheetItem *item = [self activityIndicatorItem];
+    item.image = image;
+    return item;
+}
+
 - (instancetype)init
 {
     if (self = [super init]) {
