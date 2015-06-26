@@ -22,7 +22,7 @@ static CGFloat const kYSActionSheetButtonFontSize = 20.f;
     YSActionSheetItem *item = [[YSActionSheetItem alloc] init];
     item.text = text;
     item.textAlignment = textAlignment;
-    item.textType = textType;
+    item.buttonType = textType;
     item.image = image;
     item.accessoryView = accessoryView;
     item.didClickButton = didClickButton;
@@ -55,7 +55,7 @@ static CGFloat const kYSActionSheetButtonFontSize = 20.f;
 {
     if (!self.text) return nil;
     return [[NSAttributedString alloc] initWithString:self.text
-                                           attributes:[[self class] textAttributesForType:self.textType]];
+                                           attributes:[[self class] textAttributesForType:self.buttonType]];
 }
 
 #pragma mark - Utitliy

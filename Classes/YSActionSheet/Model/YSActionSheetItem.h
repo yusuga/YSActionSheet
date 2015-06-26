@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, YSActionSheetButtonType) {
 
 @property (copy, nonatomic) NSString *text;
 @property (nonatomic) NSTextAlignment textAlignment;    // Default is NSTextAlignmentCenter
-@property (nonatomic) YSActionSheetButtonType textType;
+@property (nonatomic) YSActionSheetButtonType buttonType;
 @property (nonatomic) UIImage *image;
 @property (nonatomic) UIView *accessoryView;
 @property (copy, nonatomic) YSActionSheetDidClickButton didClickButton;
