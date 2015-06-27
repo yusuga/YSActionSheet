@@ -199,17 +199,6 @@
                 }
                 case 3:
                 {
-                    NSMutableArray *items = [NSMutableArray arrayWithCapacity:[buttonTitles count]];
-                    for (NSString *buttonTitle in buttonTitles) {
-                        [items addObject:[YSActionSheetItem itemWithText:buttonTitle
-                                                           textAlignment:indexPath.section == 0 ? NSTextAlignmentCenter : NSTextAlignmentLeft
-                                                                textType:YSActionSheetButtonTypeDefault
-                                                                   image:indexPath.section == 0 ? nil : [[UIImage imageNamed:@"cat"] ys_filter:filter]
-                                                           accessoryView:nil
-                                                          didClickButton:^(NSIndexPath *indexPath) {
-                                                              NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
-                                                          }]];
-                    }
                     [actionSheet setSectionTitles:@[@"Section height 40"]
                                             items:@[@[[YSActionSheetItem itemWithText:@"Row height 80"
                                                                       textAlignment:NSTextAlignmentLeft
@@ -221,6 +210,40 @@
                                                                      }]]]];
                     [actionSheet setRowHeight:80.];
                     [actionSheet setSectionHeaderHeight:40.];
+                    break;
+                }
+                case 4:
+                {
+                    YSImageFilter *filter = [self imageFilter];
+                    
+                    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:@"Bold 15, GreenColor"
+                                                                                  attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:15.],
+                                                                                               NSForegroundColorAttributeName : [UIColor greenColor]}];
+                    
+                    NSArray *items = @[[YSActionSheetItem itemWithText:@"TypeDefault"
+                                                         textAlignment:NSTextAlignmentLeft
+                                                              textType:YSActionSheetButtonTypeDefault
+                                                                 image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
+                                                         accessoryView:nil
+                                                        didClickButton:^(NSIndexPath *indexPath) {
+                                                            NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                        }],
+                                       [YSActionSheetItem itemWithText:@"TypeDestructive"
+                                                         textAlignment:NSTextAlignmentLeft
+                                                              textType:YSActionSheetButtonTypeDestructive
+                                                                 image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
+                                                         accessoryView:nil
+                                                        didClickButton:^(NSIndexPath *indexPath) {
+                                                            NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                        }],
+                                       [YSActionSheetItem itemWithAttributedText:attrStr
+                                                                   textAlignment:NSTextAlignmentLeft
+                                                                           image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
+                                                                   accessoryView:nil
+                                                                  didClickButton:^(NSIndexPath *indexPath) {
+                                                                      NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                                  }]];
+                    [actionSheet setItems:items];
                     break;
                 }
                 default:

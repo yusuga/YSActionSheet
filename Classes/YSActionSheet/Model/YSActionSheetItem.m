@@ -29,6 +29,21 @@ static CGFloat const kYSActionSheetButtonFontSize = 20.f;
     return item;
 }
 
++ (instancetype)itemWithAttributedText:(NSAttributedString *)attributedText
+                         textAlignment:(NSTextAlignment)textAlignment
+                                 image:(UIImage *)image
+                         accessoryView:(UIView *)accessoryView
+                        didClickButton:(YSActionSheetDidClickButton)didClickButton
+{
+    YSActionSheetItem *item = [[YSActionSheetItem alloc] init];
+    item.attributedText = attributedText;
+    item.textAlignment = textAlignment;
+    item.image = image;
+    item.accessoryView = accessoryView;
+    item.didClickButton = didClickButton;
+    return item;
+}
+
 + (instancetype)activityIndicatorItem;
 {
     YSActionSheetItem *item = [[YSActionSheetItem alloc] init];
@@ -53,7 +68,9 @@ static CGFloat const kYSActionSheetButtonFontSize = 20.f;
 
 - (NSAttributedString *)attributedText
 {
+    if (_attributedText) return _attributedText;
     if (!self.text) return nil;
+    
     return [[NSAttributedString alloc] initWithString:self.text
                                            attributes:[[self class] textAttributesForType:self.buttonType]];
 }

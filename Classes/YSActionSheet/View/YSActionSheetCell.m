@@ -36,7 +36,6 @@
     self.imageView.image = item.image;
     
     self.accessoryView = item.accessoryView;
-    self.accessoryView.backgroundColor = [UIColor clearColor];
     
     [self activityIndicatorShown:item.activityIndicatorShown];
     
