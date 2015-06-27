@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "YSActionSheetItem.h"
 
-@interface YSActionSheet : NSObject
+@interface YSActionSheet : UIViewController
 
 ///--------------------------
 /// @name Single section item
@@ -93,7 +93,7 @@
 /**
  *  Called after the block is pressed the cancel button.
  */
-- (void)setCancelButtonDidPush:(void(^)(void))didCancel;
+@property (copy, nonatomic) void(^didCancel)(void);
 
 ///--------------
 /// @name Heights
@@ -128,11 +128,9 @@
 ///--------------
 
 /**
- *  Dismisses the receiver using animation.
- *
- *  @param didDismissViewcontroller The block to execute after the view controller is dismissed.
+ *  The block to execute after the view controller is dismissed.
  */
-- (void)setDidDismissViewcontrollerCompletion:(void(^)(void))didDismissViewcontroller;
+@property (copy, nonatomic) void(^didDismiss)(void);
 
 ///------------
 /// @name State

@@ -233,16 +233,16 @@
     }
     
     __weak typeof(self) wself = self;
-    [actionSheet setDidDismissViewcontrollerCompletion:^{
+    actionSheet.didDismiss = ^{
         NSLog(@"did dismiss");
         NSParameterAssert(wself.actionSheet);
         NSParameterAssert(!wself.actionSheet.isVisible);
         wself.actionSheet = nil;
-    }];
+    };
     
-    [actionSheet setCancelButtonDidPush:^{
+    actionSheet.didCancel = ^{
         NSLog(@"did cancel");
-    }];
+    };
     
     if (indexPath.section == 4) {
         UISwitch *headerSwitch = [[UISwitch alloc] init];

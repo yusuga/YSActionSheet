@@ -7,11 +7,21 @@
 //
 
 #import "YSActionSheet.h"
-#import "YSActionSheetWindowController.h"
+#import "YSActionSheetTableViewController.h"
+#import "YSActionSheetItem.h"
+#import "YSActionSheetUtility.h"
 
-@interface YSActionSheet ()
+@interface YSActionSheet () <UIGestureRecognizerDelegate>
 
-@property (nonatomic) YSActionSheetWindowController *windowController;
+@property (weak, nonatomic) IBOutlet UIView *actionSheetArea;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *actionSheetAreaWidthConstraint;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *cancelTapGestureRecognizer;
+
+@property (nonatomic) UIWindow *window;
+@property (weak, nonatomic, readwrite) UIWindow *previousKeyWindow;
+@property (nonatomic) YSActionSheetTableViewController *tableViewController;
 
 @end
 
@@ -21,18 +31,40 @@
 
 - (instancetype)init
 {
-    if (self = [super init]) {
-        YSActionSheetWindowController *vc = [YSActionSheetWindowController viewController];
-        self.windowController = vc;
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:NSStringFromClass([self class]) bundle:nil];
+    self = [sb instantiateInitialViewController];
+    if (self) {
+        self.tableViewController = [YSActionSheetTableViewController viewController];
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    __weak typeof(self) wself = self;
+    self.tableViewController.didSelectRow = ^{
+        [wself dismiss];
+    };
+}
+
+- (void)viewWillLayoutSubviews
+{
+    /* ActionSheetArea constraint */
+    
+    self.actionSheetAreaWidthConstraint.constant = MIN(self.view.bounds.size.width, self.view.bounds.size.height);
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.actionSheetAreaWidthConstraint.constant /= 2.;
+    }
 }
 
 #pragma mark - Single section item
 
 - (void)setItems:(NSArray *)items
 {
-    [self.windowController.tableViewController setItems:items];
+    [self.tableViewController setItems:items];
 }
 
 - (void)updateItem:(YSActionSheetItem *)item forIndex:(NSUInteger)index
@@ -46,83 +78,171 @@
                    items:(NSArray *)items
 {
     NSAssert2([sectionTitles count] == [items count], @"[sectionTitles count](%zd) != [items count](%zd)", [sectionTitles count], [items count]);
-    [self.windowController.tableViewController setSectionTitles:sectionTitles
-                                                                     items:items];
+    [self.tableViewController setSectionTitles:sectionTitles
+                                         items:items];
 }
 
 - (void)updateItem:(YSActionSheetItem *)item forIndexPath:(NSIndexPath *)indexPath
 {
-    [self.windowController.tableViewController updateItem:item
-                                                        forIndexPath:indexPath];
+    [self.tableViewController updateItem:item
+                            forIndexPath:indexPath];
 }
 
 #pragma mark - Items
 
 - (NSArray *)items
 {
-    return self.windowController.tableViewController.items;
+    return self.tableViewController.items;
 }
 
 #pragma mark - Header
 
 - (void)setHeaderTitle:(NSString *)title
 {
-    self.windowController.tableViewController.headerTitle = title;
+    self.tableViewController.headerTitle = title;
 }
 
 - (void)setHeaderTitleView:(UIView *)titleView
 {
-    self.windowController.tableViewController.headerTitleView = titleView;
+    self.tableViewController.headerTitleView = titleView;
 }
 
 #pragma mark - Cancel
 
 - (void)setCancelButtonTitle:(NSString *)title
 {
-    [self.windowController setCancelButtonTitle:title];
-}
-
-- (void)setCancelButtonDidPush:(void (^)(void))didCancel
-{
-    self.windowController.didCancel = didCancel;
+    [self.cancelButton setTitle:title forState:UIControlStateNormal];
 }
 
 #pragma mark - Heights
 
 - (void)setRowHeight:(CGFloat)rowHeight
 {
-    self.windowController.tableViewController.rowHeight = rowHeight;
+    self.tableViewController.rowHeight = rowHeight;
 }
 
 - (void)setSectionHeaderHeight:(CGFloat)sectionHeaderHeight
 {
-    self.windowController.tableViewController.sectionHeaderHeight = sectionHeaderHeight;
+    self.tableViewController.sectionHeaderHeight = sectionHeaderHeight;
 }
 
 #pragma mark - Show
 
 - (void)show
 {
-    [self.windowController show];
+    self.previousKeyWindow = [UIApplication sharedApplication].keyWindow;
+    if ([self.previousKeyWindow.rootViewController isKindOfClass:[self class]]) {
+        dd_func_warn(@"Double startup of the %@", NSStringFromClass([self class]));
+        return;
+    }
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.windowLevel = UIWindowLevelStatusBar + CGFLOAT_MIN;
+    self.window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.window.opaque = NO;
+    self.window.rootViewController = self;
+    [self.window makeKeyAndVisible];
+    [self.window addSubview:self.view];
+    self.view.frame = self.window.bounds;
+    
+    self.actionSheetArea.frame = ^CGRect{
+        CGRect frame = self.actionSheetArea.frame;
+        frame.origin.y = self.view.bounds.size.height;
+        return frame;
+    }();
+    
+    self.tableViewController.view.frame = self.contentView.bounds;
+    [self.contentView addSubview:self.tableViewController.view];
+    [self addChildViewController:self.tableViewController];
+    [self.tableViewController didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.4
+                          delay:0.15
+         usingSpringWithDamping:1.
+          initialSpringVelocity:0.
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4f];
+         self.actionSheetArea.frame = ^CGRect{
+             CGRect frame = self.actionSheetArea.frame;
+             frame.origin.y = 0.f;
+             return frame;
+         }();
+     } completion:NULL];
 }
 
 - (void)reloadData
 {
-    [self.windowController.tableViewController.tableView reloadData];
+    [self.tableViewController.tableView reloadData];
 }
 
 #pragma mark - Dismiss
 
-- (void)setDidDismissViewcontrollerCompletion:(void (^)(void))didDismissViewcontroller
+- (void)dismiss
 {
-    self.windowController.didDismissViewcontroller = didDismissViewcontroller;
+    [UIView animateWithDuration:0.4
+                          delay:0.
+         usingSpringWithDamping:1.f
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         self.view.backgroundColor = [UIColor clearColor];
+         self.actionSheetArea.frame = ^CGRect{
+             CGRect frame = self.actionSheetArea.frame;
+             frame.origin.y = self.view.bounds.size.height;
+             return frame;
+         }();
+     } completion:^(BOOL finished) {
+         [self.view removeFromSuperview];
+         [self.window removeFromSuperview];
+         self.window = nil;
+         
+         [self.previousKeyWindow makeKeyAndVisible];
+         
+         if (self.didDismiss) self.didDismiss();
+     }];
 }
 
 #pragma mark - State
 
 - (BOOL)isVisible
 {
-    return [self.windowController isVisible];
+    return self.window != nil;
+}
+
+#pragma mark - Button action
+
+- (IBAction)cancelButtonDidPush:(id)sender
+{
+    if (self.didCancel) self.didCancel();
+    [self dismiss];
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UITapGestureRecognizer *)gestureRecognizer
+{
+    if (self.cancelTapGestureRecognizer == gestureRecognizer) {
+        CGPoint location = [gestureRecognizer locationInView:self.actionSheetArea];
+        if (CGRectContainsPoint(self.tableViewController.tableView.frame, location)) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+#pragma mark - StatusBar
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return [self.previousKeyWindow.rootViewController preferredStatusBarStyle];
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
 }
 
 @end
