@@ -48,6 +48,7 @@ static CGFloat const kYSActionSheetButtonFontSize = 20.f;
 {
     YSActionSheetItem *item = [[YSActionSheetItem alloc] init];
     item.activityIndicatorShown = YES;
+    item.clickDisabled = YES;
     return item;
 }
 
@@ -75,12 +76,6 @@ static CGFloat const kYSActionSheetButtonFontSize = 20.f;
     
     return [[NSAttributedString alloc] initWithString:self.text
                                            attributes:[[self class] textAttributesForType:self.buttonType]];
-}
-
-- (void)setActivityIndicatorShown:(BOOL)activityIndicatorShown
-{
-    _activityIndicatorShown = activityIndicatorShown;
-    self.clickDisabled = activityIndicatorShown;
 }
 
 #pragma mark - Utitliy
