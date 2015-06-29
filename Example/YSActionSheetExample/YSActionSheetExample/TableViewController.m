@@ -170,10 +170,12 @@
         {
             switch (indexPath.row) {
                 case 0:
+                {
                     [actionSheet setSectionTitles:@[@"Section 0", @"Section 1"]
                                             items:@[@[[YSActionSheetItem activityIndicatorItem]],
                                                     @[[YSActionSheetItem activityIndicatorItem]]]];
                     break;
+                }
                 case 1:
                     [actionSheet setSectionTitles:@[@"Section 0", @"Section 1"]
                                             items:@[@[[YSActionSheetItem activityIndicatorItemWithImage:[[UIImage imageNamed:@"cat"] ys_filter:filter]]],
@@ -216,9 +218,9 @@
                 {
                     YSImageFilter *filter = [self imageFilter];
                     
-                    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:@"Bold 15, GreenColor"
+                    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:@"Custom(Bold 15, BlackColor)"
                                                                                   attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:15.],
-                                                                                               NSForegroundColorAttributeName : [UIColor greenColor]}];
+                                                                                               NSForegroundColorAttributeName : [UIColor blackColor]}];
                     
                     NSArray *items = @[[YSActionSheetItem itemWithText:@"TypeDefault"
                                                          textAlignment:NSTextAlignmentLeft
@@ -309,7 +311,7 @@
     }
     
     dd_func_info(nil);
-    [self.actionSheet updateItem:[YSActionSheetItem itemWithText:@"UPDATE"
+    [self.actionSheet replaceItem:[YSActionSheetItem itemWithText:@"UPDATE"
                                                    textAlignment:NSTextAlignmentLeft
                                                         textType:YSActionSheetButtonTypeDefault
                                                            image:[[UIImage imageNamed:@"cat2"] ys_filter:[self imageFilter]]
