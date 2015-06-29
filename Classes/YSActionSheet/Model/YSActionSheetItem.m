@@ -90,16 +90,16 @@ static CGFloat const kYSActionSheetButtonFontSize = 20.f;
     switch (type) {
         default: NSAssert1(false, @"unsupported type: %zd", type);
         case YSActionSheetButtonTypeDefault:
-            return @{NSFontAttributeName : [self font],
+            return @{NSFontAttributeName : [self defaultFont],
                      NSForegroundColorAttributeName : [self defaultTextColor]};
         case YSActionSheetButtonTypeDestructive:
-            return @{NSFontAttributeName : [self font],
+            return @{NSFontAttributeName : [self defaultFont],
                      NSForegroundColorAttributeName : [self destructiveTextColor]};
             break;
     }
 }
 
-+ (UIFont*)font
++ (UIFont*)defaultFont
 {
     return [UIFont systemFontOfSize:kYSActionSheetButtonFontSize];
 }

@@ -44,4 +44,8 @@ typedef NS_ENUM(NSInteger, YSActionSheetButtonType) {
 @property (copy, nonatomic) YSActionSheetDidClickButton didClickButton;
 @property (nonatomic) BOOL activityIndicatorShown;
 
++ (UIFont*)defaultFont;
++ (UIColor*)defaultTextColor;
++ (UIColor*)destructiveTextColor;
+
 @end
