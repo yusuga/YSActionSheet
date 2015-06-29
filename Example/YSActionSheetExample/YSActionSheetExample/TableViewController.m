@@ -114,8 +114,9 @@
                                                         textType:YSActionSheetButtonTypeDefault
                                                            image:indexPath.section == 0 ? nil : [[UIImage imageNamed:@"cat"] ys_filter:filter]
                                                    accessoryView:nil
-                                                  didClickButton:^(NSIndexPath *indexPath) {
+                                                  didClickButton:^BOOL(NSIndexPath *indexPath) {
                                                       NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                      return YES;
                                                   }]];
             }
             [actionSheet setItems:[NSArray arrayWithArray:items]];
@@ -155,8 +156,9 @@
                                                                textType:YSActionSheetButtonTypeDefault
                                                                   image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
                                                           accessoryView:nil
-                                                         didClickButton:^(NSIndexPath *indexPath) {
+                                                         didClickButton:^BOOL(NSIndexPath *indexPath) {
                                                              NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                             return YES;
                                                          }]];
                 }
                 [items addObject:[NSArray arrayWithArray:secItems]];
@@ -194,8 +196,9 @@
                                                                    textType:YSActionSheetButtonTypeDefault
                                                                       image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
                                                               accessoryView:label
-                                                             didClickButton:^(NSIndexPath *indexPath) {
+                                                             didClickButton:^BOOL(NSIndexPath *indexPath) {
                                                                  NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                                 return YES;
                                                              }]]];
                     break;
                 }
@@ -207,8 +210,9 @@
                                                                            textType:YSActionSheetButtonTypeDefault
                                                                               image:[[UIImage imageNamed:@"cat"] ys_filter:[self imageFilter]]
                                                                       accessoryView:nil
-                                                                     didClickButton:^(NSIndexPath *indexPath) {
+                                                                     didClickButton:^BOOL(NSIndexPath *indexPath) {
                                                                          NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                                         return YES;
                                                                      }]]]];
                     [actionSheet setRowHeight:80.];
                     [actionSheet setSectionHeaderHeight:40.];
@@ -227,23 +231,26 @@
                                                               textType:YSActionSheetButtonTypeDefault
                                                                  image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
                                                          accessoryView:nil
-                                                        didClickButton:^(NSIndexPath *indexPath) {
+                                                        didClickButton:^BOOL(NSIndexPath *indexPath) {
                                                             NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                            return YES;
                                                         }],
                                        [YSActionSheetItem itemWithText:@"TypeDestructive"
                                                          textAlignment:NSTextAlignmentLeft
                                                               textType:YSActionSheetButtonTypeDestructive
                                                                  image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
                                                          accessoryView:nil
-                                                        didClickButton:^(NSIndexPath *indexPath) {
+                                                        didClickButton:^BOOL(NSIndexPath *indexPath) {
                                                             NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                            return YES;
                                                         }],
                                        [YSActionSheetItem itemWithAttributedText:attrStr
                                                                    textAlignment:NSTextAlignmentLeft
                                                                            image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
                                                                    accessoryView:nil
-                                                                  didClickButton:^(NSIndexPath *indexPath) {
+                                                                  didClickButton:^BOOL(NSIndexPath *indexPath) {
                                                                       NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                                      return YES;
                                                                   }]];
                     [actionSheet setItems:items];
                     break;
@@ -311,13 +318,22 @@
     }
     
     dd_func_info(nil);
+    __weak YSActionSheet *weakActionSheet = self.actionSheet;
     [self.actionSheet replaceItem:[YSActionSheetItem itemWithText:@"UPDATE"
                                                    textAlignment:NSTextAlignmentLeft
                                                         textType:YSActionSheetButtonTypeDefault
                                                            image:[[UIImage imageNamed:@"cat2"] ys_filter:[self imageFilter]]
                                                    accessoryView:nil
-                                                  didClickButton:^(NSIndexPath *indexPath) {
+                                                  didClickButton:^BOOL(NSIndexPath *indexPath) {
                                                       NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                      [RMUniversalAlert showAlertInViewController:weakActionSheet
+                                                                                        withTitle:@"Title"
+                                                                                          message:nil
+                                                                                cancelButtonTitle:@"OK"
+                                                                           destructiveButtonTitle:nil
+                                                                                otherButtonTitles:nil
+                                                                                         tapBlock:nil];
+                                                      return NO;
                                                   }] forIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
 

@@ -224,7 +224,9 @@ static CGFloat const kSectionHeaderHeight = 20.f;
     
     YSActionSheetItem *item = [self itemForIndexPath:indexPath];
     if (item.didClickButton) {
-        item.didClickButton(indexPath);
+        if (!item.didClickButton(indexPath)) {
+            return;
+        };
     }
     if (self.didSelectRow) {
         self.didSelectRow();
