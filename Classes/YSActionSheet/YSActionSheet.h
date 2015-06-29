@@ -23,13 +23,13 @@
 - (void)setItems:(NSArray *)items;
 
 /**
- *  Update cell item in single section.
+ *  Replace cell item in single section.
  *
  *  @param item Item of cell.
  *  @param index index of cell.
  */
-- (void)updateItem:(YSActionSheetItem *)item
-          forIndex:(NSUInteger)index;
+- (void)replaceItem:(YSActionSheetItem *)item
+           forIndex:(NSUInteger)index;
 
 ///----------------------------
 /// @name Multiple section item
@@ -50,8 +50,8 @@
  *  @param item Item of cell
  *  @param indexPath Index path of cell.
  */
-- (void)updateItem:(YSActionSheetItem *)item
-      forIndexPath:(NSIndexPath *)indexPath;
+- (void)replaceItem:(YSActionSheetItem *)item
+       forIndexPath:(NSIndexPath *)indexPath;
 
 ///------------
 /// @name Items
@@ -118,8 +118,14 @@
  */
 - (void)show;
 
+///------------------
+/// @name Reload Data
+///------------------
+
 /**
  *  Reloads the items of the action sheet.
+ *
+ *  Note: -[UITableVeiw reloadRowsAtIndexPaths:withRowAnimation:]だと描画が乱れるので使用していない。
  */
 - (void)reloadData;
 

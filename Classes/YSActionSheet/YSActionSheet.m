@@ -31,7 +31,7 @@
 
 - (instancetype)init
 {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:NSStringFromClass([self class]) bundle:nil];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"YSActionSheet" bundle:nil];
     self = [sb instantiateInitialViewController];
     if (self) {
         self.tableViewController = [YSActionSheetTableViewController viewController];
@@ -67,9 +67,9 @@
     [self.tableViewController setItems:items];
 }
 
-- (void)updateItem:(YSActionSheetItem *)item forIndex:(NSUInteger)index
+- (void)replaceItem:(YSActionSheetItem *)item forIndex:(NSUInteger)index
 {
-    [self updateItem:item forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    [self replaceItem:item forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
 
 #pragma mark - Multiple section item
@@ -82,10 +82,10 @@
                                          items:items];
 }
 
-- (void)updateItem:(YSActionSheetItem *)item forIndexPath:(NSIndexPath *)indexPath
+- (void)replaceItem:(YSActionSheetItem *)item forIndexPath:(NSIndexPath *)indexPath
 {
-    [self.tableViewController updateItem:item
-                            forIndexPath:indexPath];
+    [self.tableViewController replaceItem:item
+                             forIndexPath:indexPath];
 }
 
 #pragma mark - Items
@@ -171,6 +171,8 @@
          }();
      } completion:NULL];
 }
+
+#pragma mark - Reload Data
 
 - (void)reloadData
 {

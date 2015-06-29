@@ -19,8 +19,8 @@
 - (void)setSectionTitles:(NSArray *)sectionTitles       // NSArray of NSString
                    items:(NSArray *)items;              // NSArray of NSArray of YSActionSheetItem
 
-- (void)updateItem:(YSActionSheetItem *)item
-      forIndexPath:(NSIndexPath *)indexPath;
+- (void)replaceItem:(YSActionSheetItem *)item
+       forIndexPath:(NSIndexPath *)indexPath;
 
 @property (nonatomic, readonly) NSArray *items;
 

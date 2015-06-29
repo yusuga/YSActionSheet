@@ -159,8 +159,8 @@ static CGFloat const kSectionHeaderHeight = 20.f;
     self.items = items;
 }
 
-- (void)updateItem:(YSActionSheetItem *)item
-      forIndexPath:(NSIndexPath *)indexPath
+- (void)replaceItem:(YSActionSheetItem *)item
+       forIndexPath:(NSIndexPath *)indexPath
 {
     if (self.multipleSection) {
         NSMutableArray *items = [self.items mutableCopy];
@@ -173,7 +173,7 @@ static CGFloat const kSectionHeaderHeight = 20.f;
         [items replaceObjectAtIndex:indexPath.row withObject:item];
         self.items = [NSArray arrayWithArray:items];
     }
-
+    
     [self.tableView reloadData];
 }
 
