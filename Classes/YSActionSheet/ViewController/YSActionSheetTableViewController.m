@@ -215,7 +215,7 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
     YSActionSheetItem *item = [self itemForIndexPath:indexPath];
-    return !item.activityIndicatorShown;
+    return !item.isClickDisabled;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

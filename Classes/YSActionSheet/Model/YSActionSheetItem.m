@@ -66,6 +66,8 @@ static CGFloat const kYSActionSheetButtonFontSize = 20.f;
     return self;
 }
 
+#pragma mark - Property
+
 - (NSAttributedString *)attributedText
 {
     if (_attributedText) return _attributedText;
@@ -73,6 +75,12 @@ static CGFloat const kYSActionSheetButtonFontSize = 20.f;
     
     return [[NSAttributedString alloc] initWithString:self.text
                                            attributes:[[self class] textAttributesForType:self.buttonType]];
+}
+
+- (void)setActivityIndicatorShown:(BOOL)activityIndicatorShown
+{
+    _activityIndicatorShown = activityIndicatorShown;
+    self.clickDisabled = activityIndicatorShown;
 }
 
 #pragma mark - Utitliy

@@ -255,6 +255,22 @@
                     [actionSheet setItems:items];
                     break;
                 }
+                case 5:
+                {
+                    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:@"Click Disabled"
+                                                                                  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18.],
+                                                                                               NSForegroundColorAttributeName : [UIColor lightGrayColor]}];
+                    YSActionSheetItem *item = [YSActionSheetItem itemWithAttributedText:attrStr
+                                                                          textAlignment:NSTextAlignmentCenter
+                                                                                  image:nil
+                                                                          accessoryView:nil
+                                                                         didClickButton:^BOOL(NSIndexPath *indexPath) {
+                                                                             abort();
+                                                                         }];
+                    item.clickDisabled = YES;
+                    [actionSheet setItems:@[item]];
+                    break;
+                }
                 default:
                     abort();
             }

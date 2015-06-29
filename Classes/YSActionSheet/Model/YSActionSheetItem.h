@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger, YSActionSheetButtonType) {
 @property (nonatomic) YSActionSheetButtonType buttonType;
 @property (nonatomic) UIImage *image;
 @property (nonatomic) UIView *accessoryView;
+@property (nonatomic, getter=isClickDisabled) BOOL clickDisabled;
 @property (copy, nonatomic) YSActionSheetDidClickButton didClickButton;
 @property (nonatomic) BOOL activityIndicatorShown;
 
