@@ -137,7 +137,7 @@
     }
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.windowLevel = UIWindowLevelStatusBar + CGFLOAT_MIN;
+    self.window.windowLevel = UIWindowLevelStatusBar - 1.;
     self.window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.window.opaque = NO;
     self.window.rootViewController = self;
@@ -239,7 +239,7 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return [self.previousKeyWindow.rootViewController preferredStatusBarStyle];
+    return [UIApplication sharedApplication].statusBarStyle;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
