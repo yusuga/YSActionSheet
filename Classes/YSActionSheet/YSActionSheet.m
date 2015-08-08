@@ -35,6 +35,7 @@
     self = [sb instantiateInitialViewController];
     if (self) {
         self.tableViewController = [YSActionSheetTableViewController viewController];
+        self.windowLevel = UIWindowLevelStatusBar - 1.;
     }
     return self;
 }
@@ -137,7 +138,7 @@
     }
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.windowLevel = UIWindowLevelStatusBar - 1.;
+    self.window.windowLevel = [self windowLevel];
     self.window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.window.opaque = NO;
     self.window.rootViewController = self;

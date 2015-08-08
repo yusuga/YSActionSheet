@@ -149,4 +149,13 @@
  */
 - (BOOL)isVisible;
 
+///-------------
+/// @name Window
+///-------------
+
+/**
+ *  The positioning of windows relative to each other. The default value is UIWindowLevelStatusBar - 1.
+ */
+@property (nonatomic) UIWindowLevel windowLevel;
+
 @end
