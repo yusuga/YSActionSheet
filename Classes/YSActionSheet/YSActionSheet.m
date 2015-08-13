@@ -133,7 +133,9 @@
 {
     self.previousKeyWindow = [UIApplication sharedApplication].keyWindow;
     if ([self.previousKeyWindow.rootViewController isKindOfClass:[self class]]) {
-        dd_func_warn(@"Double startup of the %@", NSStringFromClass([self class]));
+#ifdef DDLogWarn
+        DDLogWarn(@"Double startup of the %@", NSStringFromClass([self class]));
+#endif
         return;
     }
     
