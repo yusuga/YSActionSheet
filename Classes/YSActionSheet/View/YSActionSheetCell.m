@@ -24,6 +24,9 @@
 
 - (void)awakeFromNib
 {
+    self.textLabel.minimumScaleFactor = 0.5;
+    self.textLabel.adjustsFontSizeToFitWidth = YES;
+    
     self.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = [UIColor clearColor];
 }
