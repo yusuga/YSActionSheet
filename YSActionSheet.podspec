@@ -13,27 +13,5 @@ Pod::Spec.new do |s|
   s.compiler_flags = '-fmodules'
   
   s.prefix_header_contents = "#import <LumberjackLauncher/LumberjackLauncher.h>"
-  
   s.dependency 'LumberjackLauncher'
-  
-  s.subspec 'Utility' do |ss|
-    ss.source_files = 'Classes/YSActionSheet/Utility/*.{h,m}'
-  end
-  
-  s.subspec 'Model' do |ss|
-    ss.source_files = 'Classes/YSActionSheet/Model/*.{h,m}'
-  end
-  
-  s.subspec 'View' do |ss|
-    ss.dependency 'YSActionSheet/Utility'
-    ss.dependency 'YSActionSheet/Model'
-    ss.source_files = 'Classes/YSActionSheet/View/*.{h,m}'
-    ss.resources    = 'Classes/YSActionSheet/View/*.xib'
-  end
-  
-  s.subspec 'ViewController' do |ss|
-    ss.dependency 'YSActionSheet/View'
-    ss.source_files = 'Classes/YSActionSheet/ViewController/*.{h,m}'
-    ss.resources    = 'Classes/YSActionSheet/ViewController/*.storyboard'
-  end
 end
