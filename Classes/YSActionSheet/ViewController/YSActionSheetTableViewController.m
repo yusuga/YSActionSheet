@@ -32,6 +32,7 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 
 @property (nonatomic, readwrite) NSArray *items;
 @property (nonatomic) NSArray *sectionTitles;
+@property (nonatomic) NSArray *sectionViews;
 
 @end
 
@@ -159,6 +160,14 @@ static CGFloat const kSectionHeaderHeight = 20.f;
     self.items = items;
 }
 
+- (void)setSectionViews:(NSArray *)sectionViews
+                  items:(NSArray *)items
+{
+    self.multipleSection = YES;
+    self.sectionViews = sectionViews;
+    self.items = items;
+}
+
 - (void)replaceItem:(YSActionSheetItem *)item
        forIndexPath:(NSIndexPath *)indexPath
 {
@@ -183,11 +192,22 @@ static CGFloat const kSectionHeaderHeight = 20.f;
     
     if (self.multipleSection) {
         NSUInteger count = 0;
-        
         for (NSArray *secItems in self.items) {
             count += [secItems count];
         }
-        return rowHeight*count + [[self sectionTitles] count]*self.sectionHeaderHeight;
+        CGFloat allHeight = rowHeight*count;
+        
+        if ([self.sectionTitles count]) {
+            allHeight += [[self sectionTitles] count]*self.sectionHeaderHeight;
+        } else if ([self.sectionViews count]) {
+            for (UIView *view in self.sectionViews) {
+                if ([view isKindOfClass:[UIView class]]) {
+                    allHeight += view.bounds.size.height;
+                }
+            }
+        }
+        
+        return allHeight;
     } else {
         return rowHeight*[self.items count];
     }
@@ -242,20 +262,33 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (self.multipleSection && [self.sectionTitles count]) {
-        YSActionSheetHeaderView *view = [[YSActionSheetHeaderView alloc] init];
-        view.titleLabel.text = self.sectionTitles[section];
-        if ([tableView respondsToSelector:@selector(layoutMargins)]) {
-            view.titleLabelLeadingConstraint.constant = tableView.layoutMargins.left;
+    if (self.multipleSection) {
+        if ([self.sectionTitles count]) {
+            YSActionSheetHeaderView *view = [[YSActionSheetHeaderView alloc] init];
+            view.titleLabel.text = self.sectionTitles[section];
+            if ([tableView respondsToSelector:@selector(layoutMargins)]) {
+                view.titleLabelLeadingConstraint.constant = tableView.layoutMargins.left;
+            }
+            return view;
+        } else if ([self.sectionViews count]) {
+            UIView *view = self.sectionViews[section];
+            return [view isKindOfClass:[UIView class]] ? view : nil;
         }
-        return view;
     }
     return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return self.multipleSection && [self.sectionTitles count] ? self.sectionHeaderHeight : 0.;
+    if (self.multipleSection) {
+        if ([self.sectionTitles count]) {
+            return [self.sectionTitles count] ? self.sectionHeaderHeight : 0.;
+        } else if ([self.sectionViews count]) {
+            UIView *view = self.sectionViews[section];
+            return [view isKindOfClass:[UIView class]] ? view.bounds.size.height : 0.;
+        }
+    }
+    return 0.;
 }
 
 #pragma mark - Utility

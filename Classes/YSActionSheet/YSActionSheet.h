@@ -45,6 +45,15 @@
                    items:(NSArray *)items;
 
 /**
+ *  Set cell items in multiple section.
+ *
+ *  @param sectionViews NSArray of UIView
+ *  @param items NSArray of NSArray of YSActionSheetItem
+ */
+- (void)setSectionViews:(NSArray *)sectionViews
+                  items:(NSArray *)items;
+
+/**
  *  Update cell item in multiple section.
  *
  *  @param item Item of cell
@@ -105,7 +114,7 @@
 - (void)setRowHeight:(CGFloat)rowHeight;
 
 /**
- *  The height of section headers in the table view.
+ *  The height of section title headers in the table view.
  */
 - (void)setSectionHeaderHeight:(CGFloat)sectionHeaderHeight;
 

@@ -18,6 +18,8 @@
 - (void)setItems:(NSArray *)items;                      // NSArray of YSActionSheetItem
 - (void)setSectionTitles:(NSArray *)sectionTitles       // NSArray of NSString
                    items:(NSArray *)items;              // NSArray of NSArray of YSActionSheetItem
+- (void)setSectionViews:(NSArray *)sectionViews         // NSArray of UIView
+                  items:(NSArray *)items;               // NSArray of NSArray of YSActionSheetItem
 
 - (void)replaceItem:(YSActionSheetItem *)item
        forIndexPath:(NSIndexPath *)indexPath;

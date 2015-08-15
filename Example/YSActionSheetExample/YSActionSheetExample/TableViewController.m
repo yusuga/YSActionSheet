@@ -276,6 +276,64 @@
             }
             break;
         }
+        case 8:
+        {
+            NSMutableArray *items = [NSMutableArray array];
+            NSMutableArray *views = [NSMutableArray array];
+            NSUInteger sectionMax = 0;
+            NSUInteger rowMax = 0;
+            
+            switch (indexPath.row) {
+                case 0:
+                    sectionMax = 3;
+                    rowMax = 1;
+                    break;
+                case 1:
+                    sectionMax = 2;
+                    rowMax = 3;
+                    break;
+                case 2:
+                    sectionMax = 3;
+                    rowMax = 4;
+                    break;
+                case 3:
+                    sectionMax = 4;
+                    rowMax = 2;
+                    break;
+                default:
+                    abort();
+                    break;
+            }
+            
+            for (NSUInteger section = 0; section < sectionMax; section++) {
+                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0., 0., 0., 60.)];
+                view.backgroundColor = [UIColor blueColor];
+                [view addSubview:[[UISwitch alloc] init]];
+                if (indexPath.row == 3) {
+                    [views addObject:section == 0 ? view : [NSNull null]];
+                } else {
+                    [views addObject:view];
+                }
+                
+                NSMutableArray *secItems = [NSMutableArray array];
+                for (NSUInteger row = 0; row < rowMax; row++) {
+                    [secItems addObject:[YSActionSheetItem itemWithText:[NSString stringWithFormat:@"Title %zd - %zd", section, row]
+                                                          textAlignment:NSTextAlignmentLeft
+                                                               textType:YSActionSheetButtonTypeDefault
+                                                                  image:[[UIImage imageNamed:@"cat"] ys_filter:filter]
+                                                          accessoryView:nil
+                                                         didClickButton:^BOOL(NSIndexPath *indexPath) {
+                                                             NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                             return YES;
+                                                         }]];
+                }
+                [items addObject:[secItems copy]];
+            }
+            
+            [actionSheet setSectionViews:[views copy]
+                                   items:[items copy]];
+            break;
+        }
         default:
             break;
     }

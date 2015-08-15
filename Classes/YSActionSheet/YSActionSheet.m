@@ -83,6 +83,13 @@
                                          items:items];
 }
 
+- (void)setSectionViews:(NSArray *)sectionViews
+                  items:(NSArray *)items
+{
+    [self.tableViewController setSectionViews:sectionViews
+                                        items:items];
+}
+
 - (void)replaceItem:(YSActionSheetItem *)item forIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableViewController replaceItem:item
