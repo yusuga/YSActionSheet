@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger, YSActionSheetButtonType) {
 @property (nonatomic, getter=isClickDisabled) BOOL clickDisabled;
 @property (copy, nonatomic) YSActionSheetDidClickButton didClickButton;
 @property (nonatomic) BOOL activityIndicatorShown;
+@property (nonatomic) BOOL hidden;
 
 + (UIFont*)defaultFont;
 + (UIColor*)defaultTextColor;

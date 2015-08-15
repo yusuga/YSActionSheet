@@ -271,6 +271,23 @@
                     [actionSheet setItems:@[item]];
                     break;
                 }
+                case 6:
+                {
+                    NSMutableArray *items = [NSMutableArray arrayWithCapacity:[buttonTitles count]];
+                    for (NSString *buttonTitle in buttonTitles) {
+                        [items addObject:[YSActionSheetItem itemWithText:buttonTitle
+                                                           textAlignment:indexPath.section == 0 ? NSTextAlignmentCenter : NSTextAlignmentLeft
+                                                                textType:YSActionSheetButtonTypeDefault
+                                                                   image:indexPath.section == 0 ? nil : [[UIImage imageNamed:@"cat"] ys_filter:filter]
+                                                           accessoryView:nil
+                                                          didClickButton:^BOOL(NSIndexPath *indexPath) {
+                                                              NSLog(@"did click indexPath = %zd - %zd", indexPath.section, indexPath.row);
+                                                              return YES;
+                                                          }]];
+                    }
+                    [actionSheet setItems:[NSArray arrayWithArray:items]];
+                    break;
+                }
                 default:
                     abort();
             }
@@ -356,6 +373,12 @@
                          action:@selector(headerSwitchDidChange:)
                forControlEvents:UIControlEventValueChanged];
         [actionSheet setHeaderTitleView:headerSwitch];
+    } else if ([indexPath compare:[NSIndexPath indexPathForRow:6 inSection:7]] == NSOrderedSame) {
+        UISwitch *headerSwitch = [[UISwitch alloc] init];
+        [headerSwitch addTarget:self
+                         action:@selector(hiddenSwitchChanged:)
+               forControlEvents:UIControlEventValueChanged];
+        [actionSheet setHeaderTitleView:headerSwitch];
     } else {
         [actionSheet setHeaderTitle:title];
     }
@@ -376,6 +399,13 @@
 {
     YSActionSheetItem *item = [self.actionSheet.items firstObject];
     item.image = [[UIImage imageNamed:[NSString stringWithFormat:@"cat%@", sender.on ? @"2" : @""]] ys_filter:[self imageFilter]];
+    [self.actionSheet reloadData];
+}
+
+- (void)hiddenSwitchChanged:(UISwitch *)sender
+{
+    YSActionSheetItem *item = [self.actionSheet.items firstObject];
+    item.hidden = sender.on;
     [self.actionSheet reloadData];
 }
 

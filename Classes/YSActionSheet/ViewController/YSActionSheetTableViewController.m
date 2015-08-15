@@ -191,11 +191,13 @@ static CGFloat const kSectionHeaderHeight = 20.f;
     CGFloat rowHeight = self.rowHeight;
     
     if (self.multipleSection) {
-        NSUInteger count = 0;
+        NSUInteger rowCount = 0;
         for (NSArray *secItems in self.items) {
-            count += [secItems count];
+            for (YSActionSheetItem *item in secItems) {
+                if (!item.hidden) rowCount++;
+            }
         }
-        CGFloat allHeight = rowHeight*count;
+        CGFloat allHeight = rowHeight*rowCount;
         
         if ([self.sectionTitles count]) {
             allHeight += [[self sectionTitles] count]*self.sectionHeaderHeight;
@@ -209,7 +211,11 @@ static CGFloat const kSectionHeaderHeight = 20.f;
         
         return allHeight;
     } else {
-        return rowHeight*[self.items count];
+        NSUInteger rowCount = 0;
+        for (YSActionSheetItem *item in self.items) {
+            if (!item.hidden) rowCount++;
+        }
+        return rowHeight*rowCount;
     }
 }
 
@@ -255,7 +261,8 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return self.rowHeight;
+    YSActionSheetItem *item = [self itemForIndexPath:indexPath];
+    return item.hidden ? 0. : self.rowHeight;
 }
 
 #pragma mark Header
