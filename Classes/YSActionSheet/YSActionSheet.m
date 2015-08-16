@@ -187,6 +187,8 @@
 - (void)reloadData
 {
     [self.tableViewController.tableView reloadData];
+    [self.tableViewController.tableView setNeedsLayout];
+    [self.tableViewController.tableView layoutIfNeeded];
 }
 
 #pragma mark - Dismiss
