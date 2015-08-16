@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'YSActionSheet'
-  s.version = '0.2.14'
+  s.version = '0.2.15'
   s.summary = 'Customizable action sheet.'
   s.homepage = 'https://github.com/yusuga/YSActionSheet'
   s.license = 'MIT'
