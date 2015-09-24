@@ -10,8 +10,8 @@ PODS:
   - LumberjackConsole (2.4.3):
     - CocoaLumberjack (>= 2.0.0)
     - NBUCore (>= 2.0.3)
-  - LumberjackLauncher (0.0.2):
-    - CocoaLumberjack (~> 2.0.0)
+  - LumberjackLauncher (0.1.1):
+    - CocoaLumberjack (= 2.0.0)
     - LumberjackConsole
   - NBUCore (2.0.4)
   - RMUniversalAlert (0.7):
@@ -23,7 +23,7 @@ PODS:
   - UIActionSheet+Blocks (0.9)
   - UIAlertController+Blocks (0.9)
   - UIAlertView+Blocks (0.9)
-  - YSImageFilter (0.1.7)
+  - YSImageFilter (0.1.8)
 
 DEPENDENCIES:
   - LumberjackLauncher
@@ -33,12 +33,12 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
   LumberjackConsole: 81bad3312fea315b8a17e53926b014f032ec1f44
-  LumberjackLauncher: cf75ac629d87bc5db277afe47f250285c69be725
+  LumberjackLauncher: 7bfcc7b9533e0921f8254b82cd061a2c88108886
   NBUCore: 89cbf3976cae47c358fd0ed8562ef66d79a8904a
   RMUniversalAlert: bce2ca406c24065b76665725c83e48006e8f65f8
   UIActionSheet+Blocks: e180b7dad0a721ab7f212ac9742af799008bb358
   UIAlertController+Blocks: b48c673ff60726da468b32ab21bbc7683512d45b
   UIAlertView+Blocks: a46c99c5144f6c5dbc7d62fd2a0678daceec89a3
-  YSImageFilter: c5aaf64c9cd71c308e138476840145bcece3ff75
+  YSImageFilter: e499b622bfb8b73f89f166b76ac6bc93a82d4d6d
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.38.0

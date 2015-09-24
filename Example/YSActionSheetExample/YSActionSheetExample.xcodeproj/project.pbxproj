@@ -308,7 +308,7 @@
 		B87239691975159200EC5CE2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Yu Sugawara";
 				TargetAttributes = {
 					B87239911975159200EC5CE2 = {
@@ -477,6 +477,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -539,6 +540,7 @@
 				GCC_PREFIX_HEADER = "YSActionSheetExample/YSActionSheetExample-Prefix.pch";
 				INFOPLIST_FILE = "YSActionSheetExample/YSActionSheetExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.YuSugawara.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -555,6 +557,7 @@
 				GCC_PREFIX_HEADER = "YSActionSheetExample/YSActionSheetExample-Prefix.pch";
 				INFOPLIST_FILE = "YSActionSheetExample/YSActionSheetExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.YuSugawara.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -577,6 +580,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "YSActionSheetExampleTests/YSActionSheetExampleTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.YuSugawara.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -595,6 +599,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YSActionSheetExample/YSActionSheetExample-Prefix.pch";
 				INFOPLIST_FILE = "YSActionSheetExampleTests/YSActionSheetExampleTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.YuSugawara.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
