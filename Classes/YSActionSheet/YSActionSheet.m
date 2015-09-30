@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *actionSheetAreaWidthConstraint;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (nonatomic) NSString *cancelButtonTitle;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *cancelTapGestureRecognizer;
 
 @property (nonatomic) UIWindow *window;
@@ -43,6 +44,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.cancelButton setTitle:self.cancelButtonTitle forState:UIControlStateNormal];
     
     __weak typeof(self) wself = self;
     self.tableViewController.didSelectRow = ^{
@@ -119,7 +122,10 @@
 
 - (void)setCancelButtonTitle:(NSString *)title
 {
-    [self.cancelButton setTitle:title forState:UIControlStateNormal];
+    _cancelButtonTitle = [title copy];
+    if (self.cancelButton) {
+        [self.cancelButton setTitle:title forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - Heights
