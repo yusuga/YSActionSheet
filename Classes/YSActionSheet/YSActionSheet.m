@@ -172,20 +172,17 @@
     [self addChildViewController:self.tableViewController];
     [self.tableViewController didMoveToParentViewController:self];
     
-    [UIView animateWithDuration:0.4
-                          delay:0.15
-         usingSpringWithDamping:1.
-          initialSpringVelocity:0.
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^
-     {
-         self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4f];
-         self.actionSheetArea.frame = ^CGRect{
-             CGRect frame = self.actionSheetArea.frame;
-             frame.origin.y = 0.f;
-             return frame;
-         }();
-     } completion:NULL];
+    [UIView performSystemAnimation:UISystemAnimationDelete
+                           onViews:@[]
+                           options:kNilOptions
+                        animations:^{
+                            self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4f];
+                            self.actionSheetArea.frame = ^CGRect{
+                                CGRect frame = self.actionSheetArea.frame;
+                                frame.origin.y = 0.f;
+                                return frame;
+                            }();
+                        } completion:nil];
 }
 
 #pragma mark - Reload Data
@@ -201,10 +198,10 @@
 
 - (void)dismiss
 {
-    [UIView animateWithDuration:0.4
+    [UIView animateWithDuration:0.8
                           delay:0.
-         usingSpringWithDamping:1.f
-          initialSpringVelocity:0.f
+         usingSpringWithDamping:1.
+          initialSpringVelocity:0.
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^
      {

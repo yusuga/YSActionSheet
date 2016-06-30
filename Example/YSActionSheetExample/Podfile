@@ -2,7 +2,15 @@ source 'https://github.com/yusuga/Specs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '7.0'
-pod 'LumberjackLauncher'
 
-pod 'YSImageFilter'
-pod 'RMUniversalAlert'
+target 'YSActionSheetExample' do
+  pod 'LumberjackLauncher'
+
+  pod 'YSImageFilter'
+  pod 'RMUniversalAlert'
+
+  target 'YSActionSheetExampleTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end
