@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.platform = :ios, '7.0'
   s.ios.deployment_target = '7.0'
   s.source_files = 'Classes/YSActionSheet/**/*.{h,m}'
-  s.resources    = 'Classes/YSActionSheet/**/*.{xib,storyboard}'
+  s.resources    = 'Classes/YSActionSheet/**/*.{xib,storyboard,lproj}'
   s.requires_arc = true
   s.compiler_flags = '-fmodules'
 end

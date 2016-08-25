@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1FCC979B011F8EEA0DE29768 /* libPods-YSActionSheetExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72F03D46BE86BE45B3487937 /* libPods-YSActionSheetExample.a */; };
+		B804FB961D6F52B70003A751 /* YSActionSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B804FB981D6F52B70003A751 /* YSActionSheet.storyboard */; };
 		B844487B1B103EDF00A771C4 /* YSActionSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B844487A1B103EDF00A771C4 /* YSActionSheetCell.xib */; };
 		B87239751975159200EC5CE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B87239741975159200EC5CE2 /* Foundation.framework */; };
 		B87239771975159200EC5CE2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B87239761975159200EC5CE2 /* CoreGraphics.framework */; };
@@ -31,7 +32,6 @@
 		B8B678621B0FB2A800C6924A /* YSActionSheetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B678561B0FB2A800C6924A /* YSActionSheetCell.m */; };
 		B8B678631B0FB2A800C6924A /* YSActionSheetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B678581B0FB2A800C6924A /* YSActionSheetHeaderView.m */; };
 		B8B678641B0FB2A800C6924A /* YSActionSheetHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8B678591B0FB2A800C6924A /* YSActionSheetHeaderView.xib */; };
-		B8B678651B0FB2A800C6924A /* YSActionSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B6785B1B0FB2A800C6924A /* YSActionSheet.storyboard */; };
 		B8B678661B0FB2A800C6924A /* YSActionSheetTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B6785D1B0FB2A800C6924A /* YSActionSheetTableViewController.m */; };
 		B8B678691B0FB43600C6924A /* cat2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8B678681B0FB43600C6924A /* cat2@2x.png */; };
 		B8C012331AAEE4D400DBC176 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C012321AAEE4D400DBC176 /* NavigationController.m */; };
@@ -54,6 +54,8 @@
 		32CA6914E3F1D9E7306F333F /* Pods-YSActionSheetExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YSActionSheetExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-YSActionSheetExample/Pods-YSActionSheetExample.release.xcconfig"; sourceTree = "<group>"; };
 		72F03D46BE86BE45B3487937 /* libPods-YSActionSheetExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YSActionSheetExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83AC49572EE00F50D2DE0BAE /* libPods-YSActionSheetExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YSActionSheetExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B804FB971D6F52B70003A751 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/YSActionSheet.storyboard; sourceTree = "<group>"; };
+		B804FB991D6F52C80003A751 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/YSActionSheet.strings; sourceTree = "<group>"; };
 		B844487A1B103EDF00A771C4 /* YSActionSheetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YSActionSheetCell.xib; sourceTree = "<group>"; };
 		B87239711975159200EC5CE2 /* YSActionSheetExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YSActionSheetExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B87239741975159200EC5CE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,7 +89,6 @@
 		B8B678571B0FB2A800C6924A /* YSActionSheetHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetHeaderView.h; sourceTree = "<group>"; };
 		B8B678581B0FB2A800C6924A /* YSActionSheetHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetHeaderView.m; sourceTree = "<group>"; };
 		B8B678591B0FB2A800C6924A /* YSActionSheetHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YSActionSheetHeaderView.xib; sourceTree = "<group>"; };
-		B8B6785B1B0FB2A800C6924A /* YSActionSheet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = YSActionSheet.storyboard; sourceTree = "<group>"; };
 		B8B6785C1B0FB2A800C6924A /* YSActionSheetTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSActionSheetTableViewController.h; sourceTree = "<group>"; };
 		B8B6785D1B0FB2A800C6924A /* YSActionSheetTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSActionSheetTableViewController.m; sourceTree = "<group>"; };
 		B8B678681B0FB43600C6924A /* cat2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cat2@2x.png"; sourceTree = "<group>"; };
@@ -263,7 +264,7 @@
 		B8B6785A1B0FB2A800C6924A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B8B6785B1B0FB2A800C6924A /* YSActionSheet.storyboard */,
+				B804FB981D6F52B70003A751 /* YSActionSheet.storyboard */,
 				B8B6785C1B0FB2A800C6924A /* YSActionSheetTableViewController.h */,
 				B8B6785D1B0FB2A800C6924A /* YSActionSheetTableViewController.m */,
 			);
@@ -357,7 +358,7 @@
 				B8B678691B0FB43600C6924A /* cat2@2x.png in Resources */,
 				B872397F1975159200EC5CE2 /* InfoPlist.strings in Resources */,
 				B8B678641B0FB2A800C6924A /* YSActionSheetHeaderView.xib in Resources */,
-				B8B678651B0FB2A800C6924A /* YSActionSheet.storyboard in Resources */,
+				B804FB961D6F52B70003A751 /* YSActionSheet.storyboard in Resources */,
 				B87DFDFA1AADA0AB00D5175F /* LaunchScreen.xib in Resources */,
 				B87239881975159200EC5CE2 /* Main.storyboard in Resources */,
 				B844487B1B103EDF00A771C4 /* YSActionSheetCell.xib in Resources */,
@@ -504,6 +505,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		B804FB981D6F52B70003A751 /* YSActionSheet.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B804FB971D6F52B70003A751 /* Base */,
+				B804FB991D6F52C80003A751 /* ja */,
+			);
+			name = YSActionSheet.storyboard;
+			sourceTree = "<group>";
+		};
 		B872397D1975159200EC5CE2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
