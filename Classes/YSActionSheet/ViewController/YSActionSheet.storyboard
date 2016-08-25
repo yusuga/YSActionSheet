@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Iyp-PJ-fyI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Iyp-PJ-fyI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -21,24 +21,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UQ-Dc-RHc" userLabel="CancelButton">
-                                        <rect key="frame" x="8" y="548" width="584" height="44"/>
+                                        <rect key="frame" x="10" y="546" width="580" height="44"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="INg-1r-fiD"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="Cancel"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="cancelButtonDidPush:" destination="Iyp-PJ-fyI" eventType="touchUpInside" id="b3f-fF-fIm"/>
                                         </connections>
                                     </button>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tx3-cD-JoI" userLabel="ContentView">
-                                        <rect key="frame" x="8" y="8" width="584" height="532"/>
+                                        <rect key="frame" x="10" y="10" width="580" height="528"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
@@ -46,13 +41,13 @@
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="4UQ-Dc-RHc" firstAttribute="top" secondItem="tx3-cD-JoI" secondAttribute="bottom" constant="8" id="IKP-p4-qYW"/>
-                                    <constraint firstAttribute="bottom" secondItem="4UQ-Dc-RHc" secondAttribute="bottom" constant="8" id="QFE-Pm-b9r"/>
-                                    <constraint firstItem="tx3-cD-JoI" firstAttribute="leading" secondItem="S7A-hR-AkH" secondAttribute="leading" constant="8" id="Wre-3O-dyF"/>
-                                    <constraint firstItem="4UQ-Dc-RHc" firstAttribute="leading" secondItem="S7A-hR-AkH" secondAttribute="leading" constant="8" id="Yip-vF-01k"/>
-                                    <constraint firstAttribute="trailing" secondItem="4UQ-Dc-RHc" secondAttribute="trailing" constant="8" id="jU5-1d-JYF"/>
+                                    <constraint firstAttribute="bottom" secondItem="4UQ-Dc-RHc" secondAttribute="bottom" constant="10" id="QFE-Pm-b9r"/>
+                                    <constraint firstItem="tx3-cD-JoI" firstAttribute="leading" secondItem="S7A-hR-AkH" secondAttribute="leading" constant="10" id="Wre-3O-dyF"/>
+                                    <constraint firstItem="4UQ-Dc-RHc" firstAttribute="leading" secondItem="S7A-hR-AkH" secondAttribute="leading" constant="10" id="Yip-vF-01k"/>
+                                    <constraint firstAttribute="trailing" secondItem="4UQ-Dc-RHc" secondAttribute="trailing" constant="10" id="jU5-1d-JYF"/>
                                     <constraint firstAttribute="width" constant="600" id="lNH-Cy-lXP"/>
-                                    <constraint firstItem="tx3-cD-JoI" firstAttribute="top" secondItem="S7A-hR-AkH" secondAttribute="top" constant="8" id="pap-qD-H67"/>
-                                    <constraint firstAttribute="trailing" secondItem="tx3-cD-JoI" secondAttribute="trailing" constant="8" id="sMI-CM-QkJ"/>
+                                    <constraint firstItem="tx3-cD-JoI" firstAttribute="top" secondItem="S7A-hR-AkH" secondAttribute="top" constant="10" id="pap-qD-H67"/>
+                                    <constraint firstAttribute="trailing" secondItem="tx3-cD-JoI" secondAttribute="trailing" constant="10" id="sMI-CM-QkJ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -84,6 +79,7 @@
                         <outlet property="actionSheetArea" destination="S7A-hR-AkH" id="2yE-6B-2LI"/>
                         <outlet property="actionSheetAreaWidthConstraint" destination="lNH-Cy-lXP" id="OB7-U9-5hs"/>
                         <outlet property="cancelButton" destination="4UQ-Dc-RHc" id="2tm-SB-hSh"/>
+                        <outlet property="cancelButtonHeightConstraint" destination="INg-1r-fiD" id="My2-0G-Iug"/>
                         <outlet property="cancelTapGestureRecognizer" destination="jwC-AD-kA3" id="hRR-0e-EcB"/>
                         <outlet property="contentView" destination="tx3-cD-JoI" id="1gw-ZO-mHH"/>
                     </connections>
@@ -119,17 +115,17 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="496-ei-7x7" userLabel="HeaderContainerView">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Yn-vA-MWX" userLabel="HeaderBackgroundColorView">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G81-dj-JVA" userLabel="HeaderView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2x0-VV-Ybw">
-                                                            <rect key="frame" x="8" y="22" width="584" height="16"/>
+                                                            <rect key="frame" x="8" y="22" width="584" height="0.0"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -138,12 +134,19 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstItem="2x0-VV-Ybw" firstAttribute="centerY" secondItem="G81-dj-JVA" secondAttribute="centerY" id="9ye-Hv-tYR"/>
                                                         <constraint firstAttribute="bottom" secondItem="2x0-VV-Ybw" secondAttribute="bottom" constant="22" id="Md6-of-3kd"/>
                                                         <constraint firstItem="2x0-VV-Ybw" firstAttribute="top" secondItem="G81-dj-JVA" secondAttribute="top" constant="22" id="ZcQ-q8-Qug"/>
                                                         <constraint firstAttribute="trailing" secondItem="2x0-VV-Ybw" secondAttribute="trailing" constant="8" id="cXX-SM-ysO"/>
                                                         <constraint firstItem="2x0-VV-Ybw" firstAttribute="leading" secondItem="G81-dj-JVA" secondAttribute="leading" constant="8" id="q7m-1c-c4F"/>
-                                                        <constraint firstAttribute="height" constant="60" id="uSW-iD-bgc"/>
+                                                        <constraint firstAttribute="height" constant="44" id="uSW-iD-bgc"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="Md6-of-3kd"/>
+                                                            <exclude reference="ZcQ-q8-Qug"/>
+                                                        </mask>
+                                                    </variation>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -164,13 +167,13 @@
                                     </constraints>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="nJb-DG-zZA" userLabel="FooterView">
-                                    <rect key="frame" x="0.0" y="126" width="600" height="60"/>
+                                    <rect key="frame" x="0.0" y="110" width="600" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="Clh-GP-GjQ" customClass="YSActionSheetCell">
-                                        <rect key="frame" x="0.0" y="82" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="66" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Clh-GP-GjQ" id="wWB-uV-6cq">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -181,11 +184,6 @@
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </prototypes>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="Fy1-ws-Z9n" id="7gw-6I-0Hm"/>
                                     <outlet property="delegate" destination="Fy1-ws-Z9n" id="PxE-2Y-jMF"/>

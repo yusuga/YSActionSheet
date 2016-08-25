@@ -14,6 +14,7 @@
 + (instancetype)viewController;
 
 @property (weak, nonatomic, readonly) IBOutlet UITableView *tableView;
+@property (nonatomic) CGFloat tableViewCornerRadius;
 
 - (void)setItems:(NSArray *)items;                      // NSArray of YSActionSheetItem
 - (void)setSectionTitles:(NSArray *)sectionTitles       // NSArray of NSString

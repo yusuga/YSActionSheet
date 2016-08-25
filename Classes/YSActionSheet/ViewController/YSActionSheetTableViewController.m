@@ -13,7 +13,6 @@
 
 static NSString * const kCellIdentifier = @"Cell";
 static NSString * const kHeaderIdentifier = @"Header";
-static CGFloat const kRowHeight = 44.f;
 static CGFloat const kSectionHeaderHeight = 20.f;
 
 @interface YSActionSheetTableViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -46,7 +45,6 @@ static CGFloat const kSectionHeaderHeight = 20.f;
 
 - (void)awakeFromNib
 {
-    self.rowHeight = kRowHeight;
     self.sectionHeaderHeight = kSectionHeaderHeight;
 }
 
@@ -61,6 +59,7 @@ static CGFloat const kSectionHeaderHeight = 20.f;
     CGRect frame = CGRectMake(0.f, 0.f, self.tableView.bounds.size.width, self.tableView.bounds.size.height);
     self.tableView.tableHeaderView.frame = frame;
     self.tableView.tableFooterView.frame = frame;
+    self.tableView.layer.cornerRadius = self.tableViewCornerRadius;
     
     self.headerBackgroundColorView.backgroundColor = [YSActionSheetUtility contentBackgroundColor];
     self.headerBackgroundColorBottomConstraint.constant = 1.f/[UIScreen mainScreen].scale;
@@ -217,6 +216,14 @@ static CGFloat const kSectionHeaderHeight = 20.f;
         }
         return rowHeight*rowCount;
     }
+}
+
+#pragma mark - Table view
+
+- (void)setTableViewCornerRadius:(CGFloat)tableViewCornerRadius
+{
+    _tableViewCornerRadius = tableViewCornerRadius;
+    if (self.tableView) self.tableView.layer.cornerRadius = tableViewCornerRadius;
 }
 
 #pragma mark - Table view data source

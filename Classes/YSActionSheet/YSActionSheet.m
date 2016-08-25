@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (nonatomic) NSString *cancelButtonTitle;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelButtonHeightConstraint;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *cancelTapGestureRecognizer;
 
 @property (nonatomic) UIWindow *window;
@@ -28,6 +29,12 @@
 
 @implementation YSActionSheet
 
+static CGFloat const kRowHeightLessThanOS9 = 44.;
+static CGFloat const kRowHeight = 57.;
+
+static CGFloat const kCornerRadiusLessThanOS9 = 4;
+static CGFloat const kCornerRadius = 14;
+
 #pragma mark - Initial
 
 - (instancetype)init
@@ -35,8 +42,14 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"YSActionSheet" bundle:nil];
     self = [sb instantiateInitialViewController];
     if (self) {
-        self.tableViewController = [YSActionSheetTableViewController viewController];
         self.windowLevel = UIWindowLevelStatusBar - 1.;
+        
+        self.tableViewController = [YSActionSheetTableViewController viewController];
+        if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){9, 0, 0}]) {
+            self.tableViewController.rowHeight = kRowHeight;
+        } else {
+            self.tableViewController.rowHeight = kRowHeightLessThanOS9;
+        }
     }
     return self;
 }
@@ -45,7 +58,16 @@
 {
     [super viewDidLoad];
     
-    [self.cancelButton setTitle:self.cancelButtonTitle forState:UIControlStateNormal];
+    if (self.cancelButtonTitle.length) {
+        [self.cancelButton setTitle:self.cancelButtonTitle forState:UIControlStateNormal];
+    }
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){9, 0, 0}]) {
+        self.cancelButtonHeightConstraint.constant = kRowHeight;
+        self.tableViewController.tableViewCornerRadius = self.cancelButton.layer.cornerRadius = kCornerRadius;
+    } else {
+        self.cancelButtonHeightConstraint.constant = kRowHeightLessThanOS9;
+        self.tableViewController.tableViewCornerRadius = self.cancelButton.layer.cornerRadius = kCornerRadiusLessThanOS9;
+    }
     
     __weak typeof(self) wself = self;
     self.tableViewController.didSelectRow = ^{
